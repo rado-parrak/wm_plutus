@@ -4,7 +4,7 @@ Created on Jul 26, 2018
 @author: radov
 '''
 
-class Portfolio(object):
+class Context(object):
     '''
     classdocs
     '''
@@ -14,4 +14,4 @@ class Portfolio(object):
         '''
         Constructor
         '''
-        self.products = list()
+        

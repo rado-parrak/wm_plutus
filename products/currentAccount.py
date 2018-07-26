@@ -15,7 +15,7 @@ class CurrentAccount(object):
     '''
 
 
-    def __init__(self, ID, current_outstanding, cnit, monthly_cost, EventDomain):
+    def __init__(self, ID, current_outstanding, cnit, monthly_cost):
         '''
         Constructor
         '''
@@ -23,7 +23,6 @@ class CurrentAccount(object):
         self.current_outstanding = current_outstanding
         self.cnit = cnit
         self.monthly_cost = monthly_cost
-        self.horizon = EventDomain.steps
         self.outstanding = dict()
         self.cumulativeCosts = dict()
         self.basisReturn = dict()

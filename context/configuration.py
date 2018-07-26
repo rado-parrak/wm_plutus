@@ -14,4 +14,3 @@ class Configuration(object):
         '''
         Constructor
         '''
-        self.exp = 0.00000000000000001

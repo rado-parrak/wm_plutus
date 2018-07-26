@@ -4,14 +4,12 @@ Created on Jul 26, 2018
 @author: radov
 '''
 
-class Portfolio(object):
+class Joe(object):
     '''
-    classdocs
+    This is the party in the entire setup
     '''
-
 
     def __init__(self):
         '''
         Constructor
         '''
-        self.products = list()
