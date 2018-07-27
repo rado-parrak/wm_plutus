@@ -8,10 +8,11 @@ class Context(object):
     '''
     classdocs
     '''
-
+    
 
     def __init__(self):
         '''
         Constructor
         '''
+        self.eventDomain = None
         

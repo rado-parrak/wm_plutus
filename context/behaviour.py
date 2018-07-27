@@ -8,10 +8,17 @@ class Behaviour(object):
     '''
     classdocs
     '''
-
-
-    def __init__(self, params):
+    financial   = dict()
+    product     = dict()
+        
+    def __init__(self):
         '''
         Constructor
         '''
-        self.product_related = dict()
+        self.financial['monthly_spending_share'] = None
+        self.financial['saving_share'] = None
+        self.financial['saving_frequency'] = None
+        self.financial['inv_share'] = None
+        self.financial['inv_frequency'] = None
+        
+        self.product['portfolio_weights'] = None

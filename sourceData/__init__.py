@@ -1,9 +1,6 @@
 # 1. PARTY
 JOE_NAME = 'joe'
 JOE_MONTHLY_INCOME = 100
-JOE_MONTHLY_SPENDINGS = 30
-JOE_SHARE_SAVINGS = 0.3
-JOE_SHARE_INV = 0.7
 
 # portfolio
 JOE_PORTFOLIO = dict()
@@ -19,3 +16,25 @@ scenario_1 = dict()
 
 
 # 3 Behaviour
+# 3.1 Product-related
+
+behaviourBase = dict()
+behaviour = dict()
+financial_behaviour = dict()
+portfolio_weights = dict()
+
+financial_behaviour['monthly_spending_share'] = 0.3
+financial_behaviour['saving_share'] = 0.45
+financial_behaviour['saving_frequency'] = 'monthly'
+financial_behaviour['inv_share'] = 0.55
+financial_behaviour['inv_frequency'] = 'monthly'
+
+portfolio_weights['CSOB_bezny_ucet'] = 0.3
+portfolio_weights['CSOB_bezny_ucet_2'] = 0.7
+
+behaviour['financial'] = financial_behaviour
+behaviour['portfolio'] = portfolio_weights
+behaviourBase['standard'] = behaviour
+
+
+

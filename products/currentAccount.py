@@ -3,7 +3,6 @@ Created on Jul 26, 2018
 
 @author: radov
 '''
-from context.eventDomain import EventDomain
 from context.configuration import Configuration
 
 class CurrentAccount(object):
