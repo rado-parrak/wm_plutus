@@ -14,4 +14,4 @@ class Portfolio(object):
         '''
         Constructor
         '''
-        self.products = list()
+        self.instruments = []

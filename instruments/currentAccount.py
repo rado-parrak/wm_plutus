@@ -14,11 +14,12 @@ class CurrentAccount(object):
     '''
 
 
-    def __init__(self, ID, current_outstanding, cnit, monthly_cost):
+    def __init__(self, ID, name, current_outstanding, cnit, monthly_cost):
         '''
         Constructor
         '''
         self.ID = ID
+        self.name = name
         self.current_outstanding = current_outstanding
         self.cnit = cnit
         self.monthly_cost = monthly_cost

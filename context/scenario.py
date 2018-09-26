@@ -16,4 +16,4 @@ class FinancialScenario(object):
         '''
         self.consumption_share = None
         self.investment_share = None
-        self.portfolio_shares = []
+        self.portfolio_shares = dict()

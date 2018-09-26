@@ -6,6 +6,7 @@ from context.behaviour import Behaviour
 from context.scenario import FinancialScenario
 from products.currentAccount import CurrentAccount
 import sourceData
+import json
 
 def initializeParty(source_data):
     party = Party()
@@ -14,9 +15,13 @@ def initializeParty(source_data):
     
     party.portfolio = Portfolio()
     
-    for prod in source_data['portfolio']:
-        if(prod['type'] == 'current_account'):
-            party.portfolio.products.append(CurrentAccount(prod['name'], prod['current_outstanding'], prod['cnit'], prod['monthly_cost']))
+    for instrument in source_data['portfolio']:
+        if(instrument['type'] == 'current_account'):
+            party.portfolio.instruments.append(CurrentAccount(instrument['id']
+                                                              , instrument['name']
+                                                              , instrument['current_outstanding']
+                                                              , instrument['cnit']
+                                                              , instrument['monthly_cost']))
     return(party)
 
 def initializeContext(source_data):
@@ -30,10 +35,18 @@ def initializeBehaviour(source_data):
         s = FinancialScenario()
         s.consumption_share = scenario['financial']['consumption_share']
         s.investment_share  = scenario['financial']['investment_share']
-        s.portfolio_shares  = scenario['financial']['portfolio_shares']
-        b.scenarios.append(s)
+        s.portfolio_shares = scenario['financial']['portfolio_shares']
+        b.append(scenario)
         
-    return(b)    
+    return(b)
+
+def initializeResultBase(redis):
+    resultBase      = dict()
+    resultBase_ser  = json.dumps(resultBase) 
+    
+    # Store serialized to REDIS
+    redis.set('resultBase', resultBase_ser)
+        
     
     
     
