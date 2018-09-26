@@ -11,22 +11,37 @@ class Calculator(object):
     '''
 
 
-    def __init__(self, joe, context, behaviour):
+    def __init__(self, party, context, behaviour):
         '''
         Constructor
         '''
-        self.joe = joe
+        self.party = party
         self.context = context
         self.behaviour = behaviour
         
-    def projectPortfolioWeights(self, behaviour_id):
+    def projectPortfolioWeights(self):
         self.portfolio_weights = dict()
-        for t in self.context.eventDomain.steps:
-            self.portfolio_weights[t] = self.behaviour[behaviour_id].product['portfolio_weights']
+        self.portfolio_weights['scenario']      = []
+        self.portfolio_weights['month']         = []
+        self.portfolio_weights['product_name']  = [] 
+        self.portfolio_weights['weight']        = []
+        
+        
+        for scenario in self.behaviour.scenarios:
+            for t in self.context.eventDomain.steps:
+                for prod in self.
+                self.portfolio_weights['scenario']  
+                
+                
+                = self.behaviour[behaviour_id].product['portfolio_weights']
             
-        return(pd.Dataframe(self.portfolio_weights))
+        return(pd.DataFrame())
         
+    '''    
+    def calculateOutstandings(self, behaviour_id):
+        for t in self.context.eventDomain.steps:
+            for product in self.party.portfolio.products:
+               Scheduler.runSchedule(t, product, behaviour_id)
         
-    def calculateOutstandings(self):
         return(None)
-        
+    '''    

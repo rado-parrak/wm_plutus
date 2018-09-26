@@ -1,26 +1,25 @@
 '''
 Created on Jul 26, 2018
 
-@author: radov
+@author: Rado
 '''
-from context.eventDomain import EventDomain
-from context.portfolio import Portfolio
-from products.currentAccount import CurrentAccount
 import initializer
+import sourceData as sd
 from calculator import Calculator
 
-# INITIALIZE:
-joe        = initializer.initializeJoe()
-context    = initializer.initializeContext()
-behaviour  = initializer.initializeBehaviour()
+# --- INITIALIZE ---
+party      = initializer.initializeParty(sd.source_data)
+context    = initializer.initializeContext(sd.source_data)
+behaviour  = initializer.initializeBehaviour(sd.source_data)
 
-# CALCULATE:
-calc = Calculator(joe, context, behaviour)
-pw = calc.projectPortfolioWeights('standard')
-print(pw)
+# --- DO CALCULATIONS ---
+calc = Calculator(party, context, behaviour)
+#pw = calc.projectPortfolioWeights('standard')
 
-#outstandings = calc.calculateOutstandings()
 
+'''
+outstandings = calc.calculateOutstandings()
+'''
 
 
 

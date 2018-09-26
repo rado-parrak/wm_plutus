@@ -1,45 +1,39 @@
-from context.joe import Joe
+from context.party import Party
 from context.context import Context
 from context.eventDomain import EventDomain
 from context.portfolio import Portfolio
 from context.behaviour import Behaviour
+from context.scenario import FinancialScenario
 from products.currentAccount import CurrentAccount
 import sourceData
 
-def initializeJoe():
-    joe = Joe()
-    joe.name = sourceData.JOE_NAME
-    joe.monthly_income = sourceData.JOE_MONTHLY_INCOME
-    joe.portfolio = Portfolio()
+def initializeParty(source_data):
+    party = Party()
+    party.name = source_data['party']['name']
+    party.monthly_income = source_data['party']['monthly_income']
     
-    for k in sourceData.JOE_PORTFOLIO.keys():
-        prod = sourceData.JOE_PORTFOLIO.get(k)
-        if(prod[0] == 'current_account'):
-            joe.portfolio.products.append(CurrentAccount(prod[1], prod[2], prod[3], prod[4]))
-    return(joe)
+    party.portfolio = Portfolio()
+    
+    for prod in source_data['portfolio']:
+        if(prod['type'] == 'current_account'):
+            party.portfolio.products.append(CurrentAccount(prod['name'], prod['current_outstanding'], prod['cnit'], prod['monthly_cost']))
+    return(party)
 
-def initializeContext():
+def initializeContext(source_data):
     context = Context()
-    context.eventDomain = EventDomain(sourceData.event_domain_steps)
+    context.eventDomain = EventDomain(source_data['context']['event_domain']['months'])
     return(context)
 
-def initializeBehaviour():
-    behaviourBase = dict()
-    
-    for k in sourceData.behaviourBase.keys():
-        el = sourceData.behaviourBase.get(k)
-        b = Behaviour()
-        b.financial['monthly_spending_share'] = el['financial']['monthly_spending_share']
-        b.financial['saving_share'] = el['financial']['saving_share']
-        b.financial['saving_frequency'] = el['financial']['saving_frequency']
-        b.financial['inv_share'] = el['financial']['inv_share']
-        b.financial['inv_frequency'] = el['financial']['inv_frequency']
+def initializeBehaviour(source_data):
+    b = Behaviour()
+    for scenario in source_data['behaviour']['scenarios']:
+        s = FinancialScenario()
+        s.consumption_share = scenario['financial']['consumption_share']
+        s.investment_share  = scenario['financial']['investment_share']
+        s.portfolio_shares  = scenario['financial']['portfolio_shares']
+        b.scenarios.append(s)
         
-        b.product['portfolio_weights'] = el['portfolio']
-        
-        behaviourBase[k] = b
-        
-    return(behaviourBase)    
+    return(b)    
     
     
     

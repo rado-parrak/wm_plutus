@@ -1,40 +1,44 @@
-# 1. PARTY
-JOE_NAME = 'joe'
-JOE_MONTHLY_INCOME = 100
+# Source data
+source_data = dict()
 
-# portfolio
-JOE_PORTFOLIO = dict()
-JOE_PORTFOLIO[1] = ['current_account','CSOB_bezny_ucet', 100.0, 0.05, 2.0]
-JOE_PORTFOLIO[2] = ['current_account','CSOB_bezny_ucet_2', 400.0, 0.01, 1.0]
+# i) Party
+source_data['party'] = dict()
+source_data['party']['name'] = 'Rado'
+source_data['party']['monthly_income'] = 100
 
-# 2. CONTEXT
-event_domain_steps = 5
+# ii) Portfolio
+source_data['portfolio'] = []
 
-# 2.i Scenarios
-scenarios = dict()
+contract_1 = dict()
+contract_1['name'] = 'bezny_ucet'
+contract_1['type'] = 'current_account'
+contract_1['cnit'] = 0.0
+contract_1['current_outstanding'] = 120
+contract_1['monthly_cost'] = 0.0
+
+contract_2 = dict()
+contract_2['name'] = 'dalsi_bezny_ucet'
+contract_2['type'] = 'current_account'
+contract_2['cnit'] = 0.0
+contract_2['current_outstanding'] = 50
+contract_2['monthly_cost'] = 0.0
+
+source_data['portfolio'].append(contract_1) 
+source_data['portfolio'].append(contract_2)
+
+# iii) Context
+source_data['context'] = dict()
+source_data['context']['event_domain'] = dict()
+source_data['context']['event_domain']['months'] = 10
+
+# iv) Behaviour
+source_data['behaviour'] = dict()
+source_data['behaviour']['scenarios'] = []
+
 scenario_1 = dict()
+scenario_1['financial'] = dict()
+scenario_1['financial']['consumption_share'] = 0.3
+scenario_1['financial']['investment_share'] = 0.2
+scenario_1['financial']['portfolio_shares'] = [0.4, 0.6]
 
-
-# 3 Behaviour
-# 3.1 Product-related
-
-behaviourBase = dict()
-behaviour = dict()
-financial_behaviour = dict()
-portfolio_weights = dict()
-
-financial_behaviour['monthly_spending_share'] = 0.3
-financial_behaviour['saving_share'] = 0.45
-financial_behaviour['saving_frequency'] = 'monthly'
-financial_behaviour['inv_share'] = 0.55
-financial_behaviour['inv_frequency'] = 'monthly'
-
-portfolio_weights['CSOB_bezny_ucet'] = 0.3
-portfolio_weights['CSOB_bezny_ucet_2'] = 0.7
-
-behaviour['financial'] = financial_behaviour
-behaviour['portfolio'] = portfolio_weights
-behaviourBase['standard'] = behaviour
-
-
-
+source_data['behaviour']['scenarios'].append(scenario_1)

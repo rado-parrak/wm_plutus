@@ -4,7 +4,7 @@ Created on Jul 26, 2018
 @author: radov
 '''
 
-class Joe(object):
+class Party(object):
     '''
     This is the party in the entire setup
     '''
