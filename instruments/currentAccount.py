@@ -23,7 +23,6 @@ class CurrentAccount(object):
         self.current_outstanding = current_outstanding
         self.cnit = cnit
         self.monthly_cost = monthly_cost
-        self.outstanding = dict()
         self.cumulativeCosts = dict()
         self.basisReturn = dict()
         self.effective_rate = (1 + self.cnit)**(1/12) - 1
@@ -31,21 +30,30 @@ class CurrentAccount(object):
     def deposit(self, amount, t):
         self.outstanding[t] = self.outstanding.get(t, 0) + amount
     
-    def calculateOutstanding(self, t):
+    def calculateOutstanding(self, scenario, t, resultBase):
         if t == 0:
-            self.outstanding[t] = self.outstanding.get(t,0) + self.current_outstanding
+            outstanding = self.current_outstanding
         else:
-            self.outstanding[t] = self.outstanding.get(t,0) + self.outstanding[t-1]*(1+self.effective_rate) - self.monthly_cost
-            
-    def calculateCumulativeCosts(self, t):
-        if t == 0:
-            self.cumulativeCosts[t] = 0 + self.monthly_cost
-        else:
-            self.cumulativeCosts[t] = self.cumulativeCosts[t-1] + self.monthly_cost
-            
-    def calculateBasisReturn(self, t):
-        if t == 0:
-            self.basisReturn[t] = 0
-        else:
-            self.basisReturn[t] = (self.outstanding[t] - self.outstanding[0])/(self.outstanding[0] + Configuration.exp)        
-        
+            if resultBase[scenario.ID][self.ID][t-1] == None:
+                raise Exception('Element in the resultBase not found!')
+            else:
+                lastOutstanding = resultBase[scenario.ID][self.ID][t-1]
+                outstanding = lastOutstanding*(1+self.effective_rate) - self.monthly_cost
+        return(outstanding)
+    
+    
+    def calculateIncome(self, scenario, t, resultBase):
+        return(None)
+    
+    def calculateExpenses(self, scenario, t, resultBase):
+        return(None)
+    
+    def calculateInvestments(self, scenario, t, resultBase):
+        return(None)
+    
+    def calculateSavings(self, scenario, t, resultBase):
+        return(None)
+    
+    
+    
+    

@@ -4,9 +4,10 @@ from context.eventDomain import EventDomain
 from context.portfolio import Portfolio
 from context.behaviour import Behaviour
 from context.scenario import FinancialScenario
-from products.currentAccount import CurrentAccount
+from instruments.currentAccount import CurrentAccount
 import sourceData
 import json
+import redis
 
 def initializeParty(source_data):
     party = Party()
@@ -32,20 +33,19 @@ def initializeContext(source_data):
 def initializeBehaviour(source_data):
     b = Behaviour()
     for scenario in source_data['behaviour']['scenarios']:
-        s = FinancialScenario()
-        s.consumption_share = scenario['financial']['consumption_share']
-        s.investment_share  = scenario['financial']['investment_share']
-        s.portfolio_shares = scenario['financial']['portfolio_shares']
-        b.append(scenario)
-        
+        s = FinancialScenario(scenario['financial']['ID']
+                              , scenario['financial']['consumption_share']
+                              , scenario['financial']['investment_share']
+                              , scenario['financial']['portfolio_shares'])
+        b.appendScenario(s)
     return(b)
 
-def initializeResultBase(redis):
+def initializeResultBase(rredis):
     resultBase      = dict()
     resultBase_ser  = json.dumps(resultBase) 
     
     # Store serialized to REDIS
-    redis.set('resultBase', resultBase_ser)
+    rredis.set('resultBase', resultBase_ser)
         
     
     

@@ -10,10 +10,11 @@ class FinancialScenario(object):
     '''
 
 
-    def __init__(self):
+    def __init__(self, ID, consumption_share, investment_share, portfolio_shares):
         '''
         Constructor
         '''
-        self.consumption_share = None
-        self.investment_share = None
-        self.portfolio_shares = dict()
+        self.ID = ID
+        self.consumption_share = consumption_share
+        self.investment_share = investment_share
+        self.portfolio_shares = portfolio_shares
