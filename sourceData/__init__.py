@@ -5,7 +5,6 @@ source_data = dict()
 
 # Run Config:
 source_data['runs_config'] = list()
-
 run_config = dict()
 run_config['ID'] = 'uniqueRunID'
 run_config['name'] = 'dummy_run'
