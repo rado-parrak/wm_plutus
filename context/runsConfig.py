@@ -3,6 +3,7 @@ Created on Oct 4, 2018
 
 @author: radov
 '''
+from context.eventDomain import EventDomain
 
 class RunsConfig:
     '''
@@ -29,4 +30,7 @@ class RunConfig:
         self.name       = name
         self.run_date   = run_date
         self.life_expectancy = life_expectancy
+        
+    def appendEventDomain(self, eventDomain: EventDomain):
+        self.eventDomain = eventDomain
         

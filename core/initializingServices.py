@@ -12,7 +12,9 @@ def initializeInstrument(instrument_source_data):
                                      , instrument_source_data['name']
                                      , instrument_source_data['current_outstanding']
                                      , instrument_source_data['monthly_cost']
-                                     , instrument_source_data['cnit'])
+                                     , instrument_source_data['accountType']
+                                     , instrument_source_data['cnit']
+                                     )
         
         
     return(instrument)
