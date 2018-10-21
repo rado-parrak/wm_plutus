@@ -9,3 +9,5 @@ __pycache__/main.cpython-37.pyc
 core/__pycache__/
 initializer/__pycache__/
 sourceData/__pycache__/
+historyKeeper/baseObjects/__pycache__/
+historyKeeper/scraperObjects/__pycache__/
