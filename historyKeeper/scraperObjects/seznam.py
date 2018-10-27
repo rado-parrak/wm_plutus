@@ -1,6 +1,7 @@
 from baseObjects.page import Page
 from scraperObjects.mappings import Mappings
 import re
+from config import seznamConfig as conf
 
 page_url = "https://www.sreality.cz/hledani/byty"
 
@@ -26,14 +27,20 @@ class SelectionPage(Page):
     def wait_until_loaded(self):
         self.wait_for_available(locators['checkBox'])
         return self
-        
-    def tickOffCheckBoxes(self):
+    
+    def selectFlatTypes(self):
         elements = self.find_elements_by_locator(locators['checkBox'])
-        counter = 0
         for element in elements:
-            counter = counter + 1
-            if counter < 22: # only first 21 checkboxes!
-                if element.is_displayed():
+            if element.text in conf.flatTypes:
+                if element.is_enabled():
+                    element.click()
+        return self
+    
+    def selectRegions(self):
+        elements = self.find_elements_by_locator(locators['area'])
+        for element in elements:    
+            if element.get_attribute("class") in conf.regions:
+                if element.is_enabled():
                     element.click()
         return self
         
@@ -43,11 +50,6 @@ class SelectionPage(Page):
         submitButton.click()
         return self
     
-    def setRegion(self, No):
-        self.wait_for_available(locators['area'])
-        regions = self.find_elements_by_locator(locators['area'])
-        regions[No].click() # Prague is 10th region...
-
     def getNumberOfResults(self):
         self.wait_for_available(locators['submitButton'])
         submitButton = self.find_element_by_locator(locators['submitButton'])

@@ -17,8 +17,9 @@ source_data['runs_config'].append(run_config)
 source_data['parties'] = list()
 
 party = dict()
+party['ID'] = '00X'
 party['name'] = 'Rado'
-party['monthly_income'] = 100
+party['monthly_gross_wage'] = 100
 party['current_age'] = 30
 
 source_data['parties'].append(party)

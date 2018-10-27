@@ -7,16 +7,15 @@ from scraperObjects.seznam import PropertyList
 from scraperObjects.seznam import PropertyPage
 
 # -- Set up driver:
-driver = WebDriver()
+chromeDriver = WebDriver()
 
 # -- Open selection page:
-selectionPage = SelectionPage(driver)
+selectionPage = SelectionPage(chromeDriver)
 selectionPage.open()
+selectionPage.selectFlatTypes()
+selectionPage.selectRegions()
 
-# -- Tick-off the selection and submit
-selectionPage.tickOffCheckBoxes()
-selectionPage.setRegion(10)
-time.sleep(3)
+'''
 propertiesCount = selectionPage.getNumberOfResults()
 selectionPage.goToSelection()
 
@@ -57,7 +56,6 @@ for propertyLink in propertyLinkContainer:
         except:
             print("Property No. "+ str(counter)+" not saved to the propertyBase!")
 
-'''
 for propertyLink in propertyBase:    
     counter += 1
     propertyPage = PropertyPage(driver)

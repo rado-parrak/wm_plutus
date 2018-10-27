@@ -8,6 +8,7 @@ import _pickle as pickle
 from context.eventDomain import EventDomain
 from context.instruments import AccountType
 from resultObjects import *
+from core.helpers import *
 
 class Calculator:
     '''
@@ -17,8 +18,10 @@ class Calculator:
         '''
         Constructor
         '''
+        self.rredis = rredis
+        
         # load the ROOT data file
-        self.root = pickle.loads(rredis.get(root_name))    
+        self.root = pickle.loads(self.rredis.get(root_name))    
         
         # initialize event domain
         for run in self.root['runs_config'].runs:
@@ -28,11 +31,13 @@ class Calculator:
         self.root['resultBase'] = ResultBase()
 
     def run(self):
-        # 1) Run over all run_configs, scenarios, instruments, steps
+        # 1) Run over all run_configs, scenarios, parties, instruments, steps
         for run in self.root['runs_config'].runs:
             for scenario in self.root['scenarios'].scenarios:
-                for instrument in self.root['facts']['instruments']:
-                    for step in run.eventDomain.steps:
+                for step in run.eventDomain.steps:
+                    # i) first update the positions
+                    for instrumentID in self.root['facts']['instruments'].keys():
+                        instrument = self.root['facts']['instruments'][instrumentID] 
                         # i) Value Assets:
                         if instrument.account_type == AccountType.ASSET:
                             if self.root['resultBase'].getFromResultBaseInstrumentResult(run.ID, scenario.ID, instrument.ID) == None: #create result object if doesn't exist
@@ -54,14 +59,64 @@ class Calculator:
                         
                         
                         # iv) Net Income
-        
-        
+                       
+                
+                
+                    # ii.) next simulate party actions based on these                
+                    for party in self.root['facts']['parties']:
+                        if self.root['resultBase'].getFromResultBasePartyResult(run.ID, scenario.ID, party.ID) == None: #create result object if doesn't exist
+                            self.root['resultBase'].addToResultBasePartyResult(run.ID, scenario.ID, party.ID,  PartyLevelResultObject())
+                                
+                        resultObject = self.root['resultBase'].getFromResultBasePartyResult(run.ID, scenario.ID,party.ID)
+                        
+                        ## I) --- INCOME ACCOUNT ---
+                        # i) calculate realized income (wage + capital income + inheritance + pension)                        
+                        # grossWage
+                        grossWage = party.calculateGrossWage(step, resultObject)
+                        resultObject.updateGrossWage(grossWage, step)                    
+                        
+                        # ii) calculate unrealized income (capital gain/loss)
+                        
+                        # iii) redemptions
+                        
+                        # z) update income account
+                        resultObject.updateIncomeAccount(grossWage, step)
+                        
+                        ## II) --- EXPENDITURE ACCOUNT (+ PENSION ACCOUNT) --- 
+                        # i) Taxes
+                        incomeTax = party.calculateIncomeTax(grossWage)
+                        resultObject.updateIncomeTax(incomeTax, step)
+                        
+                        # ii) Social + Welfare
+                        
+                        # iii) Pension contribution
+                        
+                        # iv) Fees
+                        
+                        # v) Housing / renting
+                        
+                        # vi) Other monthly consumption
+                        
+                        # z) expenditure account
+                        resultObject.updateExpenditureAccount(incomeTax, step)
+                        
+                        ## III) --- NET CASH BALANCE ---
+                        resultObject.updateNetCashBalance(resultObject.incomeAccount[step] - resultObject.expenditureAccount[step], step)
+                        
+                        ## IV) --- ACTION ---
+                        # i) allocate to savings
+                        
+                        # ii) allocate to investments
+                        
+                        # iii) keep in cash 
+                        
+                        
+                        ## add to result base                        
+                        self.root['resultBase'].addToResultBasePartyResult(run.ID, scenario.ID, party.ID, resultObject)
                         
         
-        # 2) Run over all scenarios, parties, steps
-        
-        
-        
+        # save the root
+        self.rredis.set('root', pickle.dumps(self.root))         
         return(None)
     
 

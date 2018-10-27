@@ -4,7 +4,6 @@ Created on Jul 26, 2018
 @author: Rado
 '''
 from calculator import Calculator
-from core.initialize import *
 from initialize import Initialize
 # --- INITIALIZE ---
 rredis = Initialize();
@@ -16,7 +15,6 @@ calc.run()
 # i) calculate outstandings on all instruments:
 #calc.projectOutstandings()
 
-
-
+print('Calculation done!')
     
 

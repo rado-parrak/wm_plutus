@@ -30,9 +30,10 @@ def Initialize():
         parties.append( Party(sd.source_data['parties'][i]) )
     
     # b.ii) instruments:
-    instruments = list()
+    instruments = dict()
     for i in range(len(sd.source_data['instruments'])):
-        instruments.append( initializeInstrument(sd.source_data['instruments'][i]) )
+        instrument = initializeInstrument(sd.source_data['instruments'][i])
+        instruments[instrument.ID] = instrument
         
     # b.iii) relations:
     relations = Relations(sd.source_data['relations'])
