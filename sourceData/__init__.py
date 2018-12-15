@@ -1,4 +1,4 @@
-from context.instruments import InstrumentType, AccountType
+from context.instruments import InstrumentType, AccountType, InstrumentClass
 
 # Source data
 source_data = dict()
@@ -35,6 +35,7 @@ contract_1['cnit'] = 0.0
 contract_1['current_outstanding'] = 120
 contract_1['monthly_cost'] = 5
 contract_1['accountType'] = AccountType.ASSET
+contract_1['instrumentClass'] = InstrumentClass.CASH_BALANCE
 
 contract_2 = dict()
 contract_2['name'] = 'dalsi_bezny_ucet'
@@ -44,33 +45,39 @@ contract_2['cnit'] = 0.05
 contract_2['current_outstanding'] = 50
 contract_2['monthly_cost'] = 0.0
 contract_2['accountType'] = AccountType.ASSET
+contract_2['instrumentClass'] = InstrumentClass.CASH_BALANCE
+
+contract_3 = dict()
+contract_3['name'] = 'sporak'
+contract_3['ID'] = '003'
+contract_3['type'] = InstrumentType.SAVING_ACCOUNT
+contract_3['cnit'] = 0.05
+contract_3['current_outstanding'] = 25
+contract_3['monthly_cost'] = 0.01
+contract_3['accountType'] = AccountType.ASSET
+contract_3['instrumentClass'] = InstrumentClass.SAVING
 
 source_data['instruments'].append(contract_1) 
 source_data['instruments'].append(contract_2)
+source_data['instruments'].append(contract_3)
 
 # iii) Relations
 source_data['relations'] = dict()
 source_data['relations']['party_instrument'] = dict()
-source_data['relations']['party_instrument']['Rado'] = ['001', '002']
+source_data['relations']['party_instrument']['00X'] = ['001', '002','003']
 
 # iv) Config
 source_data['config'] = dict()
 
 # iv) Behaviour
-source_data['behaviours'] = list()
-
-behaviour= dict()
-behaviour['ID'] = 1
-behaviour['name'] = 'baseline_behaviour'
-behaviour['saving_allocation_weight'] = 0.3
-behaviour['investment_allocation_weight'] = 0.2
-behaviour['cash_allocation_weight'] = 0.5
-behaviour['instrument_shares']= dict()
-behaviour['instrument_shares']['001'] = 0.3
-behaviour['instrument_shares']['002'] = 0.7
-
-source_data['behaviours'].append(behaviour)
-
+# TODO: Currently only 1 behaviour allowed per tool configuration
+source_data['behaviour'] = dict()
+source_data['behaviour']['party'] = dict()
+source_data['behaviour']['party']['00X'] = dict()
+source_data['behaviour']['party']['00X']['saving_allocation_weight'] = 0.3
+source_data['behaviour']['party']['00X']['investment_allocation_weight'] = 0.2
+source_data['behaviour']['party']['00X']['cash_allocation_weight'] = 0.5
+ 
 # vi) Scenarios
 source_data['scenarios'] = list()
 

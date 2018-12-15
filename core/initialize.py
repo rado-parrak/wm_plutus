@@ -9,7 +9,7 @@ import sourceData as sd
 from context.party import Party
 from context.relations import Relations
 from context.runsConfig import RunsConfig
-from context.behaviour import Behaviours
+from context.behaviour import Behaviour
 from initializingServices import initializeInstrument
 from context.scenarios import Scenarios
 
@@ -39,13 +39,13 @@ def Initialize():
     relations = Relations(sd.source_data['relations'])
     
     # b.v) behaviour:
-    behaviours  = Behaviours(sd.source_data['behaviours'])
+    behaviour  = Behaviour(sd.source_data['behaviour'])
     
     # !!! STORE !!!
     facts['parties']        = parties
     facts['instruments']    = instruments
     facts['relations']      = relations
-    facts['behaviours']     = behaviours 
+    facts['behaviour']      = behaviour 
     
     # c) --- scenarios:
     scenarios = Scenarios(sd.source_data['scenarios'])

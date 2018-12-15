@@ -3,36 +3,44 @@ Created on Jul 26, 2018
 
 @author: radov
 '''
-class Behaviours:
+from enum import Enum
+from context.instruments import InstrumentClass
+
+class Behaviour:
     '''
     classdocs
     '''
         
-    def __init__(self, behaviours_source_data):
+    def __init__(self, behaviour_source_data):
         '''
         Constructor
         '''
-        self.behaviours = list()
-        for b in behaviours_source_data:            
-            self.behaviours.append(Behaviour(b['ID']
-                                             , b['name']
-                                             , b['saving_allocation_weight']
-                                             , b['investment_allocation_weight']
-                                             , b['cash_allocation_weight']
-                                             , b['instrument_shares']))
+        self.party = dict()
+        for key in behaviour_source_data['party'].keys():
+            self.party[key] = behaviour_source_data['party'][key]
             
-class Behaviour:
-    def __init__(self
-                 , ID
-                 , name
-                 , saving_allocation_weight
-                 , investment_allocation_weight
-                 , cash_allocation_weight
-                 , instrument_shares):
+class BehaviourScheme(Enum):
+    STATIC_SHARES_BEST_RETURN = 1 # allocation schemes are static over time, entire share is allocated into instrument with largest return
+          
+                        
+class BehaviourLibrary:
+    
+    def staticSharesBestReturn(self, amount, instruments, shares):
+        allocatedQuantities = dict()
+        #i.) Savings:
+        # allocate all saving-dedicated share of the remaining funds into the 
+        # saving instrument with the largest income
+        ret = -999
+        for instrument in instruments:
+            if instrument.instrument_class == InstrumentClass.SAVING:
+                if instrument.CNIT > ret:
+                    selectedInstrument = instrument
+                    ret = instrument.CNIT
+                    
+        allocatedQuantities[selectedInstrument.ID] = shares['saving_allocation_weight'] * amount
         
-        self.ID = ID
-        self.name = name
-        self.saving_allocation_weight = saving_allocation_weight
-        self.investment_allocation_weight = investment_allocation_weight
-        self.cash_allocation_weight = cash_allocation_weight
-        self.instrument_shares = instrument_shares
+        
+        return(allocatedQuantities)
+    
+    # list of all behaviour schemes
+    schemes = {BehaviourScheme.STATIC_SHARES_BEST_RETURN : staticSharesBestReturn}
