@@ -30,7 +30,7 @@ class Party:
         #TODO: There should come a more elaborate calculation of this in line with the Czech legislation       
         return(self.grossWage * 0.21) 
     
-    def staticSharesBestReturn(amount, instruments, shares):
+    def staticSharesBestReturn(self, amount, instruments, shares):
         allocatedQuantities = dict()
         #i.) Savings:
         ret = -999

@@ -32,7 +32,7 @@ class Instrument:
         self.current_outstanding = current_outstanding
         self.monthly_cost = monthly_cost
         self.account_type = account_type
-        self.intruments_class = instrument_class
+        self.instrument_class = instrument_class
         
     def calculateCurrentValue(self, step, previous_results: InstrumentLevelResultObject):
         return(None)

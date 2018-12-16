@@ -44,14 +44,14 @@ class Calculator:
                             if self.root['resultBase'].getFromResultBaseInstrumentResult(run.ID, scenario.ID, instrument.ID) == None: #create result object if doesn't exist
                                 self.root['resultBase'].addToResultBaseInstrumentResult(run.ID, scenario.ID, instrument.ID,  InstrumentLevelResultObject())
                             
-                            resultObject = self.root['resultBase'].getFromResultBaseInstrumentResult(run.ID, scenario.ID,instrument.ID)
+                            instrumentResultObject = self.root['resultBase'].getFromResultBaseInstrumentResult(run.ID, scenario.ID,instrument.ID)
                             
                             # calculate the asset value and update
-                            currentValue = instrument.calculateCurrentValue(step, resultObject)
-                            resultObject = resultObject.updateCurrentValue(currentValue, step)                               
+                            currentValue = instrument.calculateCurrentValue(step, instrumentResultObject)
+                            instrumentResultObject = instrumentResultObject.updateCurrentValue(currentValue, step)                               
                             
                             # store back to resultBase    
-                            self.root['resultBase'].addToResultBaseInstrumentResult(run.ID, scenario.ID, instrument.ID, resultObject)
+                            self.root['resultBase'].addToResultBaseInstrumentResult(run.ID, scenario.ID, instrument.ID, instrumentResultObject)
                         
                         # ii) Value Liabilities:
                         
@@ -68,25 +68,25 @@ class Calculator:
                         if self.root['resultBase'].getFromResultBasePartyResult(run.ID, scenario.ID, party.ID) == None: #create result object if doesn't exist
                             self.root['resultBase'].addToResultBasePartyResult(run.ID, scenario.ID, party.ID,  PartyLevelResultObject())
                                 
-                        resultObject = self.root['resultBase'].getFromResultBasePartyResult(run.ID, scenario.ID,party.ID)
+                        partyResultObject = self.root['resultBase'].getFromResultBasePartyResult(run.ID, scenario.ID,party.ID)
                         
                         ## I) --- INCOME ACCOUNT ---
                         # i) calculate realized income (wage + capital income + inheritance + pension)                        
                         # grossWage
-                        grossWage = party.calculateGrossWage(step, resultObject)
-                        resultObject.updateGrossWage(grossWage, step)                    
+                        grossWage = party.calculateGrossWage(step, partyResultObject)
+                        partyResultObject.updateGrossWage(grossWage, step)                    
                         
                         # ii) calculate unrealized income (capital gain/loss)
                         
                         # iii) capital redemptions
                         
                         # z) update income account
-                        resultObject.updateIncomeAccount(grossWage, step)
+                        partyResultObject.updateIncomeAccount(grossWage, step)
                         
                         ## II) --- EXPENDITURE ACCOUNT (+ PENSION ACCOUNT) --- 
                         # i) Taxes
                         incomeTax = party.calculateIncomeTax(grossWage)
-                        resultObject.updateIncomeTax(incomeTax, step)
+                        partyResultObject.updateIncomeTax(incomeTax, step)
                         
                         # ii) Social + Welfare
                         
@@ -99,21 +99,26 @@ class Calculator:
                         # vi) Other monthly consumption
                         
                         # z) expenditure account
-                        resultObject.updateExpenditureAccount(incomeTax, step)
+                        partyResultObject.updateExpenditureAccount(incomeTax, step)
                         
                         ## III) --- NET CASH BALANCE ---
-                        resultObject.updateNetCashBalance(resultObject.incomeAccount[step] - resultObject.expenditureAccount[step], step)
+                        partyResultObject.updateNetCashBalance(partyResultObject.incomeAccount[step] - partyResultObject.expenditureAccount[step], step)
                         
                         ## IV) --- ACTION ---
                         # i) allocate the netCashBalance to savings / investments / cash
                         # TODO: currently the behaviour scheme is hardcoded, should become an input parameter...
-                        allocationInputParameters = party.prepareAllocationInputs(BehaviourScheme.STATIC_SHARES_BEST_RETURN, self.root, resultObject, party.ID, step)
+                        allocationInputParameters = party.prepareAllocationInputs(BehaviourScheme.STATIC_SHARES_BEST_RETURN, self.root, partyResultObject, party.ID, step)
                         allocatedQuantities = party.allocate(BehaviourScheme.STATIC_SHARES_BEST_RETURN, **allocationInputParameters)                                
                         
-                        ## add to result base                        
-                        self.root['resultBase'].addToResultBasePartyResult(run.ID, scenario.ID, party.ID, resultObject)
+                        #update oustanding amounts per each instument for the allocated quantity
+                        for instrumentID in allocatedQuantities.keys():                            
+                            instrumentResultObject = self.root['resultBase'].getFromResultBaseInstrumentResult(run.ID, scenario.ID,instrumentID)
+                            instrumentResultObject = instrumentResultObject.updateCurrentValue(allocatedQuantities[instrumentID], step) 
+                            self.root['resultBase'].addToResultBaseInstrumentResult(run.ID, scenario.ID, instrumentID, instrumentResultObject)
                         
-        
+                        ## add party results to the result base                        
+                        self.root['resultBase'].addToResultBasePartyResult(run.ID, scenario.ID, party.ID, partyResultObject)
+                        
         # save the root
         self.rredis.set('root', pickle.dumps(self.root))         
         return(None)

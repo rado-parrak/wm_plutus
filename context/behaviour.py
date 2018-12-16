@@ -33,11 +33,23 @@ class BehaviourLibrary:
         ret = -999
         for instrument in instruments:
             if instrument.instrument_class == InstrumentClass.SAVING:
-                if instrument.CNIT > ret:
+                if instrument.cnit > ret:
                     selectedInstrument = instrument
-                    ret = instrument.CNIT
+                    ret = instrument.cnit
                     
         allocatedQuantities[selectedInstrument.ID] = shares['saving_allocation_weight'] * amount
+        
+        #i.) Cash:
+        # allocate all cash-dedicated share of the remaining funds into the 
+        # saving instrument with the largest income
+        ret = -999
+        for instrument in instruments:
+            if instrument.instrument_class == InstrumentClass.CASH_BALANCE:
+                if instrument.cnit > ret:
+                    selectedInstrument = instrument
+                    ret = instrument.cnit
+                    
+        allocatedQuantities[selectedInstrument.ID] = shares['cash_allocation_weight'] * amount
         
         
         return(allocatedQuantities)

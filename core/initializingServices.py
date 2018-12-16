@@ -21,13 +21,13 @@ def initializeInstrument(instrument_source_data):
         
     if instrument_source_data['type'] == InstrumentType.SAVING_ACCOUNT:
         instrument = SavingAccount( instrument_source_data['ID']
-                                 , instrument_source_data['name']
-                                 , instrument_source_data['current_outstanding']
-                                 , instrument_source_data['monthly_cost']
-                                 , instrument_source_data['accountType']
-                                 , instrument_source_data['instrumentClass']
-                                 , instrument_source_data['cnit']
-                                 )
+                                    , instrument_source_data['name']
+                                    , instrument_source_data['current_outstanding']
+                                    , instrument_source_data['monthly_cost']
+                                    , instrument_source_data['accountType']
+                                   , instrument_source_data['instrumentClass']
+                                   , instrument_source_data['cnit']
+                                   )
         
         
     return(instrument)
