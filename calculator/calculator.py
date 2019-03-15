@@ -106,11 +106,11 @@ class Calculator:
                         
                         ## IV) --- ACTION ---
                         # i) allocate the netCashBalance to savings / investments / cash
-                        # TODO: currently the behaviour scheme is hardcoded, should become an input parameter...
+                        # TODO: currently the behaviour scheme is hard-coded, should become an input parameter...
                         allocationInputParameters = party.prepareAllocationInputs(BehaviourScheme.STATIC_SHARES_BEST_RETURN, self.root, partyResultObject, party.ID, step)
                         allocatedQuantities = party.allocate(BehaviourScheme.STATIC_SHARES_BEST_RETURN, **allocationInputParameters)                                
                         
-                        #update oustanding amounts per each instument for the allocated quantity
+                        #update outstanding amounts per each instrument for the allocated quantity
                         for instrumentID in allocatedQuantities.keys():                            
                             instrumentResultObject = self.root['resultBase'].getFromResultBaseInstrumentResult(run.ID, scenario.ID,instrumentID)
                             instrumentResultObject = instrumentResultObject.updateCurrentValue(allocatedQuantities[instrumentID], step) 

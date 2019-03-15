@@ -19,7 +19,7 @@ source_data['parties'] = list()
 party = dict()
 party['ID'] = '00X'
 party['name'] = 'Rado'
-party['monthly_gross_wage'] = 100
+party['monthly_gross_wage'] = 35000
 party['current_age'] = 30
 
 source_data['parties'].append(party)
@@ -31,9 +31,9 @@ contract_1 = dict()
 contract_1['type'] = InstrumentType.CURRENT_ACCOUNT
 contract_1['name'] = 'bezny_ucet'
 contract_1['ID']   = '001'
-contract_1['cnit'] = 0.0
-contract_1['current_outstanding'] = 120
-contract_1['monthly_cost'] = 5
+contract_1['cnit'] = 0.0001
+contract_1['current_outstanding'] = 25000
+contract_1['monthly_cost'] = 25
 contract_1['accountType'] = AccountType.ASSET
 contract_1['instrumentClass'] = InstrumentClass.CASH_BALANCE
 
@@ -41,8 +41,8 @@ contract_2 = dict()
 contract_2['name'] = 'dalsi_bezny_ucet'
 contract_2['ID'] = '002'
 contract_2['type'] = InstrumentType.CURRENT_ACCOUNT
-contract_2['cnit'] = 0.05
-contract_2['current_outstanding'] = 50
+contract_2['cnit'] = 0.00001
+contract_2['current_outstanding'] = 7500
 contract_2['monthly_cost'] = 0.0
 contract_2['accountType'] = AccountType.ASSET
 contract_2['instrumentClass'] = InstrumentClass.CASH_BALANCE
@@ -51,9 +51,9 @@ contract_3 = dict()
 contract_3['name'] = 'sporak'
 contract_3['ID'] = '003'
 contract_3['type'] = InstrumentType.SAVING_ACCOUNT
-contract_3['cnit'] = 0.05
-contract_3['current_outstanding'] = 25
-contract_3['monthly_cost'] = 0.01
+contract_3['cnit'] = 0.01
+contract_3['current_outstanding'] = 250000
+contract_3['monthly_cost'] = 12
 contract_3['accountType'] = AccountType.ASSET
 contract_3['instrumentClass'] = InstrumentClass.SAVING
 
