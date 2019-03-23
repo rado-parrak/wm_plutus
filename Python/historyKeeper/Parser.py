@@ -7,8 +7,12 @@ Created on Mar 15, 2019
 '''
 import pandas as pd 
 import os
+from elasticsearch import Elasticsearch
+import datetime
 
 class Parser:
+    es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
+    
     def __init__(self, parserFlavourList):
         self.parsefFlavourList = parserFlavourList
     
@@ -24,6 +28,62 @@ class Parser:
                 parser.updateHistory()
                 parser.saveHistory()
                 parser.moveToArchive()
+                
+    def elasticSearch_create_index(self,es_object, index_name='transactions'):
+        created = False
+        # index settings
+        settings = {
+            "mappings": {
+                "_doc": {
+                    "dynamic": "strict",
+                    "properties": {
+                        "accountNo": { "type": "text" },
+                        "bookingDate" : { "type" : "date" },
+                        "amount" : { "type" : "double" },
+                        "currency" : { "type" : "text" },
+                        "outstanding" : { "type" : "double" },
+                        "targetAccountNo" : { "type" : "text" },
+                        "targetBankCode" : { "type" : "text" },
+                        "targetAccountName" : { "type" : "text" },
+                        "constantSymbol" : { "type" : "text" },
+                        "variableSymbol" : { "type" : "text" },
+                        "specificSymbol" : { "type" : "text" },
+                        "transactionName" : { "type" : "text" },
+                        "transactionId" : { "type" : "text" },
+                        "note" : { "type" : "text" }
+                    }
+                }
+            }
+        }
+        try:
+            if not es_object.indices.exists(index_name):
+                # Ignore 400 means to ignore "Index Already Exist" error.
+                es_object.indices.create(index=index_name, ignore=400, body=settings)
+                print('Created Index')
+                created = True
+        except Exception as ex:
+            print(str(ex))
+        finally:
+            return created
+        
+    def elasticSearch_store_record(self, elastic_object, index_name, record, uid):
+        try:
+            outcome = elastic_object.index(index=index_name, doc_type='_doc', body=record, id = uid)
+        except Exception as ex:
+            print('Error in indexing data')
+            print(str(ex))
+     
+    def updateElasticSearch(self):
+        # fetch data from the intermediate store
+        history = pd.read_pickle("../../03_data/transactions/_aggregated/transactional_history")
+        
+        # create index if not already there
+        self.elasticSearch_create_index(self.es, index_name='transactions')
+        
+        # post the actual data
+        for index, row in history.iterrows():
+            self.elasticSearch_store_record(self.es, 'transactions', row.to_dict(), row['transactionId'])            
+        print('ElasticSearch update done!')
 
 
 class ParserCsob:
@@ -53,6 +113,8 @@ class ParserCsob:
                                     , "oznaèení operace" : "transactionName"
                                     , "ID transakce" : "transactionId"
                                     , "poznámka" : "note"})
+        
+        self.data['bookingDate'] = 
 
     def updateHistory(self):
         if(os.listdir("../../03_data/transactions/_aggregated").__contains__('transactional_history')):
@@ -75,6 +137,8 @@ class ParserCsob:
         os.rename(self.path + "/" + self.filename, self.path + "/_alreadyProcessed/" + self.filename)
         
         
+
+            
         
         
         
