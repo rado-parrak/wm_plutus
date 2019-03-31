@@ -9,6 +9,8 @@ import pandas as pd
 import os
 from elasticsearch import Elasticsearch
 import datetime
+from categorization import categorizer
+import json
 
 class Parser:
     def __init__(self, parserFlavourList):
@@ -24,7 +26,7 @@ class Parser:
                 parser = ParserCsob(path = path, filename = file)
                 parser.parse()
                 # TODO: Categorisation should be moved to a dedicated class
-                parser.categorise()
+                parser.categorise("./categorization/categorizationRulesDefinitions.json")
                 parser.updateElasticSearch() 
                 parser.moveToArchive()
 
@@ -73,6 +75,18 @@ class ParserCsob:
                         self.data[col].fillna(0.0, inplace = True)
                     if col in {"bookingDate"}:
                         self.data[col].fillna(datetime.datetime(1970, 1, 1, 0, 0), inplace = True)
+                        
+        # add categorization place holders for new transactions:
+        self.data['transactionType'] = "unknown"
+        self.data['transactionPurpose'] = "unknown"
+        #self.data['transactionCategorizationDate'] = None
+        
+        # text field cleaning
+        self.data['transactionName'] = self.data['transactionName'].str.replace('[^A-Za-z\s]+','').str.lower()        
+        self.data['note'] = self.data['note'].str.replace('[^A-Za-z\s]+','').str.lower()
+        self.data['note'] = self.data['note'].str.replace('\s+',' ')
+        self.data['note'] = self.data['note'].str.replace(' ','_')
+        self.data['note'] = self.data['note'].fillna('***MISSING***')
                             
     def moveToArchive(self):
         os.rename(self.path + "/" + self.filename, self.path + "/_alreadyProcessed/" + self.filename)
@@ -121,7 +135,9 @@ class ParserCsob:
                         "specificSymbol" : { "type" : "keyword" },
                         "transactionName" : { "type" : "text" },
                         "transactionId" : { "type" : "text" },
-                        "note" : { "type" : "text" }
+                        "note" : { "type" : "text" },
+                        "transactionType" : { "type" : "keyword" },
+                        "transactionPurpose" : { "type" : "keyword" }                        
                     }
                 }
             }
@@ -138,11 +154,19 @@ class ParserCsob:
             return created   
         
         
-    def categorise(self):
-        self.data['transactionCategory'] = "unknown"
+    def categorise(self, rulesPath):
+        # i) load in rules
+        with open(rulesPath, 'r') as f:
+            rules = json.load(f)
+        # ii) initialize categorization
+        catt = categorizer.Categorizer(rules)
         
-        for transaction in self.data.iterrows():
-            if transaction['']
+        # iii) rule-based categorisation        
+        self.data = catt.rulebasedCategorization(self.data, categorizationTargetAttribute = "transactionType")
+        self.data = catt.rulebasedCategorization(self.data, categorizationTargetAttribute = "transactionPurpose")
+
+        # ii) scoring model based categorisation:
+        # TODO: Not implemented yet...
         
         
         
