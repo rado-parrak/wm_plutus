@@ -6,6 +6,7 @@ Created on Mar 15, 2019
 @author: Rado
 '''
 import pandas as pd 
+import numpy as np
 import os
 from elasticsearch import Elasticsearch
 import datetime
@@ -26,9 +27,9 @@ class Parser:
                 parser = ParserCsob(path = path, filename = file)
                 parser.parse()
                 # TODO: Categorisation should be moved to a dedicated class
-                parser.categorise("./categorization/categorizationRulesDefinitions.json")
-                parser.updateElasticSearch() 
-                parser.moveToArchive()
+                parser.categorise("./categorization/categorizationRulesDefinitions.json", filename = file)
+                parser.updateElasticSearch(file) 
+                # parser.moveToArchive()
 
 class ParserCsob:
     def __init__(self, path, filename):
@@ -36,12 +37,29 @@ class ParserCsob:
         self.filename = filename
     
     def parse(self):
+        schema={"èíslo úètu": np.str, 
+                "datum zaúètování": np.str,
+                "èástka": np.float,
+                "mìna" : np.str,
+                "zùstatek" : np.float,
+                "èíslo úètu protiúètu" : np.str,
+                "kód banky protiúètu" : np.str,
+                "název úètu protiúètu" : np.str,
+                "konstantní symbol" : np.str,
+                "variabilní symbol" : np.str,
+                "specifický symbol" : np.str,
+                "oznaèení operace" : np.str,
+                "ID transakce" : np.str,
+                "poznámka" : np.str}
+        
+        
         self.data = pd.read_csv(self.path + "/" + self.filename
                            , encoding = "ansi"
                            , header = 1
                            , delimiter = ";"
                            , index_col=False
-                           , decimal = ',')
+                           , decimal = ','
+                           , dtype = schema)
 
         self.data = self.data.rename(columns={"èíslo úètu": "accountNo"
                                     , "datum zaúètování": "bookingDate"
@@ -87,6 +105,13 @@ class ParserCsob:
         self.data['note'] = self.data['note'].str.replace('\s+',' ')
         self.data['note'] = self.data['note'].str.replace(' ','_')
         self.data['note'] = self.data['note'].fillna('***MISSING***')
+        
+        # internal / external transactions
+        self.data['isInternal'] = False
+        self.data.loc[self.data['targetAccountNo'] == "217207635", ['isInternal']] = True
+        self.data.loc[self.data['targetAccountNo'] == "261846266", ['isInternal']] = True
+        self.data.loc[self.data['targetAccountNo'] == "273810949", ['isInternal']] = True
+        self.data.loc[ (self.data['targetAccountNo'] == "2701115563") & (self.data['targetBankCode'] == "2010"), ['isInternal']] = True
                             
     def moveToArchive(self):
         os.rename(self.path + "/" + self.filename, self.path + "/_alreadyProcessed/" + self.filename)
@@ -98,7 +123,7 @@ class ParserCsob:
             print('Error in indexing data')
             print(str(ex))
      
-    def updateElasticSearch(self):
+    def updateElasticSearch(self, filename):
         # initialize ES session
         es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
         
@@ -107,9 +132,9 @@ class ParserCsob:
         
         # post the actual data
         for index, row in self.data.iterrows():
-            # TODO: Here should come a check if the record is not already in the DB
-            self.elasticSearch_store_record(es, 'transactions', row.to_dict(), row['transactionId'])            
-        print('ElasticSearch update done') 
+            if(not es.exists(index="transactions", doc_type='_doc', id=row['transactionId'])):
+                self.elasticSearch_store_record(es, 'transactions', row.to_dict(), row['transactionId'])            
+        print('ElasticSearch | updated for file: '+ filename) 
         
     def elasticSearch_create_index(self,es_object, index_name='transactions'):
         created = False
@@ -137,7 +162,8 @@ class ParserCsob:
                         "transactionId" : { "type" : "text" },
                         "note" : { "type" : "text" },
                         "transactionType" : { "type" : "keyword" },
-                        "transactionPurpose" : { "type" : "keyword" }                        
+                        "transactionPurpose" : { "type" : "keyword" },
+                        "isInternal" : { "type" : "keyword" },                                                
                     }
                 }
             }
@@ -146,7 +172,7 @@ class ParserCsob:
             if not es_object.indices.exists(index_name):
                 # Ignore 400 means to ignore "Index Already Exist" error.
                 es_object.indices.create(index=index_name, ignore=400, body=settings)
-                print('Created Index')
+                print('ElasticSearch | created index: '+ index_name)
                 created = True
         except Exception as ex:
             print(str(ex))
@@ -154,12 +180,12 @@ class ParserCsob:
             return created   
         
         
-    def categorise(self, rulesPath):
+    def categorise(self, rulesPath, filename):
         # i) load in rules
         with open(rulesPath, 'r') as f:
             rules = json.load(f)
         # ii) initialize categorization
-        catt = categorizer.Categorizer(rules)
+        catt = categorizer.Categorizer(rules, filename)
         
         # iii) rule-based categorisation        
         self.data = catt.rulebasedCategorization(self.data, categorizationTargetAttribute = "transactionType")

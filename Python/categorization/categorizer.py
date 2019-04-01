@@ -10,15 +10,15 @@ class Categorizer():
     '''
 
 
-    def __init__(self, rules):
+    def __init__(self, rules, filename):
         '''
         Constructor
         '''
         self.rules = rules
+        self.filename = filename
        
     def rulebasedCategorization(self, transactionData, categorizationTargetAttribute):
-        if(categorizationTargetAttribute == "transactionPurpose"):
-            
+        if(categorizationTargetAttribute == "transactionPurpose"):            
             # run over the rules:            
             for e in self.rules:
                 conditionHolder = ""
@@ -33,8 +33,9 @@ class Categorizer():
                 exec(executionRule)
                 
             # save some categorization reports:
-            transactionData['transactionPurpose'].value_counts().to_csv("valueCountsTransactionalPurpose.csv", header=False)
-            transactionData[transactionData['transactionPurpose'] == 'unknown'].note.str.split(expand=True).stack().value_counts().head(50).to_csv("topUncategorizedWordsTransactionPurpose.csv", header=False)
+            self.filename = self.filename.replace(".csv","")
+            transactionData['transactionPurpose'].value_counts().to_csv("valueCountsTransactionalPurpose" + self.filename + ".csv", header=False)
+            transactionData[transactionData['transactionPurpose'] == 'unknown'].note.str.split(expand=True).stack().value_counts().head(50).to_csv("topUncategorizedWordsTransactionPurpose"+ self.filename +".csv", header=False)
         
         
         # transactionData.to_csv("test.csv", header=True)

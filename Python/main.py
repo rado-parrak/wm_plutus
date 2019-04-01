@@ -8,7 +8,7 @@ from historyKeeper.Parser import Parser
 parser = Parser(list(["CSOB"]))
 parser.parse()
 
-print("End")
+print("historyKeeper done!")
 
 
 #===============================================================================

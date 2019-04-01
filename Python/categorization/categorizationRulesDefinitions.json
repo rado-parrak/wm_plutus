@@ -904,5 +904,25 @@
 			],
 		"targetCategory" : "'no_note'", 
 		"logicalOperator" : "&"
+	},
+	{
+		"categorizationTargetAttribute" : "'transactionPurpose'" ,
+		"conditions" : 
+			[
+				{ "conditionAttribute" : "'transactionPurpose'", "attributeValue" : "'unknown'", "condition" : " == "},
+				{ "conditionAttribute" : "'note'", "attributeValue" : "'missing'", "condition" : ".str.contains"}
+			],
+		"targetCategory" : "'no_note'", 
+		"logicalOperator" : "&"
+	},
+	{
+		"categorizationTargetAttribute" : "'transactionPurpose'" ,
+		"conditions" : 
+			[
+				{ "conditionAttribute" : "'transactionPurpose'", "attributeValue" : "'unknown'", "condition" : " == "},
+				{ "conditionAttribute" : "'note'", "attributeValue" : "'csob'", "condition" : ".str.contains"}
+			],
+		"targetCategory" : "'ATM'", 
+		"logicalOperator" : "&"
 	}
 ]
