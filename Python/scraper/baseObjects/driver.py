@@ -59,6 +59,9 @@ class WebDriver(webdriver.Chrome):
 
         #TODO could I return a generator instead of a list
         return [WebElement(e) for e in elements]
+    
+    def find_element_by_class_name(self, class_name):
+        return WebElement(self.find_element_by_class_name(class_name))
 
     def is_element_present(self, locator):
         try:

@@ -48,7 +48,7 @@ class SelectionPage(Page):
         self.wait_for_available(locators['submitButton'])
         submitButton = self.find_element_by_locator(locators['submitButton'])
         submitButton.click()
-        return self
+        return self.driver
     
     def getNumberOfResults(self):
         self.wait_for_available(locators['submitButton'])

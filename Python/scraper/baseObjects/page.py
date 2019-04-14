@@ -28,6 +28,9 @@ class Page(object):
 
     def find_elements_by_locator(self, locator):
         return self.driver.find_elements_by_locator(locator)
+    
+    def find_element_by_class_name(self, class_name):
+        return self.driver.find_elements_by_class_name(class_name)
 
     def wait_for_available(self, locator):
         counter = 1
