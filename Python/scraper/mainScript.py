@@ -7,8 +7,14 @@ from scraper.baseObjects.driver import WebDriver
 # from scraperObjects.seznam import PropertyPage
 
 from scraper.crawler import Crawler
+from elasticsearch import Elasticsearch
+from _datetime import date, datetime
 
 crawler = Crawler(driver = WebDriver())
+
+# prepare elastic index
+es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
+crawler.elasticSearch_create_index(es, "properties")
 
 # initial page
 crawler.goToPage("https://www.sreality.cz/hledani/byty")
@@ -58,12 +64,19 @@ for propertyUrl in propertiesOnPage:
     street  = propertyUrl.split("/")[7].split("-")[-1]
     
     gps = crawler.getGpsLocation(street, city)
-    attribute_dictionary['gps_latitude'] = gps[0]
-    attribute_dictionary['gps_longtitude'] = gps[1]
+    attribute_dictionary['location'] = str(gps[0]) + "," + str(gps[1])
+    attribute_dictionary['propertyUrl'] = propertyUrl
+    attribute_dictionary['averagePricePerSqM'] = attribute_dictionary['totalPrice'] / attribute_dictionary['livingArea']
     
-    print("Latitude for " + street + ", " + city + " : [" + str(gps[0]) + ", " + str(gps[1]) + "].")
+    # print("Latitude for " + street + ", " + city + " : [" + str(gps[0]) + ", " + str(gps[1]) + "].")
+    
+    # store to ElasticSearch
+    if(not es.exists(index="properties", doc_type='_doc', id=attribute_dictionary['id'])):
+        crawler.elasticSearch_store_record(es, 'properties', attribute_dictionary, attribute_dictionary['id'])
+    else:
+        if(es.get('properties', '_doc', attribute_dictionary['id'])['updateDate'] < datetime.date().today()):
+            crawler.elasticSearch_store_record(es, 'properties', attribute_dictionary, attribute_dictionary['id'])
 
-    print(attribute_dictionary)
     # go back
     crawler.goBack()
     

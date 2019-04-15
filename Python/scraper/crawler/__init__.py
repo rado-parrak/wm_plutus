@@ -13,6 +13,7 @@ import re
 from scraper.scraperObjects.mappings import Mappings
 import datetime
 from geopy.geocoders import Nominatim
+from elasticsearch import Elasticsearch
 
 class Crawler(Page):
     '''
@@ -211,8 +212,64 @@ class Crawler(Page):
             print("Unable to fetch GPS location of street: " + street + " in the city of: " + city)
         
         return(latitude, longitude) 
+    
+    def elasticSearch_create_index(self,es_object, index_name):
+        created = False
+        # index settings
+        if(index_name == "properties"):            
+            settings = {
+                "mappings": {
+                    "_doc": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "id": { "type": "text" },
+                            "propertyUrl": { "type": "text" },
+                            "updateDate" : {
+                                "type":   "date",
+                                "format": "yyyy-MM-dd"
+                                },
+                            "totalPrice" : { "type" : "double" },
+                            "price" : { "type" : "double" },
+                            "constructionStatus" : { "type" : "keyword" },  
+                            "constructionType" : { "type" : "keyword" },  
+                            "ownership" : { "type" : "keyword" },
+                            "livingArea" : { "type" : "double" },
+                            "getByPublicTransport" : { "type" : "keyword" },
+                            "getByHighway" : { "type" : "keyword" },  
+                            "getByBus" : { "type" : "keyword" },  
+                            "getByTrain" : { "type" : "keyword" },  
+                            "getByRoad" : { "type" : "keyword" }, 
+                            "energyEfficiency" : { "type" : "keyword" }, 
+                            "water" : { "type" : "keyword" }, 
+                            "balcony" : { "type" : "keyword" }, 
+                            "electricity" : { "type" : "keyword" }, 
+                            "sewer" : { "type" : "keyword" }, 
+                            "heating" : { "type" : "keyword" }, 
+                            "floorNo" : { "type" : "keyword" }, 
+                            "location" : { "type" : "geo_point"}, 
+                            "attributesNo" : {"type": "double"},
+                            "averagePricePerSqM" : {"type": "double"}                                                                      
+                        }
+                    }
+                }
+            }
+        try:
+            if not es_object.indices.exists(index_name):
+                # Ignore 400 means to ignore "Index Already Exist" error.
+                es_object.indices.create(index=index_name, ignore=400, body=settings)
+                print('ElasticSearch | created index: '+ index_name)
+                created = True
+        except Exception as ex:
+            print(str(ex))
+        finally:
+            return created   
         
-
+    def elasticSearch_store_record(self, elastic_object, index_name, record, uid):
+        try:
+            elastic_object.index(index=index_name, doc_type='_doc', body=record, id = uid)
+        except Exception as ex:
+            print('Error in indexing data')
+            print(str(ex))
 
 
 
