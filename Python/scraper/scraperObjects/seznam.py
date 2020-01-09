@@ -120,7 +120,7 @@ class PropertyPage(Page):
                 price = re.findall("\d+", attribute_value)
                 price = ''.join(price)
                 if(len(price) == 0 | price.isspace()):
-                    attribute_dictionary["totalPrice"] = "NA"
+                    attribute_dictionary["totalPrice"] = None
                 else:
                     attribute_dictionary["totalPrice"] = float(price)
                     
@@ -131,7 +131,7 @@ class PropertyPage(Page):
                 price = re.findall("\d+", attribute_value)
                 price = ''.join(price)
                 if(len(price) == 0 | price.isspace()):
-                    attribute_dictionary["price"] = "NA"
+                    attribute_dictionary["price"] = None
                 else:
                     attribute_dictionary["price"] = float(price)
                 

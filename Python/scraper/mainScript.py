@@ -8,7 +8,7 @@ from scraper.baseObjects.driver import WebDriver
 
 from scraper.crawler import Crawler
 from elasticsearch import Elasticsearch
-from _datetime import date, datetime
+from _datetime import datetime
 
 crawler = Crawler(driver = WebDriver())
 
@@ -19,7 +19,7 @@ crawler.elasticSearch_create_index(es, "properties")
 # initial page
 crawler.goToPage("https://www.sreality.cz/hledani/byty")
 crawler.selectElements(locator = 'class|checkbox', how = "byText", selector_set = {"1+kk","1+1"}, attribute_name = None)
-crawler.selectElements(locator = 'class|area-cover', how = "byAttribute", selector_set = {"area-cover praha","area-cover jihocesky"}, attribute_name = 'class')
+crawler.selectElements(locator = 'class|area-cover', how = "byAttribute", selector_set = {"area-cover praha"}, attribute_name = 'class')
 crawler.pushButton(locator = 'css|button.btn-full.btn-XL')
 
 # list of properties
@@ -27,10 +27,9 @@ aux = crawler.getElementsByLocator('css|.images.count3.clear')
 propertiesOnPage = []
 for propertyy in aux:
     try:
-        print('Trying to scrape URL of property')
         propertiesOnPage.append(propertyy.get_attribute("href"))
     except Exception as e:
-        print("URL could not be scraped")
+        print("URL of the property could not be scraped")
         print("Exception: " + str(e))
 
 
@@ -66,16 +65,25 @@ for propertyUrl in propertiesOnPage:
     gps = crawler.getGpsLocation(street, city)
     attribute_dictionary['location'] = str(gps[0]) + "," + str(gps[1])
     attribute_dictionary['propertyUrl'] = propertyUrl
-    attribute_dictionary['averagePricePerSqM'] = attribute_dictionary['totalPrice'] / attribute_dictionary['livingArea']
+    try:
+        attribute_dictionary['pricePerSqM'] = attribute_dictionary['totalPrice'] / attribute_dictionary['livingArea']
+    except:
+        attribute_dictionary['pricePerSqM'] = None
     
     # print("Latitude for " + street + ", " + city + " : [" + str(gps[0]) + ", " + str(gps[1]) + "].")
     
     # store to ElasticSearch
-    if(not es.exists(index="properties", doc_type='_doc', id=attribute_dictionary['id'])):
-        crawler.elasticSearch_store_record(es, 'properties', attribute_dictionary, attribute_dictionary['id'])
-    else:
-        if(es.get('properties', '_doc', attribute_dictionary['id'])['updateDate'] < datetime.date().today()):
+    try:
+        if(not es.exists(index="properties", doc_type='_doc', id=attribute_dictionary['id'])):
+            print("Storing property: " + str(attribute_dictionary['propertyUrl']) + "...")
             crawler.elasticSearch_store_record(es, 'properties', attribute_dictionary, attribute_dictionary['id'])
+        else:
+            print('Property already in Elastic!')
+            if(datetime.strptime(es.get('properties', '_doc', attribute_dictionary['id'])['_source']['updateDate'], '%Y-%m-%d').date() < datetime.now().date()):
+                crawler.elasticSearch_store_record(es, 'properties', attribute_dictionary, attribute_dictionary['id'])
+    except Exception as e:
+        print('Storing to Elastic crashed on:')
+        print(str(e))
 
     # go back
     crawler.goBack()

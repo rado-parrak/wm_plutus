@@ -85,10 +85,11 @@ class Crawler(Page):
             attribute_value = re.sub('[^A-Za-z0-9]+', '', attribute_value)
             price = re.findall("\d+", attribute_value)
             price = ''.join(price)
-            if(len(price) == 0 | price.isspace()):
-                attribute_dictionary["totalPrice"] = "NA"
-            else:
+            try:
                 attribute_dictionary["totalPrice"] = float(price)
+            except Exception as e:
+                print("Unable to parse 'price' attribute. Attribute value: " + str(price))
+                print(str(e))
                 
             del(price)
                 
@@ -98,10 +99,10 @@ class Crawler(Page):
             price = re.findall("\d+", attribute_value)
             price = ''.join(price)
             if(len(price) == 0 | price.isspace()):
-                attribute_dictionary["price"] = "NA"
+                attribute_dictionary["price"] = None
             else:
                 attribute_dictionary["price"] = float(price)
-            
+            print("Price: " + str(price))
             del(price)
         
         # -------- ID zakazky --------
@@ -248,7 +249,7 @@ class Crawler(Page):
                             "floorNo" : { "type" : "keyword" }, 
                             "location" : { "type" : "geo_point"}, 
                             "attributesNo" : {"type": "double"},
-                            "averagePricePerSqM" : {"type": "double"}                                                                      
+                            "pricePerSqM" : {"type": "double"}                                                                      
                         }
                     }
                 }
