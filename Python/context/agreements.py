@@ -6,6 +6,7 @@ class Agreement:
     def __init__(self, id, name):
         self.id = id
         self.name = name
+        self.cash_flow = dict()
 
 class RentalAgreement(Agreement):
 
@@ -19,7 +20,7 @@ class RentalAgreement(Agreement):
         if self.my_position=='renter':
             self.cash_flow[step] = self.average_yearly_validity * (self.rent - self.yearly_costs/12)
 
-        if self.y_position=='rentee':
+        if self.my_position=='rentee':
             self.cash_flow[step] = self.average_yearly_validity * (-self.rent - self.yearly_costs/12)
 
 class UtilitiesAgreement(Agreement):
@@ -34,7 +35,7 @@ class UtilitiesAgreement(Agreement):
         self.heat = heat
         self.average_yearly_validity = average_yearly_validity
 
-    def projectCashFlow(self, step):
+    def project_cash_flow(self, step):
         self.cash_flow[step] = - 1 * self.average_yearly_validity * (self.water + self.gas + self.electricity + self.internet + self.heat)
 
 class EmployeeContract(Agreement):
@@ -46,16 +47,11 @@ class EmployeeContract(Agreement):
         self.salary = salary
         self.income_tax_rate = income_tax_rate
         self.yearly_salary_trend = yearly_salary_trend
-        self.salary_income = dict()
         self.bonus_rate = bonus_rate
 
-    def project_salary_income(self, step):
+    def project_cash_flow(self, step):
         if step in self.bonus_steps:
             bonus = self.bonus_rate * (12*self.salary)
         else:
             bonus = 0.0
-        self.salary_income[step] = (1 + (step // 12) * self.yearly_salary_trend) * (self.salary + bonus) * (1-self.income_tax_rate)
-
-    def pay_salary(self, step) -> float:
-        self.project_salary_income(step)
-        return self.salary_income[step]
+        self.cash_flow[step] = (1 + (step // 12) * self.yearly_salary_trend) * (self.salary + bonus) * (1-self.income_tax_rate)

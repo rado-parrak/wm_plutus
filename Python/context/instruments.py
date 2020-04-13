@@ -51,23 +51,14 @@ class CurrentAccount(Instrument):
             else:
                 self.value[step] = self.value[step - 1] * (1 + self.effective_rate)
 
-    def project_costs(self, step):
+    def project_monthly_costs(self, step):
         self.monthly_costs[step] = self.monthly_cost
-
-    def pay_costs(self, step) -> float:
-        self.project_costs(step)
-        return self.monthly_costs[step]
-                
-    def freeup_resources(self, step) -> float:
-        free_resources = 0.0
-        self.project_value(step)
-        if self.value[step] > 0.0:
-            free_resources = self.value[step]
-            self.value[step] = 0.0
-        return free_resources
 
     def deposit(self, step, amount):
         self.value[step] = self.value[step] + amount
+
+    def withdraw_all(self, step):
+        self.value[step] = 0.0
 
 
 class Mortgage(Instrument):
@@ -82,6 +73,8 @@ class Mortgage(Instrument):
         self.outstanding_amount = dict()
         self.interest_payment = dict()
         self.principal_payment = dict()
+        self.monthly_payment = 0.0
+        self.monthly_costs = dict()
 
     def calculateNumberOfPeriods(self):
         self.number_of_periods = self.maturity_in_years * 12
@@ -119,6 +112,10 @@ class Mortgage(Instrument):
                 raise Exception('Interest payment at previous step to step ' + str(step) + ' not calculated!')
             else:
                 self.principal_payment[step] = self.monthly_payment - self.interest_payment[step]
+
+    def project_monthly_costs(self, step):
+        self.calculateMonthlyPayment
+        self.monthly_costs[step] = self.monthly_payment
 
 # class SavingAccount(Instrument):
 #     '''

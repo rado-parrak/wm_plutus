@@ -11,7 +11,7 @@ from context.relations import Relations
 from context.runsConfig import RunsConfig
 from context.behaviour import Behaviour
 from initializingServices import initializeInstrument
-from context.scenarios import Scenarios
+from context.market import Scenarios
 
 def Initialize():  
     root = dict()
