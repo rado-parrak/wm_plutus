@@ -1,20 +1,26 @@
+import logging
 class Agreement:
     '''
     classdocs
     '''
 
-    def __init__(self, id, name):
+    def __init__(self, id:str, logger:logging.Logger):
         self.id = id
-        self.name = name
         self.cash_flow = dict()
+        self.logger = logger
+        # log
+        self.logger.info('Initializing: '+ str(self.id))
 
 class RentalAgreement(Agreement):
 
-    def __init__(self, id, name, average_yearly_validity, linked_asset, my_position, rent, yearly_costs):
+    def __init__(self, id, logger, average_yearly_validity:float, inflation_index:dict, my_position:str, rent:float, yearly_costs:float):
         # Constructor
-        super().__init__(id, name)
+        super().__init__(id, logger)
         self.average_yearly_validity = average_yearly_validity # how much time, on average, over year this agreement is in place
-        self.linked_asset = linked_asset # id of a linked asset
+        self.inflation_index = inflation_index
+        self.my_position = my_position
+        self.rent = rent
+        self.yearly_costs = yearly_costs
 
     def projectCashFlow(self, step):
         if self.my_position=='renter':
@@ -24,9 +30,9 @@ class RentalAgreement(Agreement):
             self.cash_flow[step] = self.average_yearly_validity * (-self.rent - self.yearly_costs/12)
 
 class UtilitiesAgreement(Agreement):
-    def __init__(self, id, name, linked_asset, water, gas, electricity, internet, heat, average_yearly_validity):
+    def __init__(self, id, logger, linked_asset, water, gas, electricity, internet, heat, average_yearly_validity):
         # Constructor
-        super().__init__(id, name)
+        super().__init__(id, logger)
         self.linked_asset = linked_asset
         self.water = water
         self.gas = gas
@@ -39,9 +45,9 @@ class UtilitiesAgreement(Agreement):
         self.cash_flow[step] = - 1 * self.average_yearly_validity * (self.water + self.gas + self.electricity + self.internet + self.heat)
 
 class EmployeeContract(Agreement):
-    def __init__(self, id, name, average_yearly_validity, salary, bonus_steps: set, yearly_salary_trend, income_tax_rate, bonus_rate):
+    def __init__(self, id, logger, average_yearly_validity, salary, bonus_steps: set, yearly_salary_trend, income_tax_rate, bonus_rate):
         # Constructor
-        super().__init__(id, name)
+        super().__init__(id, logger)
         self.average_yearly_validity = average_yearly_validity
         self.bonus_steps = bonus_steps
         self.salary = salary

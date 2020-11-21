@@ -2,10 +2,10 @@ from context.instruments import CurrentAccount, Mortgage
 from context.assets import RealEstate
 from context.agreements import EmployeeContract
 from context.market import Market
-
+import logging
 class Party:
 
-    def __init__(self, name: str, initial_free_resources: float, initial_portfolio: set, monthly_expenditures: float, discount_rate: float, market: Market):
+    def __init__(self, logger:logging.Logger, name: str, initial_free_resources: float, initial_portfolio: set, monthly_expenditures: float, discount_rate: float):
         '''
         Constructor
         '''
@@ -21,7 +21,6 @@ class Party:
         self.free_resources_pv = dict()
         self.discount_rate = discount_rate
         self.portfolio_values = dict()
-        self.market = market
 
     def refresh_portfolio(self, step):
         if step == 0:
@@ -114,14 +113,12 @@ class Party:
             self.portfolio_values[scenario_name] = dict()
         self.portfolio_values[scenario_name][step] = portfolio_value
 
-
-    def live(self, steps: int, verbose=False):
-        for scenario in self.market.scenarios:
+    def live(self, steps: int):
             for step in range(0, steps):
                 # resources
-                self.calculate_free_resources(step, verbose)
-                self.allocate_free_resources(step, verbose)
+                self.calculate_free_resources(step)
+                self.allocate_free_resources(step)
                 self.discount_free_resources(step, self.discount_rate)
 
                 # balance
-                self.project_portfolio_value(step, scenario.name)
+                self.project_portfolio_value(step)

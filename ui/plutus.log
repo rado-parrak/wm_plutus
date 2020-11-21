@@ -1,0 +1,16 @@
+2020-11-21 20:42:13,462 :: plutusLogger | INFO | ============================================
+2020-11-21 20:42:13,503 :: plutusLogger | INFO | ============ CONFIGURATION  ================
+2020-11-21 20:42:13,504 :: plutusLogger | INFO | ============================================
+2020-11-21 20:42:13,505 :: plutusLogger | INFO | 
+2020-11-21 20:42:13,506 :: plutusLogger | INFO | [1] General: 
+2020-11-21 20:42:13,507 :: plutusLogger | INFO |  - n_years: 1
+2020-11-21 20:42:14,461 :: plutusLogger | INFO | 
+2020-11-21 20:42:14,463 :: plutusLogger | INFO | [2] Market: 
+2020-11-21 20:42:14,464 :: plutusLogger | INFO | Adding inflation index.
+2020-11-21 20:42:14,465 :: plutusLogger | INFO | Adding real-estate index.
+2020-11-21 20:42:15,323 :: plutusLogger | INFO | 
+2020-11-21 20:42:15,324 :: plutusLogger | INFO | [3] Portfolio: 
+2020-11-21 20:42:15,325 :: plutusLogger | INFO | Initializing: beznyUcet
+2020-11-21 20:42:15,326 :: plutusLogger | INFO | Initializing: hypoteka
+2020-11-21 20:42:15,327 :: plutusLogger | INFO | Initializing: byt
+2020-11-21 20:42:15,328 :: plutusLogger | INFO | Initializing: employeeCredo

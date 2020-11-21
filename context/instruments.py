@@ -1,6 +1,5 @@
 from enum import Enum
 
-
 class InstrumentType(Enum):
     CURRENT_ACCOUNT = 1
     SAVING_ACCOUNT = 2
@@ -21,20 +20,20 @@ class Instrument:
     '''
     classdocs
     '''
-
-    def __init__(self, id, name):
+    def __init__(self, id, logger):
         self.id = id
-        self.name = name
-
+        self.logger = logger
+        # log
+        self.logger.info('Initializing: '+ str(self.id))
 
 class CurrentAccount(Instrument):
     '''
     classdocs
     '''
 
-    def __init__(self, id, name, current_outstanding, monthly_cost, cnit):
+    def __init__(self, id, logger, current_outstanding, monthly_cost, cnit):
         # Constructor
-        super().__init__(id, name)
+        super().__init__(id, logger)
         self.cnit = cnit
         self.effective_rate = (1 + self.cnit) ** (1 / 12) - 1
         self.value = dict()
@@ -62,9 +61,9 @@ class CurrentAccount(Instrument):
 
 
 class Mortgage(Instrument):
-    def __init__(self, id, name, principal, cnit, maturity_in_years):
+    def __init__(self, id, logger, principal, cnit, maturity_in_years):
         # Constructor
-        super().__init__(id, name)
+        super().__init__(id, logger)
         self.cnit = cnit
         self.monthly_interest_rate = self.cnit*(31/365)
         self.value = dict()
