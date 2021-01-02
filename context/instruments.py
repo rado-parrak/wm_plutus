@@ -1,4 +1,5 @@
 from enum import Enum
+import logging
 
 class InstrumentType(Enum):
     CURRENT_ACCOUNT = 1
@@ -17,127 +18,136 @@ class AccountType(Enum):
 
 
 class Instrument:
-    '''
-    classdocs
-    '''
+
     def __init__(self, id, logger):
         self.id = id
         self.logger = logger
-        # log
-        self.logger.info('Initializing: '+ str(self.id))
 
 class CurrentAccount(Instrument):
-    '''
-    classdocs
-    '''
 
-    def __init__(self, id, logger, current_outstanding, monthly_cost, cnit):
-        # Constructor
+    def __init__(self, id:str, logger:logging.Logger, current_outstanding:float, monthly_cost:float, cnit:float, current_step:int=0):
         super().__init__(id, logger)
         self.cnit = cnit
         self.effective_rate = (1 + self.cnit) ** (1 / 12) - 1
         self.value = dict()
-        self.current_outstanding = current_outstanding
+        self.value[current_step] = current_outstanding
         self.monthly_cost = monthly_cost
         self.monthly_costs = dict()
+        self.current_step = current_step
 
-    def project_value(self, step):
-        if step == 0:
-            self.value[step] = self.current_outstanding
-        else:
+        self.logger.info('Initializing Current Account: {} with: '.format(self.id))
+        self.logger.info(' - CNIT: {:.4f}'.format(cnit))
+        self.logger.info(' - effective rate: {:.4f}'.format(self.effective_rate))
+        self.logger.info(' - current outstanding: {:.2f}'.format(current_outstanding))
+        self.logger.info(' - monthly cost: {}'.format(monthly_cost))
+
+    def calculate_value(self, step):
+        if step > self.current_step:
             if self.value[step - 1] is None:
                 raise Exception('Value at previous step to step ' + str(step) + ' not calculated!')
             else:
                 self.value[step] = self.value[step - 1] * (1 + self.effective_rate)
+                self.logger.debug('[STEP {}] Account value: {}'.format(step, self.value[step]))
 
-    def project_monthly_costs(self, step):
+    def calculate_monthly_costs(self, step):
         self.monthly_costs[step] = self.monthly_cost
+        self.logger.debug('[STEP {}] Account monthly cost: {}'.format(step, self.monthly_cost[step]))
 
     def deposit(self, step, amount):
         self.value[step] = self.value[step] + amount
+        self.logger.debug('[STEP {}] Amount deposited: {}'.format(step, amount))
 
     def withdraw_all(self, step):
         self.value[step] = 0.0
+        self.logger.debug('[STEP {}] All funds withdrawn!'.format(step))
+
+class SavingAccount(CurrentAccount):
+
+    def __init__(self, id:str, logger:logging.Logger, current_outstanding:float, monthly_cost:float, cnit:float, current_step:int=0):
+        super().__init__(id, logger, current_outstanding, monthly_cost, cnit, current_step)
+        self.cnit = cnit
+        self.effective_rate = (1 + self.cnit) ** (1 / 12) - 1
+        self.value = dict()
+        self.value[current_step] = current_outstanding
+        self.monthly_cost = monthly_cost
+        self.monthly_costs = dict()
+        self.current_step = current_step
+
+        self.logger.info('Initializing Saving Account: {} with: '.format(self.id))
+        self.logger.info(' - CNIT: {:.4f}'.format(cnit))
+        self.logger.info(' - effective rate: {:.4f}'.format(self.effective_rate))
+        self.logger.info(' - current outstanding: {:.2f}'.format(current_outstanding))
+        self.logger.info(' - monthly cost: {}'.format(monthly_cost))
 
 
 class Mortgage(Instrument):
-    def __init__(self, id, logger, principal, cnit, maturity_in_years):
-        # Constructor
+    def __init__(self, id:str, logger:logging.Logger, principal:float, cnit:float, maturity_in_years:int, current_step:int=0):
         super().__init__(id, logger)
         self.cnit = cnit
         self.monthly_interest_rate = self.cnit*(31/365)
         self.value = dict()
         self.principal = principal
         self.maturity_in_years = maturity_in_years
+
         self.outstanding_amount = dict()
+        self.outstanding_amount[current_step] = principal
+        
         self.interest_payment = dict()
+        self.interest_payment[current_step] = 0.0
+
         self.principal_payment = dict()
+        self.principal_payment[current_step]= 0.0
+        
         self.monthly_payment = 0.0
         self.monthly_costs = dict()
+        self.current_step = current_step
+
+        self.logger.info('Initializing Mortgage: {} with: '.format(self.id))
+        self.logger.info(' - CNIT: {:.4f}'.format(cnit))
+        self.logger.info(' - monthly interest rate: {:.4f}'.format(self.monthly_interest_rate))
+        self.logger.info(' - principal: {:.2f}'.format(self.principal))
+        self.logger.info(' - maturity (in years): {:.2f}'.format(self.maturity_in_years))
 
     def calculateNumberOfPeriods(self):
         self.number_of_periods = self.maturity_in_years * 12
+        self.logger.debug(' Derived number of monthly periods: {:.2f}'.format(self.number_of_periods))
 
     def calculateMonthlyPayment(self):
         self.calculateNumberOfPeriods()
         self.monthly_payment = (self.monthly_interest_rate * self.principal) / (
                     1 - (1 + self.monthly_interest_rate) ** -self.number_of_periods)
 
+        self.logger.debug(' Derived monthly mortgage payment: {:.2f}'.format(self.monthly_payment))
+
     def calculateOutstandingAmount(self, step):
-        if step == 0:
-            self.outstanding_amount[step] = self.principal
-        else:
+        if step > self.current_step:
             if self.outstanding_amount[step-1] is None:
                 raise Exception('Outstanding amount at previous step to step ' + str(step) + ' not calculated!')
             elif self.principal_payment[step-1] is None:
                 raise Exception('Principal payment at previous step to step ' + str(step) + ' not calculated!')
             else:
                 self.outstanding_amount[step] = self.outstanding_amount[step-1] - self.principal_payment[step]
+                self.logger.debug('[STEP {}] Outstanding amount: {}'.format(step, self.outstanding_amount[step]))
 
     def calculateInterestPayment(self, step):
-        if step == 0:
-            self.interest_payment[step] = 0.0
-        else:
+        if step > self.current_step:
             if self.outstanding_amount[step - 1] is None:
                 raise Exception('Outstanding amount at previous step to step ' + str(step) + ' not calculated!')
             else:
                 self.interest_payment[step] = self.outstanding_amount[step-1] * self.monthly_interest_rate
+                self.logger.debug('[STEP {}] Interest payment: {}'.format(step, self.interest_payment[step]))
 
     def calculatePrincipalPayment(self, step):
-        if step == 0:
-            self.principal_payment[step] = 0.0
-        else:
+        if step > self.current_step:
             if self.interest_payment[step - 1] is None:
                 raise Exception('Interest payment at previous step to step ' + str(step) + ' not calculated!')
             else:
                 self.principal_payment[step] = self.monthly_payment - self.interest_payment[step]
+                self.logger.debug('[STEP {}] Principal payment: {}'.format(step, self.principal_payment[step]))
 
-    def project_monthly_costs(self, step):
+    def calculate_monthly_costs(self, step):
         self.calculateMonthlyPayment
         self.monthly_costs[step] = self.monthly_payment
-
-# class SavingAccount(Instrument):
-#     '''
-#     classdocs
-#     '''
-#
-#     def __init__(self, id, name, current_outstanding, monthly_cost, cnit):
-#         # Constructor
-#         super().__init__(id, name)
-#         self.cnit = cnit
-#         self.effective_rate = (1 + self.cnit) ** (1 / 12) - 1
-#         self.value = dict()
-#         self.current_outstanding = current_outstanding
-#         self.monthly_cost = monthly_cost
-#
-#     def projectValue(self, step):
-#         if step == 0:
-#             self.value[step] = self.current_outstanding
-#         else:
-#             if self.value[step - 1] is None:
-#                 raise Exception('Value at previous step to step ' + str(step) + ' not calculated!')
-#             else:
-#                 self.value[step] = self.value[step - 1] * (1 + self.effective_rate) - self.monthly_cost
 
 
 

@@ -45,12 +45,6 @@ class Party:
         self.logger.info('with initial portfolio: {}'.format(initial_portfolio.list_elements()))
         self.logger.info('with initial free resources: {}'.format(self.initial_free_resources))
 
-    # def refresh_portfolio(self, step):
-    #     if step == 0:
-    #         self.portfolio = self.initial_portfolio
-            
-    #     self.logger.debug('[STEP {}] Portfolio members: {}'.format(step, self.portfolio.list_elements()))
-
     def calculate_expenditures(self, step):        
         # expenditures from consumption
         expenditures = self.monthly_expenditures
@@ -59,12 +53,12 @@ class Party:
         # expenditures from porfolio holding
         for key, el in self.portfolio.elements.items():
             if isinstance(el, Mortgage):
-                el.project_monthly_costs(step)
+                el.calculate_monthly_costs(step)
                 expenditures = expenditures + el.monthly_costs[step]
                 self.logger.debug('[STEP {}] Expenditures from mortgage: {:.2f}'.format(step, el.monthly_costs[step]))
 
             if isinstance(el, CurrentAccount):
-                el.project_monthly_costs(step)
+                el.calculate_monthly_costs(step)
                 expenditures = expenditures + el.monthly_costs[step]
                 self.logger.debug('[STEP {}] Expenditures from the current account: {:.2f}'.format(step, el.monthly_costs[step]))
 
@@ -84,12 +78,12 @@ class Party:
 
         for key,el in self.portfolio.elements.items():
             if isinstance(el, CurrentAccount):
-                el.project_value(step)
+                el.calculate_value(step)
                 resources = resources + el.value[step]
                 self.logger.debug('[STEP {}] Resources from current account: {:.2f}'.format(step, el.value[step]))
 
             if isinstance(el, EmployeeContract):
-                el.project_cash_flow(step)
+                el.calculate_cash_flow(step)
                 resources = resources + el.cash_flow[step]
                 self.logger.debug('[STEP {}] Resources from the employee contract: {:.2f}'.format(step, el.cash_flow[step]))
 
@@ -127,7 +121,6 @@ class Party:
 
         for key, el in self.portfolio.elements.items():
             if isinstance(el, RealEstate):
-                # project value
                 el.calculate_price(step)
                 portfolio_value = portfolio_value + el.price[step]
 
