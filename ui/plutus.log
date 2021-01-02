@@ -1,16 +1,492 @@
-2020-11-21 20:42:13,462 :: plutusLogger | INFO | ============================================
-2020-11-21 20:42:13,503 :: plutusLogger | INFO | ============ CONFIGURATION  ================
-2020-11-21 20:42:13,504 :: plutusLogger | INFO | ============================================
-2020-11-21 20:42:13,505 :: plutusLogger | INFO | 
-2020-11-21 20:42:13,506 :: plutusLogger | INFO | [1] General: 
-2020-11-21 20:42:13,507 :: plutusLogger | INFO |  - n_years: 1
-2020-11-21 20:42:14,461 :: plutusLogger | INFO | 
-2020-11-21 20:42:14,463 :: plutusLogger | INFO | [2] Market: 
-2020-11-21 20:42:14,464 :: plutusLogger | INFO | Adding inflation index.
-2020-11-21 20:42:14,465 :: plutusLogger | INFO | Adding real-estate index.
-2020-11-21 20:42:15,323 :: plutusLogger | INFO | 
-2020-11-21 20:42:15,324 :: plutusLogger | INFO | [3] Portfolio: 
-2020-11-21 20:42:15,325 :: plutusLogger | INFO | Initializing: beznyUcet
-2020-11-21 20:42:15,326 :: plutusLogger | INFO | Initializing: hypoteka
-2020-11-21 20:42:15,327 :: plutusLogger | INFO | Initializing: byt
-2020-11-21 20:42:15,328 :: plutusLogger | INFO | Initializing: employeeCredo
+2021-01-02 15:04:17,131 :: plutusLogger | INFO | ============================================
+2021-01-02 15:04:17,132 :: plutusLogger | INFO | ============ CONFIGURATION  ================
+2021-01-02 15:04:17,132 :: plutusLogger | INFO | ============================================
+2021-01-02 15:04:17,133 :: plutusLogger | INFO | 
+2021-01-02 15:04:17,134 :: plutusLogger | INFO | [1] General: 
+2021-01-02 15:04:17,134 :: plutusLogger | INFO |  - n_years: 1
+2021-01-02 15:04:18,045 :: plutusLogger | INFO | 
+2021-01-02 15:04:18,045 :: plutusLogger | INFO | [2] Market: 
+2021-01-02 15:04:18,045 :: plutusLogger | INFO | Adding inflation index.
+2021-01-02 15:04:18,045 :: plutusLogger | INFO | Adding real-estate index.
+2021-01-02 15:04:19,278 :: plutusLogger | INFO | 
+2021-01-02 15:04:19,279 :: plutusLogger | INFO | [3] Portfolio: 
+2021-01-02 15:04:19,280 :: plutusLogger | INFO | Initializing: beznyUcet
+2021-01-02 15:04:19,280 :: plutusLogger | INFO | Initializing: hypoteka
+2021-01-02 15:04:19,280 :: plutusLogger | INFO | Initializing: byt
+2021-01-02 15:04:19,281 :: plutusLogger | INFO | Initializing: zamestnanec_Credo
+2021-01-02 15:04:21,658 :: plutusLogger | INFO | Initializing party: Rado
+2021-01-02 15:04:21,659 :: plutusLogger | INFO | with initial portfolio: {<context.instruments.CurrentAccount object at 0x7ff7b9b17100>, <context.instruments.Mortgage object at 0x7ff7b9b1b100>, <context.assets.RealEstate object at 0x7ff7b81e44c0>, <context.agreements.EmployeeContract object at 0x7ff76c878f70>}
+2021-01-02 15:04:21,659 :: plutusLogger | INFO | with initial free resources: 10000
+2021-01-02 15:04:22,489 :: plutusLogger | INFO | 
+2021-01-02 15:04:22,489 :: plutusLogger | INFO | ============================================
+2021-01-02 15:04:22,489 :: plutusLogger | INFO | ============== SIMULATION  =================
+2021-01-02 15:04:22,489 :: plutusLogger | INFO | ============================================
+2021-01-02 15:04:22,489 :: plutusLogger | INFO | 
+2021-01-02 15:04:22,489 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 0 <<<<<<<
+2021-01-02 15:04:22,489 :: plutusLogger | INFO | [STEP 0] Total resources: 147700.00
+2021-01-02 15:04:22,490 :: plutusLogger | INFO | [STEP 0] Total expenditures: 20766.67
+2021-01-02 15:04:22,490 :: plutusLogger | INFO | [STEP 0] Free resources: 126933.33
+2021-01-02 15:04:22,490 :: plutusLogger | INFO | [STEP 0] Discounted free resources: 126933.33
+2021-01-02 15:04:22,490 :: plutusLogger | INFO | [STEP 0] Portfolio value: 5000000.00
+2021-01-02 15:04:22,490 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 0 <<<<<<<
+2021-01-02 15:04:22,490 :: plutusLogger | INFO | [STEP 0] Total resources: 147700.00
+2021-01-02 15:04:22,490 :: plutusLogger | INFO | [STEP 0] Total expenditures: 20766.67
+2021-01-02 15:04:22,490 :: plutusLogger | INFO | [STEP 0] Free resources: 126933.33
+2021-01-02 15:04:22,490 :: plutusLogger | INFO | [STEP 0] Discounted free resources: 126933.33
+2021-01-02 15:04:22,491 :: plutusLogger | INFO | [STEP 0] Portfolio value: 5000000.00
+2021-01-02 15:04:22,491 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 1 <<<<<<<
+2021-01-02 15:04:22,491 :: plutusLogger | INFO | [STEP 1] Total resources: 164633.33
+2021-01-02 15:04:22,491 :: plutusLogger | INFO | [STEP 1] Total expenditures: 20766.67
+2021-01-02 15:04:22,491 :: plutusLogger | INFO | [STEP 1] Free resources: 143866.67
+2021-01-02 15:04:22,491 :: plutusLogger | INFO | [STEP 1] Discounted free resources: 143688.28
+2021-01-02 15:04:22,491 :: plutusLogger | INFO | [STEP 1] Portfolio value: 5029166.67
+2021-01-02 15:04:22,491 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 0 <<<<<<<
+2021-01-02 15:04:22,491 :: plutusLogger | INFO | [STEP 0] Total resources: 147700.00
+2021-01-02 15:04:22,491 :: plutusLogger | INFO | [STEP 0] Total expenditures: 20766.67
+2021-01-02 15:04:22,491 :: plutusLogger | INFO | [STEP 0] Free resources: 126933.33
+2021-01-02 15:04:22,491 :: plutusLogger | INFO | [STEP 0] Discounted free resources: 126933.33
+2021-01-02 15:04:22,491 :: plutusLogger | INFO | [STEP 0] Portfolio value: 5000000.00
+2021-01-02 15:04:22,491 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 1 <<<<<<<
+2021-01-02 15:04:22,492 :: plutusLogger | INFO | [STEP 1] Total resources: 164633.33
+2021-01-02 15:04:22,492 :: plutusLogger | INFO | [STEP 1] Total expenditures: 20766.67
+2021-01-02 15:04:22,492 :: plutusLogger | INFO | [STEP 1] Free resources: 143866.67
+2021-01-02 15:04:22,492 :: plutusLogger | INFO | [STEP 1] Discounted free resources: 143688.28
+2021-01-02 15:04:22,492 :: plutusLogger | INFO | [STEP 1] Portfolio value: 5029166.67
+2021-01-02 15:04:22,492 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 2 <<<<<<<
+2021-01-02 15:04:22,492 :: plutusLogger | INFO | [STEP 2] Total resources: 181566.67
+2021-01-02 15:04:22,492 :: plutusLogger | INFO | [STEP 2] Total expenditures: 20766.67
+2021-01-02 15:04:22,492 :: plutusLogger | INFO | [STEP 2] Free resources: 160800.00
+2021-01-02 15:04:22,492 :: plutusLogger | INFO | [STEP 2] Discounted free resources: 160401.48
+2021-01-02 15:04:22,492 :: plutusLogger | INFO | [STEP 2] Portfolio value: 5058333.33
+2021-01-02 15:04:22,492 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 0 <<<<<<<
+2021-01-02 15:04:22,492 :: plutusLogger | INFO | [STEP 0] Total resources: 147700.00
+2021-01-02 15:04:22,492 :: plutusLogger | INFO | [STEP 0] Total expenditures: 20766.67
+2021-01-02 15:04:22,492 :: plutusLogger | INFO | [STEP 0] Free resources: 126933.33
+2021-01-02 15:04:22,493 :: plutusLogger | INFO | [STEP 0] Discounted free resources: 126933.33
+2021-01-02 15:04:22,493 :: plutusLogger | INFO | [STEP 0] Portfolio value: 5000000.00
+2021-01-02 15:04:22,493 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 1 <<<<<<<
+2021-01-02 15:04:22,493 :: plutusLogger | INFO | [STEP 1] Total resources: 164633.33
+2021-01-02 15:04:22,493 :: plutusLogger | INFO | [STEP 1] Total expenditures: 20766.67
+2021-01-02 15:04:22,493 :: plutusLogger | INFO | [STEP 1] Free resources: 143866.67
+2021-01-02 15:04:22,493 :: plutusLogger | INFO | [STEP 1] Discounted free resources: 143688.28
+2021-01-02 15:04:22,493 :: plutusLogger | INFO | [STEP 1] Portfolio value: 5029166.67
+2021-01-02 15:04:22,493 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 2 <<<<<<<
+2021-01-02 15:04:22,493 :: plutusLogger | INFO | [STEP 2] Total resources: 181566.67
+2021-01-02 15:04:22,493 :: plutusLogger | INFO | [STEP 2] Total expenditures: 20766.67
+2021-01-02 15:04:22,493 :: plutusLogger | INFO | [STEP 2] Free resources: 160800.00
+2021-01-02 15:04:22,493 :: plutusLogger | INFO | [STEP 2] Discounted free resources: 160401.48
+2021-01-02 15:04:22,493 :: plutusLogger | INFO | [STEP 2] Portfolio value: 5058333.33
+2021-01-02 15:04:22,493 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 3 <<<<<<<
+2021-01-02 15:04:22,493 :: plutusLogger | INFO | [STEP 3] Total resources: 198500.00
+2021-01-02 15:04:22,494 :: plutusLogger | INFO | [STEP 3] Total expenditures: 20766.67
+2021-01-02 15:04:22,494 :: plutusLogger | INFO | [STEP 3] Free resources: 177733.33
+2021-01-02 15:04:22,494 :: plutusLogger | INFO | [STEP 3] Discounted free resources: 177073.01
+2021-01-02 15:04:22,494 :: plutusLogger | INFO | [STEP 3] Portfolio value: 5087500.00
+2021-01-02 15:04:22,494 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 0 <<<<<<<
+2021-01-02 15:04:22,494 :: plutusLogger | INFO | [STEP 0] Total resources: 147700.00
+2021-01-02 15:04:22,494 :: plutusLogger | INFO | [STEP 0] Total expenditures: 20766.67
+2021-01-02 15:04:22,494 :: plutusLogger | INFO | [STEP 0] Free resources: 126933.33
+2021-01-02 15:04:22,494 :: plutusLogger | INFO | [STEP 0] Discounted free resources: 126933.33
+2021-01-02 15:04:22,494 :: plutusLogger | INFO | [STEP 0] Portfolio value: 5000000.00
+2021-01-02 15:04:22,494 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 1 <<<<<<<
+2021-01-02 15:04:22,494 :: plutusLogger | INFO | [STEP 1] Total resources: 164633.33
+2021-01-02 15:04:22,494 :: plutusLogger | INFO | [STEP 1] Total expenditures: 20766.67
+2021-01-02 15:04:22,494 :: plutusLogger | INFO | [STEP 1] Free resources: 143866.67
+2021-01-02 15:04:22,494 :: plutusLogger | INFO | [STEP 1] Discounted free resources: 143688.28
+2021-01-02 15:04:22,495 :: plutusLogger | INFO | [STEP 1] Portfolio value: 5029166.67
+2021-01-02 15:04:22,495 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 2 <<<<<<<
+2021-01-02 15:04:22,495 :: plutusLogger | INFO | [STEP 2] Total resources: 181566.67
+2021-01-02 15:04:22,495 :: plutusLogger | INFO | [STEP 2] Total expenditures: 20766.67
+2021-01-02 15:04:22,495 :: plutusLogger | INFO | [STEP 2] Free resources: 160800.00
+2021-01-02 15:04:22,495 :: plutusLogger | INFO | [STEP 2] Discounted free resources: 160401.48
+2021-01-02 15:04:22,495 :: plutusLogger | INFO | [STEP 2] Portfolio value: 5058333.33
+2021-01-02 15:04:22,495 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 3 <<<<<<<
+2021-01-02 15:04:22,495 :: plutusLogger | INFO | [STEP 3] Total resources: 198500.00
+2021-01-02 15:04:22,495 :: plutusLogger | INFO | [STEP 3] Total expenditures: 20766.67
+2021-01-02 15:04:22,495 :: plutusLogger | INFO | [STEP 3] Free resources: 177733.33
+2021-01-02 15:04:22,495 :: plutusLogger | INFO | [STEP 3] Discounted free resources: 177073.01
+2021-01-02 15:04:22,495 :: plutusLogger | INFO | [STEP 3] Portfolio value: 5087500.00
+2021-01-02 15:04:22,495 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 4 <<<<<<<
+2021-01-02 15:04:22,495 :: plutusLogger | INFO | [STEP 4] Total resources: 215433.33
+2021-01-02 15:04:22,495 :: plutusLogger | INFO | [STEP 4] Total expenditures: 20766.67
+2021-01-02 15:04:22,495 :: plutusLogger | INFO | [STEP 4] Free resources: 194666.67
+2021-01-02 15:04:22,496 :: plutusLogger | INFO | [STEP 4] Discounted free resources: 193702.95
+2021-01-02 15:04:22,496 :: plutusLogger | INFO | [STEP 4] Portfolio value: 5116666.67
+2021-01-02 15:04:22,496 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 0 <<<<<<<
+2021-01-02 15:04:22,496 :: plutusLogger | INFO | [STEP 0] Total resources: 147700.00
+2021-01-02 15:04:22,496 :: plutusLogger | INFO | [STEP 0] Total expenditures: 20766.67
+2021-01-02 15:04:22,496 :: plutusLogger | INFO | [STEP 0] Free resources: 126933.33
+2021-01-02 15:04:22,496 :: plutusLogger | INFO | [STEP 0] Discounted free resources: 126933.33
+2021-01-02 15:04:22,496 :: plutusLogger | INFO | [STEP 0] Portfolio value: 5000000.00
+2021-01-02 15:04:22,496 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 1 <<<<<<<
+2021-01-02 15:04:22,496 :: plutusLogger | INFO | [STEP 1] Total resources: 164633.33
+2021-01-02 15:04:22,496 :: plutusLogger | INFO | [STEP 1] Total expenditures: 20766.67
+2021-01-02 15:04:22,496 :: plutusLogger | INFO | [STEP 1] Free resources: 143866.67
+2021-01-02 15:04:22,496 :: plutusLogger | INFO | [STEP 1] Discounted free resources: 143688.28
+2021-01-02 15:04:22,496 :: plutusLogger | INFO | [STEP 1] Portfolio value: 5029166.67
+2021-01-02 15:04:22,496 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 2 <<<<<<<
+2021-01-02 15:04:22,496 :: plutusLogger | INFO | [STEP 2] Total resources: 181566.67
+2021-01-02 15:04:22,496 :: plutusLogger | INFO | [STEP 2] Total expenditures: 20766.67
+2021-01-02 15:04:22,497 :: plutusLogger | INFO | [STEP 2] Free resources: 160800.00
+2021-01-02 15:04:22,497 :: plutusLogger | INFO | [STEP 2] Discounted free resources: 160401.48
+2021-01-02 15:04:22,497 :: plutusLogger | INFO | [STEP 2] Portfolio value: 5058333.33
+2021-01-02 15:04:22,497 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 3 <<<<<<<
+2021-01-02 15:04:22,497 :: plutusLogger | INFO | [STEP 3] Total resources: 198500.00
+2021-01-02 15:04:22,497 :: plutusLogger | INFO | [STEP 3] Total expenditures: 20766.67
+2021-01-02 15:04:22,497 :: plutusLogger | INFO | [STEP 3] Free resources: 177733.33
+2021-01-02 15:04:22,497 :: plutusLogger | INFO | [STEP 3] Discounted free resources: 177073.01
+2021-01-02 15:04:22,497 :: plutusLogger | INFO | [STEP 3] Portfolio value: 5087500.00
+2021-01-02 15:04:22,497 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 4 <<<<<<<
+2021-01-02 15:04:22,497 :: plutusLogger | INFO | [STEP 4] Total resources: 215433.33
+2021-01-02 15:04:22,497 :: plutusLogger | INFO | [STEP 4] Total expenditures: 20766.67
+2021-01-02 15:04:22,497 :: plutusLogger | INFO | [STEP 4] Free resources: 194666.67
+2021-01-02 15:04:22,497 :: plutusLogger | INFO | [STEP 4] Discounted free resources: 193702.95
+2021-01-02 15:04:22,497 :: plutusLogger | INFO | [STEP 4] Portfolio value: 5116666.67
+2021-01-02 15:04:22,497 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 5 <<<<<<<
+2021-01-02 15:04:22,498 :: plutusLogger | INFO | [STEP 5] Total resources: 232366.67
+2021-01-02 15:04:22,498 :: plutusLogger | INFO | [STEP 5] Total expenditures: 220766.67
+2021-01-02 15:04:22,498 :: plutusLogger | INFO | [STEP 5] Free resources: 11600.00
+2021-01-02 15:04:22,498 :: plutusLogger | INFO | [STEP 5] Discounted free resources: 11528.26
+2021-01-02 15:04:22,498 :: plutusLogger | INFO | [STEP 5] Portfolio value: 5145833.33
+2021-01-02 15:04:22,498 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 0 <<<<<<<
+2021-01-02 15:04:22,498 :: plutusLogger | INFO | [STEP 0] Total resources: 147700.00
+2021-01-02 15:04:22,498 :: plutusLogger | INFO | [STEP 0] Total expenditures: 20766.67
+2021-01-02 15:04:22,498 :: plutusLogger | INFO | [STEP 0] Free resources: 126933.33
+2021-01-02 15:04:22,498 :: plutusLogger | INFO | [STEP 0] Discounted free resources: 126933.33
+2021-01-02 15:04:22,498 :: plutusLogger | INFO | [STEP 0] Portfolio value: 5000000.00
+2021-01-02 15:04:22,498 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 1 <<<<<<<
+2021-01-02 15:04:22,498 :: plutusLogger | INFO | [STEP 1] Total resources: 164633.33
+2021-01-02 15:04:22,498 :: plutusLogger | INFO | [STEP 1] Total expenditures: 20766.67
+2021-01-02 15:04:22,498 :: plutusLogger | INFO | [STEP 1] Free resources: 143866.67
+2021-01-02 15:04:22,498 :: plutusLogger | INFO | [STEP 1] Discounted free resources: 143688.28
+2021-01-02 15:04:22,498 :: plutusLogger | INFO | [STEP 1] Portfolio value: 5029166.67
+2021-01-02 15:04:22,499 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 2 <<<<<<<
+2021-01-02 15:04:22,499 :: plutusLogger | INFO | [STEP 2] Total resources: 181566.67
+2021-01-02 15:04:22,499 :: plutusLogger | INFO | [STEP 2] Total expenditures: 20766.67
+2021-01-02 15:04:22,499 :: plutusLogger | INFO | [STEP 2] Free resources: 160800.00
+2021-01-02 15:04:22,499 :: plutusLogger | INFO | [STEP 2] Discounted free resources: 160401.48
+2021-01-02 15:04:22,499 :: plutusLogger | INFO | [STEP 2] Portfolio value: 5058333.33
+2021-01-02 15:04:22,499 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 3 <<<<<<<
+2021-01-02 15:04:22,499 :: plutusLogger | INFO | [STEP 3] Total resources: 198500.00
+2021-01-02 15:04:22,499 :: plutusLogger | INFO | [STEP 3] Total expenditures: 20766.67
+2021-01-02 15:04:22,499 :: plutusLogger | INFO | [STEP 3] Free resources: 177733.33
+2021-01-02 15:04:22,499 :: plutusLogger | INFO | [STEP 3] Discounted free resources: 177073.01
+2021-01-02 15:04:22,499 :: plutusLogger | INFO | [STEP 3] Portfolio value: 5087500.00
+2021-01-02 15:04:22,499 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 4 <<<<<<<
+2021-01-02 15:04:22,499 :: plutusLogger | INFO | [STEP 4] Total resources: 215433.33
+2021-01-02 15:04:22,499 :: plutusLogger | INFO | [STEP 4] Total expenditures: 20766.67
+2021-01-02 15:04:22,499 :: plutusLogger | INFO | [STEP 4] Free resources: 194666.67
+2021-01-02 15:04:22,500 :: plutusLogger | INFO | [STEP 4] Discounted free resources: 193702.95
+2021-01-02 15:04:22,500 :: plutusLogger | INFO | [STEP 4] Portfolio value: 5116666.67
+2021-01-02 15:04:22,500 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 5 <<<<<<<
+2021-01-02 15:04:22,500 :: plutusLogger | INFO | [STEP 5] Total resources: 232366.67
+2021-01-02 15:04:22,500 :: plutusLogger | INFO | [STEP 5] Total expenditures: 220766.67
+2021-01-02 15:04:22,500 :: plutusLogger | INFO | [STEP 5] Free resources: 11600.00
+2021-01-02 15:04:22,500 :: plutusLogger | INFO | [STEP 5] Discounted free resources: 11528.26
+2021-01-02 15:04:22,500 :: plutusLogger | INFO | [STEP 5] Portfolio value: 5145833.33
+2021-01-02 15:04:22,500 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 6 <<<<<<<
+2021-01-02 15:04:22,500 :: plutusLogger | INFO | [STEP 6] Total resources: 185020.00
+2021-01-02 15:04:22,500 :: plutusLogger | INFO | [STEP 6] Total expenditures: 20766.67
+2021-01-02 15:04:22,500 :: plutusLogger | INFO | [STEP 6] Free resources: 164253.33
+2021-01-02 15:04:22,500 :: plutusLogger | INFO | [STEP 6] Discounted free resources: 163035.12
+2021-01-02 15:04:22,500 :: plutusLogger | INFO | [STEP 6] Portfolio value: 5175000.00
+2021-01-02 15:04:22,500 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 0 <<<<<<<
+2021-01-02 15:04:22,500 :: plutusLogger | INFO | [STEP 0] Total resources: 147700.00
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | [STEP 0] Total expenditures: 20766.67
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | [STEP 0] Free resources: 126933.33
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | [STEP 0] Discounted free resources: 126933.33
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | [STEP 0] Portfolio value: 5000000.00
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 1 <<<<<<<
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | [STEP 1] Total resources: 164633.33
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | [STEP 1] Total expenditures: 20766.67
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | [STEP 1] Free resources: 143866.67
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | [STEP 1] Discounted free resources: 143688.28
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | [STEP 1] Portfolio value: 5029166.67
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 2 <<<<<<<
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | [STEP 2] Total resources: 181566.67
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | [STEP 2] Total expenditures: 20766.67
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | [STEP 2] Free resources: 160800.00
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | [STEP 2] Discounted free resources: 160401.48
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | [STEP 2] Portfolio value: 5058333.33
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 3 <<<<<<<
+2021-01-02 15:04:22,501 :: plutusLogger | INFO | [STEP 3] Total resources: 198500.00
+2021-01-02 15:04:22,502 :: plutusLogger | INFO | [STEP 3] Total expenditures: 20766.67
+2021-01-02 15:04:22,502 :: plutusLogger | INFO | [STEP 3] Free resources: 177733.33
+2021-01-02 15:04:22,502 :: plutusLogger | INFO | [STEP 3] Discounted free resources: 177073.01
+2021-01-02 15:04:22,502 :: plutusLogger | INFO | [STEP 3] Portfolio value: 5087500.00
+2021-01-02 15:04:22,502 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 4 <<<<<<<
+2021-01-02 15:04:22,502 :: plutusLogger | INFO | [STEP 4] Total resources: 215433.33
+2021-01-02 15:04:22,502 :: plutusLogger | INFO | [STEP 4] Total expenditures: 20766.67
+2021-01-02 15:04:22,502 :: plutusLogger | INFO | [STEP 4] Free resources: 194666.67
+2021-01-02 15:04:22,502 :: plutusLogger | INFO | [STEP 4] Discounted free resources: 193702.95
+2021-01-02 15:04:22,502 :: plutusLogger | INFO | [STEP 4] Portfolio value: 5116666.67
+2021-01-02 15:04:22,502 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 5 <<<<<<<
+2021-01-02 15:04:22,502 :: plutusLogger | INFO | [STEP 5] Total resources: 232366.67
+2021-01-02 15:04:22,502 :: plutusLogger | INFO | [STEP 5] Total expenditures: 220766.67
+2021-01-02 15:04:22,502 :: plutusLogger | INFO | [STEP 5] Free resources: 11600.00
+2021-01-02 15:04:22,502 :: plutusLogger | INFO | [STEP 5] Discounted free resources: 11528.26
+2021-01-02 15:04:22,502 :: plutusLogger | INFO | [STEP 5] Portfolio value: 5145833.33
+2021-01-02 15:04:22,502 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 6 <<<<<<<
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | [STEP 6] Total resources: 185020.00
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | [STEP 6] Total expenditures: 20766.67
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | [STEP 6] Free resources: 164253.33
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | [STEP 6] Discounted free resources: 163035.12
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | [STEP 6] Portfolio value: 5175000.00
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 7 <<<<<<<
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | [STEP 7] Total resources: 201953.33
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | [STEP 7] Total expenditures: 20766.67
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | [STEP 7] Free resources: 181186.67
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | [STEP 7] Discounted free resources: 179619.87
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | [STEP 7] Portfolio value: 5204166.67
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 0 <<<<<<<
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | [STEP 0] Total resources: 147700.00
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | [STEP 0] Total expenditures: 20766.67
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | [STEP 0] Free resources: 126933.33
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | [STEP 0] Discounted free resources: 126933.33
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | [STEP 0] Portfolio value: 5000000.00
+2021-01-02 15:04:22,503 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 1 <<<<<<<
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | [STEP 1] Total resources: 164633.33
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | [STEP 1] Total expenditures: 20766.67
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | [STEP 1] Free resources: 143866.67
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | [STEP 1] Discounted free resources: 143688.28
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | [STEP 1] Portfolio value: 5029166.67
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 2 <<<<<<<
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | [STEP 2] Total resources: 181566.67
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | [STEP 2] Total expenditures: 20766.67
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | [STEP 2] Free resources: 160800.00
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | [STEP 2] Discounted free resources: 160401.48
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | [STEP 2] Portfolio value: 5058333.33
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 3 <<<<<<<
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | [STEP 3] Total resources: 198500.00
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | [STEP 3] Total expenditures: 20766.67
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | [STEP 3] Free resources: 177733.33
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | [STEP 3] Discounted free resources: 177073.01
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | [STEP 3] Portfolio value: 5087500.00
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 4 <<<<<<<
+2021-01-02 15:04:22,504 :: plutusLogger | INFO | [STEP 4] Total resources: 215433.33
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | [STEP 4] Total expenditures: 20766.67
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | [STEP 4] Free resources: 194666.67
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | [STEP 4] Discounted free resources: 193702.95
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | [STEP 4] Portfolio value: 5116666.67
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 5 <<<<<<<
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | [STEP 5] Total resources: 232366.67
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | [STEP 5] Total expenditures: 220766.67
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | [STEP 5] Free resources: 11600.00
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | [STEP 5] Discounted free resources: 11528.26
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | [STEP 5] Portfolio value: 5145833.33
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 6 <<<<<<<
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | [STEP 6] Total resources: 185020.00
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | [STEP 6] Total expenditures: 20766.67
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | [STEP 6] Free resources: 164253.33
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | [STEP 6] Discounted free resources: 163035.12
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | [STEP 6] Portfolio value: 5175000.00
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 7 <<<<<<<
+2021-01-02 15:04:22,505 :: plutusLogger | INFO | [STEP 7] Total resources: 201953.33
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | [STEP 7] Total expenditures: 20766.67
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | [STEP 7] Free resources: 181186.67
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | [STEP 7] Discounted free resources: 179619.87
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | [STEP 7] Portfolio value: 5204166.67
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 8 <<<<<<<
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | [STEP 8] Total resources: 218886.67
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | [STEP 8] Total expenditures: 20766.67
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | [STEP 8] Free resources: 198120.00
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | [STEP 8] Discounted free resources: 196163.24
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | [STEP 8] Portfolio value: 5233333.33
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 0 <<<<<<<
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | [STEP 0] Total resources: 147700.00
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | [STEP 0] Total expenditures: 20766.67
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | [STEP 0] Free resources: 126933.33
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | [STEP 0] Discounted free resources: 126933.33
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | [STEP 0] Portfolio value: 5000000.00
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 1 <<<<<<<
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | [STEP 1] Total resources: 164633.33
+2021-01-02 15:04:22,506 :: plutusLogger | INFO | [STEP 1] Total expenditures: 20766.67
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | [STEP 1] Free resources: 143866.67
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | [STEP 1] Discounted free resources: 143688.28
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | [STEP 1] Portfolio value: 5029166.67
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 2 <<<<<<<
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | [STEP 2] Total resources: 181566.67
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | [STEP 2] Total expenditures: 20766.67
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | [STEP 2] Free resources: 160800.00
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | [STEP 2] Discounted free resources: 160401.48
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | [STEP 2] Portfolio value: 5058333.33
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 3 <<<<<<<
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | [STEP 3] Total resources: 198500.00
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | [STEP 3] Total expenditures: 20766.67
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | [STEP 3] Free resources: 177733.33
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | [STEP 3] Discounted free resources: 177073.01
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | [STEP 3] Portfolio value: 5087500.00
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 4 <<<<<<<
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | [STEP 4] Total resources: 215433.33
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | [STEP 4] Total expenditures: 20766.67
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | [STEP 4] Free resources: 194666.67
+2021-01-02 15:04:22,507 :: plutusLogger | INFO | [STEP 4] Discounted free resources: 193702.95
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | [STEP 4] Portfolio value: 5116666.67
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 5 <<<<<<<
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | [STEP 5] Total resources: 232366.67
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | [STEP 5] Total expenditures: 220766.67
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | [STEP 5] Free resources: 11600.00
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | [STEP 5] Discounted free resources: 11528.26
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | [STEP 5] Portfolio value: 5145833.33
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 6 <<<<<<<
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | [STEP 6] Total resources: 185020.00
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | [STEP 6] Total expenditures: 20766.67
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | [STEP 6] Free resources: 164253.33
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | [STEP 6] Discounted free resources: 163035.12
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | [STEP 6] Portfolio value: 5175000.00
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 7 <<<<<<<
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | [STEP 7] Total resources: 201953.33
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | [STEP 7] Total expenditures: 20766.67
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | [STEP 7] Free resources: 181186.67
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | [STEP 7] Discounted free resources: 179619.87
+2021-01-02 15:04:22,508 :: plutusLogger | INFO | [STEP 7] Portfolio value: 5204166.67
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 8 <<<<<<<
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | [STEP 8] Total resources: 218886.67
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | [STEP 8] Total expenditures: 20766.67
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | [STEP 8] Free resources: 198120.00
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | [STEP 8] Discounted free resources: 196163.24
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | [STEP 8] Portfolio value: 5233333.33
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 9 <<<<<<<
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | [STEP 9] Total resources: 235820.00
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | [STEP 9] Total expenditures: 20766.67
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | [STEP 9] Free resources: 215053.33
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | [STEP 9] Discounted free resources: 212665.31
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | [STEP 9] Portfolio value: 5262500.00
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 0 <<<<<<<
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | [STEP 0] Total resources: 147700.00
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | [STEP 0] Total expenditures: 20766.67
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | [STEP 0] Free resources: 126933.33
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | [STEP 0] Discounted free resources: 126933.33
+2021-01-02 15:04:22,509 :: plutusLogger | INFO | [STEP 0] Portfolio value: 5000000.00
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 1 <<<<<<<
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | [STEP 1] Total resources: 164633.33
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | [STEP 1] Total expenditures: 20766.67
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | [STEP 1] Free resources: 143866.67
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | [STEP 1] Discounted free resources: 143688.28
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | [STEP 1] Portfolio value: 5029166.67
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 2 <<<<<<<
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | [STEP 2] Total resources: 181566.67
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | [STEP 2] Total expenditures: 20766.67
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | [STEP 2] Free resources: 160800.00
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | [STEP 2] Discounted free resources: 160401.48
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | [STEP 2] Portfolio value: 5058333.33
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 3 <<<<<<<
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | [STEP 3] Total resources: 198500.00
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | [STEP 3] Total expenditures: 20766.67
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | [STEP 3] Free resources: 177733.33
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | [STEP 3] Discounted free resources: 177073.01
+2021-01-02 15:04:22,510 :: plutusLogger | INFO | [STEP 3] Portfolio value: 5087500.00
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 4 <<<<<<<
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | [STEP 4] Total resources: 215433.33
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | [STEP 4] Total expenditures: 20766.67
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | [STEP 4] Free resources: 194666.67
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | [STEP 4] Discounted free resources: 193702.95
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | [STEP 4] Portfolio value: 5116666.67
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 5 <<<<<<<
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | [STEP 5] Total resources: 232366.67
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | [STEP 5] Total expenditures: 220766.67
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | [STEP 5] Free resources: 11600.00
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | [STEP 5] Discounted free resources: 11528.26
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | [STEP 5] Portfolio value: 5145833.33
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 6 <<<<<<<
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | [STEP 6] Total resources: 185020.00
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | [STEP 6] Total expenditures: 20766.67
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | [STEP 6] Free resources: 164253.33
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | [STEP 6] Discounted free resources: 163035.12
+2021-01-02 15:04:22,511 :: plutusLogger | INFO | [STEP 6] Portfolio value: 5175000.00
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 7 <<<<<<<
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | [STEP 7] Total resources: 201953.33
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | [STEP 7] Total expenditures: 20766.67
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | [STEP 7] Free resources: 181186.67
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | [STEP 7] Discounted free resources: 179619.87
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | [STEP 7] Portfolio value: 5204166.67
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 8 <<<<<<<
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | [STEP 8] Total resources: 218886.67
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | [STEP 8] Total expenditures: 20766.67
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | [STEP 8] Free resources: 198120.00
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | [STEP 8] Discounted free resources: 196163.24
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | [STEP 8] Portfolio value: 5233333.33
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 9 <<<<<<<
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | [STEP 9] Total resources: 235820.00
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | [STEP 9] Total expenditures: 20766.67
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | [STEP 9] Free resources: 215053.33
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | [STEP 9] Discounted free resources: 212665.31
+2021-01-02 15:04:22,512 :: plutusLogger | INFO | [STEP 9] Portfolio value: 5262500.00
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 10 <<<<<<<
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | [STEP 10] Total resources: 252753.33
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | [STEP 10] Total expenditures: 220766.67
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | [STEP 10] Free resources: 31986.67
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | [STEP 10] Discounted free resources: 31592.25
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | [STEP 10] Portfolio value: 5291666.67
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 0 <<<<<<<
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | [STEP 0] Total resources: 147700.00
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | [STEP 0] Total expenditures: 20766.67
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | [STEP 0] Free resources: 126933.33
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | [STEP 0] Discounted free resources: 126933.33
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | [STEP 0] Portfolio value: 5000000.00
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 1 <<<<<<<
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | [STEP 1] Total resources: 164633.33
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | [STEP 1] Total expenditures: 20766.67
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | [STEP 1] Free resources: 143866.67
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | [STEP 1] Discounted free resources: 143688.28
+2021-01-02 15:04:22,513 :: plutusLogger | INFO | [STEP 1] Portfolio value: 5029166.67
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 2 <<<<<<<
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | [STEP 2] Total resources: 181566.67
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | [STEP 2] Total expenditures: 20766.67
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | [STEP 2] Free resources: 160800.00
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | [STEP 2] Discounted free resources: 160401.48
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | [STEP 2] Portfolio value: 5058333.33
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 3 <<<<<<<
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | [STEP 3] Total resources: 198500.00
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | [STEP 3] Total expenditures: 20766.67
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | [STEP 3] Free resources: 177733.33
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | [STEP 3] Discounted free resources: 177073.01
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | [STEP 3] Portfolio value: 5087500.00
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 4 <<<<<<<
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | [STEP 4] Total resources: 215433.33
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | [STEP 4] Total expenditures: 20766.67
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | [STEP 4] Free resources: 194666.67
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | [STEP 4] Discounted free resources: 193702.95
+2021-01-02 15:04:22,514 :: plutusLogger | INFO | [STEP 4] Portfolio value: 5116666.67
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 5 <<<<<<<
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | [STEP 5] Total resources: 232366.67
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | [STEP 5] Total expenditures: 220766.67
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | [STEP 5] Free resources: 11600.00
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | [STEP 5] Discounted free resources: 11528.26
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | [STEP 5] Portfolio value: 5145833.33
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 6 <<<<<<<
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | [STEP 6] Total resources: 185020.00
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | [STEP 6] Total expenditures: 20766.67
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | [STEP 6] Free resources: 164253.33
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | [STEP 6] Discounted free resources: 163035.12
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | [STEP 6] Portfolio value: 5175000.00
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 7 <<<<<<<
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | [STEP 7] Total resources: 201953.33
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | [STEP 7] Total expenditures: 20766.67
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | [STEP 7] Free resources: 181186.67
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | [STEP 7] Discounted free resources: 179619.87
+2021-01-02 15:04:22,515 :: plutusLogger | INFO | [STEP 7] Portfolio value: 5204166.67
+2021-01-02 15:04:22,516 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 8 <<<<<<<
+2021-01-02 15:04:22,516 :: plutusLogger | INFO | [STEP 8] Total resources: 218886.67
+2021-01-02 15:04:22,516 :: plutusLogger | INFO | [STEP 8] Total expenditures: 20766.67
+2021-01-02 15:04:22,516 :: plutusLogger | INFO | [STEP 8] Free resources: 198120.00
+2021-01-02 15:04:22,516 :: plutusLogger | INFO | [STEP 8] Discounted free resources: 196163.24
+2021-01-02 15:04:22,516 :: plutusLogger | INFO | [STEP 8] Portfolio value: 5233333.33
+2021-01-02 15:04:22,516 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 9 <<<<<<<
+2021-01-02 15:04:22,516 :: plutusLogger | INFO | [STEP 9] Total resources: 235820.00
+2021-01-02 15:04:22,516 :: plutusLogger | INFO | [STEP 9] Total expenditures: 20766.67
+2021-01-02 15:04:22,516 :: plutusLogger | INFO | [STEP 9] Free resources: 215053.33
+2021-01-02 15:04:22,516 :: plutusLogger | INFO | [STEP 9] Discounted free resources: 212665.31
+2021-01-02 15:04:22,516 :: plutusLogger | INFO | [STEP 9] Portfolio value: 5262500.00
+2021-01-02 15:04:22,516 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 10 <<<<<<<
+2021-01-02 15:04:22,516 :: plutusLogger | INFO | [STEP 10] Total resources: 252753.33
+2021-01-02 15:04:22,516 :: plutusLogger | INFO | [STEP 10] Total expenditures: 220766.67
+2021-01-02 15:04:22,516 :: plutusLogger | INFO | [STEP 10] Free resources: 31986.67
+2021-01-02 15:04:22,517 :: plutusLogger | INFO | [STEP 10] Discounted free resources: 31592.25
+2021-01-02 15:04:22,517 :: plutusLogger | INFO | [STEP 10] Portfolio value: 5291666.67
+2021-01-02 15:04:22,517 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 11 <<<<<<<
+2021-01-02 15:04:22,517 :: plutusLogger | INFO | [STEP 11] Total resources: 69686.67
+2021-01-02 15:04:22,517 :: plutusLogger | INFO | [STEP 11] Total expenditures: 20766.67
+2021-01-02 15:04:22,517 :: plutusLogger | INFO | [STEP 11] Free resources: 48920.00
+2021-01-02 15:04:22,517 :: plutusLogger | INFO | [STEP 11] Discounted free resources: 48256.88
+2021-01-02 15:04:22,517 :: plutusLogger | INFO | [STEP 11] Portfolio value: 5320833.33

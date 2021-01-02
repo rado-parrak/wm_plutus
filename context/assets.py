@@ -26,7 +26,7 @@ class RealEstate(Asset):
         self.real_estate_index = real_estate_index
 
 
-    def project_price(self, step):
+    def calculate_price(self, step):
         if step == 0:
             self.price[step] = self.current_market_value
         else:
@@ -36,7 +36,7 @@ class RealEstate(Asset):
                 self.price[step] = self.price[0] * self.real_estate_index[step]
         self.logger.debug('step '+str(step)+' | '+self.id+' price: '+str(self.price[step]))
 
-    def project_monthly_costs(self, step):
+    def calculate_monthly_costs(self, step):
         # renovations happen at distinct steps - renovation_steps
         if step in self.renovation_steps:
             self.monthly_costs[step] = self.property_tax / 12 + self.renovation_costs + self.house_community_costs/12
