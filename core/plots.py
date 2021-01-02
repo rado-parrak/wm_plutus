@@ -2,10 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from context.party import Party
 
-class PlutusPlotter():
-    '''
-    classdocs
-    '''
+class PartyPlotter():
 
     def __init__(self, party: Party):
         self.party = party
@@ -18,7 +15,7 @@ class PlutusPlotter():
 
         plt.xlabel('month')
         plt.ylabel('value')
-        plt.title('Overall financial evolution | ' + self.party.name)
+        plt.title('Overall financial evolution | ' + self.party.id)
         plt.legend()
 
         return plt.show()
@@ -28,7 +25,7 @@ class PlutusPlotter():
 
         plt.xlabel('month')
         plt.ylabel('PV of value')
-        plt.title('PV of overall financial evolution | ' + self.party.name)
+        plt.title('PV of overall financial evolution | ' + self.party.id)
         plt.legend()
 
         return plt.show()
@@ -39,7 +36,7 @@ class PlutusPlotter():
 
         plt.xlabel('month')
         plt.ylabel('value')
-        plt.title('Inflation gap | ' + self.party.name)
+        plt.title('Inflation gap | ' + self.party.id)
         plt.legend()
 
         return plt.show()
@@ -49,7 +46,7 @@ class PlutusPlotter():
 
         plt.xlabel('month')
         plt.ylabel('value')
-        plt.title('Portfolio value | ' + self.party.name)
+        plt.title('Portfolio value | ' + self.party.id)
         plt.legend()
 
         return plt.show()
