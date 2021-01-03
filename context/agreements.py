@@ -1,63 +1,81 @@
 import logging
 class Agreement:
-    '''
-    classdocs
-    '''
 
     def __init__(self, id:str, logger:logging.Logger):
         self.id = id
         self.cash_flow = dict()
         self.logger = logger
-        # log
-        self.logger.info('Initializing: '+ str(self.id))
 
 class RentalAgreement(Agreement):
 
-    def __init__(self, id, logger, average_yearly_validity:float, inflation_index:dict, my_position:str, rent:float, yearly_costs:float):
-        # Constructor
+    def __init__(self, id:str, logger:logging.Logger, inflation_index:dict, my_position:str, rent:float, yearly_costs:float):
         super().__init__(id, logger)
-        self.average_yearly_validity = average_yearly_validity # how much time, on average, over year this agreement is in place
         self.inflation_index = inflation_index
         self.my_position = my_position
         self.rent = rent
         self.yearly_costs = yearly_costs
 
-    def projectCashFlow(self, step):
+        self.logger.info('Initializing: Rental Agreement: {} with: '.format(self.id))
+        self.logger.info('- position: {}'.format(my_position))
+        self.logger.info('- rent: {}'.format(rent))
+        self.logger.info('- yearly costs: {}'.format(yearly_costs))
+
+    def calculate_cashflow(self, step):
         if self.my_position=='renter':
-            self.cash_flow[step] = self.average_yearly_validity * (self.rent - self.yearly_costs/12)
+            self.cash_flow[step] = self.rent - self.yearly_costs/12
+            self.logger.debug('[STEP {}] Cash-flow from rental agreement (renter): {:.2f}'.format(step, self.cash_flow[step] ))
 
         if self.my_position=='rentee':
-            self.cash_flow[step] = self.average_yearly_validity * (-self.rent - self.yearly_costs/12)
+            self.cash_flow[step] = -1.0 * self.rent
+            self.logger.debug('[STEP {}] Cash-flow from rental agreement (rentee): {:.2f}'.format(step, self.cash_flow[step] ))
 
 class UtilitiesAgreement(Agreement):
-    def __init__(self, id, logger, linked_asset, water, gas, electricity, internet, heat, average_yearly_validity):
-        # Constructor
+    def __init__(self, id, logger:logging.Logger, water:float, gas:float, electricity:float, internet:float, heat:float):
         super().__init__(id, logger)
-        self.linked_asset = linked_asset
         self.water = water
         self.gas = gas
         self.electricity = electricity
         self.internet = internet
         self.heat = heat
-        self.average_yearly_validity = average_yearly_validity
+        
+        self.logger.info('Initializing: Utilities Agreement: {} with: '.format(self.id))
+        self.logger.info('- water: {}'.format(water))
+        self.logger.info('- gas: {}'.format(gas))
+        self.logger.info('- electricity: {}'.format(electricity))
+        self.logger.info('- internet: {}'.format(internet))
+        self.logger.info('- heat: {}'.format(heat))
 
-    def project_cash_flow(self, step):
-        self.cash_flow[step] = - 1 * self.average_yearly_validity * (self.water + self.gas + self.electricity + self.internet + self.heat)
+    def calculate_cashflow(self, step):
+        self.cash_flow[step] = - 1 * (self.water + self.gas + self.electricity + self.internet + self.heat)
+        self.logger.debug('[STEP {}] Cash-flow from utilities agreement: {:.2f}'.format(step, self.cash_flow[step] ))
 
 class EmployeeContract(Agreement):
-    def __init__(self, id, logger, average_yearly_validity, salary, bonus_steps: set, yearly_salary_trend, income_tax_rate, bonus_rate):
-        # Constructor
+    def __init__(self, id, logger:logging.Logger, salary:float, income_tax_rate:float, events:dict):
         super().__init__(id, logger)
-        self.average_yearly_validity = average_yearly_validity
-        self.bonus_steps = bonus_steps
         self.salary = salary
         self.income_tax_rate = income_tax_rate
-        self.yearly_salary_trend = yearly_salary_trend
-        self.bonus_rate = bonus_rate
+        self.events = events
 
-    def project_cash_flow(self, step):
-        if step in self.bonus_steps:
-            bonus = self.bonus_rate * (12*self.salary)
-        else:
-            bonus = 0.0
-        self.cash_flow[step] = (1 + (step // 12) * self.yearly_salary_trend) * (self.salary + bonus) * (1-self.income_tax_rate)
+        self.logger.info('Initializing: Employee Agreement: {} with: '.format(self.id))
+        self.logger.info('- salary: {}'.format(salary))
+        self.logger.info('- income tax rate: {}'.format(income_tax_rate))
+
+    def calculate_cashflow(self, step):
+        if self.events is not None:
+            # modify
+            if self.events['modify'] is not None:
+                for event in self.events['modify']:
+                    if event['step'] == step:
+                        self.salary = self.salary + event['value']
+
+        salary = self.salary
+        if self.events is not None:
+            # bonuses
+            if self.events['bonus'] is not None:
+                for event in self.events['bonus']:
+                    if event['step'] == step:
+                        salary += event['value']
+                        self.logger.debug('[STEP {}] Bonus cash-flow from employee agreement: {:.2f}'.format(step, event['value'] ))
+   
+        self.cash_flow[step] = salary * (1-self.income_tax_rate)
+        self.logger.debug('[STEP {}] Cash-flow from employee agreement: {:.2f}'.format(step, self.cash_flow[step] ))

@@ -25,15 +25,16 @@ class Instrument:
 
 class CurrentAccount(Instrument):
 
-    def __init__(self, id:str, logger:logging.Logger, current_outstanding:float, monthly_cost:float, cnit:float, current_step:int=0):
+    def __init__(self, id:str, logger:logging.Logger, current_outstanding:float, monthly_cost:float, cnit:float, primary:bool=False, current_step:int=0):
         super().__init__(id, logger)
         self.cnit = cnit
-        self.effective_rate = (1 + self.cnit) ** (1 / 12) - 1
+        self.effective_rate = ((1 + self.cnit) ** (1 / 12)) - 1
         self.value = dict()
         self.value[current_step] = current_outstanding
         self.monthly_cost = monthly_cost
         self.monthly_costs = dict()
         self.current_step = current_step
+        self.primary = primary
 
         self.logger.info('Initializing Current Account: {} with: '.format(self.id))
         self.logger.info(' - CNIT: {:.4f}'.format(cnit))
@@ -47,38 +48,19 @@ class CurrentAccount(Instrument):
                 raise Exception('Value at previous step to step ' + str(step) + ' not calculated!')
             else:
                 self.value[step] = self.value[step - 1] * (1 + self.effective_rate)
-                self.logger.debug('[STEP {}] Account value: {}'.format(step, self.value[step]))
+                self.logger.debug('[STEP {}] Account "{}" value: {}'.format(step, self.id, self.value[step]))
 
     def calculate_monthly_costs(self, step):
         self.monthly_costs[step] = self.monthly_cost
-        self.logger.debug('[STEP {}] Account monthly cost: {}'.format(step, self.monthly_cost[step]))
+        self.logger.debug('[STEP {}] Account "{}" monthly cost: {}'.format(step, self.id, self.monthly_cost))
 
     def deposit(self, step, amount):
         self.value[step] = self.value[step] + amount
-        self.logger.debug('[STEP {}] Amount deposited: {}'.format(step, amount))
+        self.logger.debug('[STEP {}] Amount deposited: {} to account "{}"'.format(step, amount, self.id))
 
     def withdraw_all(self, step):
         self.value[step] = 0.0
-        self.logger.debug('[STEP {}] All funds withdrawn!'.format(step))
-
-class SavingAccount(CurrentAccount):
-
-    def __init__(self, id:str, logger:logging.Logger, current_outstanding:float, monthly_cost:float, cnit:float, current_step:int=0):
-        super().__init__(id, logger, current_outstanding, monthly_cost, cnit, current_step)
-        self.cnit = cnit
-        self.effective_rate = (1 + self.cnit) ** (1 / 12) - 1
-        self.value = dict()
-        self.value[current_step] = current_outstanding
-        self.monthly_cost = monthly_cost
-        self.monthly_costs = dict()
-        self.current_step = current_step
-
-        self.logger.info('Initializing Saving Account: {} with: '.format(self.id))
-        self.logger.info(' - CNIT: {:.4f}'.format(cnit))
-        self.logger.info(' - effective rate: {:.4f}'.format(self.effective_rate))
-        self.logger.info(' - current outstanding: {:.2f}'.format(current_outstanding))
-        self.logger.info(' - monthly cost: {}'.format(monthly_cost))
-
+        self.logger.debug('[STEP {}] All funds withdrawn! from account {}'.format(step, self.id))
 
 class Mortgage(Instrument):
     def __init__(self, id:str, logger:logging.Logger, principal:float, cnit:float, maturity_in_years:int, current_step:int=0):

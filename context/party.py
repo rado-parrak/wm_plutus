@@ -71,7 +71,7 @@ class Party:
         self.expenditures[step] = expenditures
         self.logger.info('[STEP {}] Total expenditures: {:.2f}'.format(step, expenditures))
 
-    def calculate_resources(self, step):
+    def calculate_resources(self, step, saldo_of_events):
         resources = 0.0
         if step == 0:
             resources = self.initial_free_resources
@@ -79,32 +79,32 @@ class Party:
         for key,el in self.portfolio.elements.items():
             if isinstance(el, CurrentAccount):
                 el.calculate_value(step)
-                resources = resources + el.value[step]
-                self.logger.debug('[STEP {}] Resources from current account: {:.2f}'.format(step, el.value[step]))
+                if el.primary:
+                    resources = resources + el.value[step]
+                    self.logger.debug('[STEP {}] Resources from PRIMARY current account "{}": {:.2f}'.format(step, el.id ,el.value[step]))
 
             if isinstance(el, EmployeeContract):
-                el.calculate_cash_flow(step)
+                el.calculate_cashflow(step)
                 resources = resources + el.cash_flow[step]
-                self.logger.debug('[STEP {}] Resources from the employee contract: {:.2f}'.format(step, el.cash_flow[step]))
+                self.logger.debug('[STEP {}] Resources from the employee contract "{}": {:.2f}'.format(step, el.id, el.cash_flow[step]))
 
-        self.resources[step] = resources
+        self.resources[step] = resources + saldo_of_events
         self.logger.info('[STEP {}] Total resources: {:.2f}'.format(step, resources))
 
     def calculate_free_resources(self, step, saldo_of_events):
-        # self.refresh_portfolio(step)
-        self.calculate_resources(step)
+        self.calculate_resources(step, saldo_of_events)
         self.calculate_expenditures(step)
-        self.free_resources[step] = self.resources[step] + saldo_of_events - self.expenditures[step]
+        self.free_resources[step] = self.resources[step] - self.expenditures[step]
 
         self.logger.info('[STEP {}] Free resources: {:.2f}'.format(step, self.free_resources[step]))
 
     def allocate_free_resources(self, step):
-        # TODO: assumption: only single current account
-
+        # TODO: assumption: only single PRIMARY current account
         for key, el in self.portfolio.elements.items():
             if isinstance(el, CurrentAccount):
-                el.withdraw_all(step)
-                el.deposit(step, self.free_resources[step])
+                if el.primary:
+                    el.withdraw_all(step)
+                    el.deposit(step, self.free_resources[step])
 
     def discount_free_resources(self, step: int, discount_rate: float):
         # TODO: discout rate / factor should be also a curve, not a point
@@ -127,7 +127,7 @@ class Party:
         self.portfolio_values[step] = portfolio_value
         self.logger.info('[STEP {}] Portfolio value: {:.2f}'.format(step, portfolio_value))
 
-    def act_on_events(self, step):
+    def act_on_pre_events(self, step):
         saldo_of_events = 0.0
 
         # sell events:
@@ -142,7 +142,6 @@ class Party:
 
                             # delete asset from the portfolio:
                             self.portfolio.remove_element(el)
-
                             self.logger.info('[STEP {}] Asset {} sold for: {:.2f}'.format(step, el.id, el.price[step-1]))
 
         # buy events:
@@ -160,6 +159,23 @@ class Party:
 
         return(saldo_of_events)
 
+    def act_on_post_events(self, step):
+        # transfer events:
+        if self.events['transfer'] is not None:
+            for event in self.events['transfer']:
+                if event['step'] == step:
+                    # decrease by amount 'from'
+                    for key, el in self.portfolio.elements.copy().items():
+                        if el.id == event['from']:
+                            el.value[step] = el.value[step] - event['amount']
+                            self.logger.debug('[STEP {}] Outstanding of account {} decreased by: {:.2f} '.format(step, el.id, event['amount']))
+
+                    # increase by amount 'to'
+                    for key, el in self.portfolio.elements.copy().items():
+                        if el.id == event['to']:
+                            el.value[step] = el.value[step] + event['amount']
+                            self.logger.debug('[STEP {}] Outstanding of account {} increased by: {:.2f} '.format(step, el.id, event['amount']))
+
     def create_new_portfolio_element(self, event_description: dict):
         if event_description['type'] == 'RealEstate':
             return(RealEstate(id=event_description['id']
@@ -176,13 +192,16 @@ class Party:
                 self.logger.info('')
                 self.logger.info('>>>>>> Party {} is living the step: {} <<<<<<<'.format(self.id, step))
                 
-                # events
-                saldo_of_events = self.act_on_events(step)
+                # pre-events
+                saldo_of_events = self.act_on_pre_events(step)
                 
                 # resources
                 self.calculate_free_resources(step, saldo_of_events)
                 self.allocate_free_resources(step)
                 self.discount_free_resources(step, self.discount_rate)
+
+                # post-events
+                self.act_on_post_events(step)
 
                 # balance
                 self.calculate_portfolio_value(step)
