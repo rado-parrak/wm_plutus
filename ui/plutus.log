@@ -1,0 +1,385 @@
+2021-01-04 20:02:05,737 :: plutusLogger | INFO | ============================================
+2021-01-04 20:02:05,738 :: plutusLogger | INFO | ============ CONFIGURATION  ================
+2021-01-04 20:02:05,739 :: plutusLogger | INFO | ============================================
+2021-01-04 20:02:05,739 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,740 :: plutusLogger | INFO | [1] General: 
+2021-01-04 20:02:05,740 :: plutusLogger | INFO |  - n_years: 1
+2021-01-04 20:02:05,740 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,741 :: plutusLogger | INFO | [2] Market: 
+2021-01-04 20:02:05,747 :: plutusLogger | INFO | Adding inflation index.
+2021-01-04 20:02:05,748 :: plutusLogger | DEBUG | Inflation index step 1 : 1.0025
+2021-01-04 20:02:05,749 :: plutusLogger | DEBUG | Inflation index step 2 : 1.005
+2021-01-04 20:02:05,749 :: plutusLogger | DEBUG | Inflation index step 3 : 1.0074999999999998
+2021-01-04 20:02:05,749 :: plutusLogger | DEBUG | Inflation index step 4 : 1.0099999999999998
+2021-01-04 20:02:05,749 :: plutusLogger | DEBUG | Inflation index step 5 : 1.0124999999999997
+2021-01-04 20:02:05,749 :: plutusLogger | DEBUG | Inflation index step 6 : 1.0149999999999997
+2021-01-04 20:02:05,749 :: plutusLogger | DEBUG | Inflation index step 7 : 1.0174999999999996
+2021-01-04 20:02:05,749 :: plutusLogger | DEBUG | Inflation index step 8 : 1.0199999999999996
+2021-01-04 20:02:05,749 :: plutusLogger | DEBUG | Inflation index step 9 : 1.0224999999999995
+2021-01-04 20:02:05,749 :: plutusLogger | DEBUG | Inflation index step 10 : 1.0249999999999995
+2021-01-04 20:02:05,750 :: plutusLogger | DEBUG | Inflation index step 11 : 1.0274999999999994
+2021-01-04 20:02:05,750 :: plutusLogger | DEBUG | Inflation index step 12 : 1.0299999999999994
+2021-01-04 20:02:05,750 :: plutusLogger | INFO | Adding real-estate index.
+2021-01-04 20:02:05,751 :: plutusLogger | DEBUG | Real estate index step 1 : 1.0058333333333334
+2021-01-04 20:02:05,751 :: plutusLogger | DEBUG | Real estate index step 2 : 1.0116666666666667
+2021-01-04 20:02:05,751 :: plutusLogger | DEBUG | Real estate index step 3 : 1.0175
+2021-01-04 20:02:05,753 :: plutusLogger | DEBUG | Real estate index step 4 : 1.0233333333333334
+2021-01-04 20:02:05,755 :: plutusLogger | DEBUG | Real estate index step 5 : 1.0291666666666668
+2021-01-04 20:02:05,756 :: plutusLogger | DEBUG | Real estate index step 6 : 1.0350000000000001
+2021-01-04 20:02:05,756 :: plutusLogger | DEBUG | Real estate index step 7 : 1.0408333333333335
+2021-01-04 20:02:05,756 :: plutusLogger | DEBUG | Real estate index step 8 : 1.0466666666666669
+2021-01-04 20:02:05,757 :: plutusLogger | DEBUG | Real estate index step 9 : 1.0525000000000002
+2021-01-04 20:02:05,757 :: plutusLogger | DEBUG | Real estate index step 10 : 1.0583333333333336
+2021-01-04 20:02:05,757 :: plutusLogger | DEBUG | Real estate index step 11 : 1.064166666666667
+2021-01-04 20:02:05,757 :: plutusLogger | DEBUG | Real estate index step 12 : 1.0700000000000003
+2021-01-04 20:02:05,773 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,775 :: plutusLogger | INFO | [3] Portfolio: 
+2021-01-04 20:02:05,784 :: plutusLogger | INFO | Initializing: Employee Agreement: rado_credo with: 
+2021-01-04 20:02:05,784 :: plutusLogger | INFO | - salary: 135000
+2021-01-04 20:02:05,785 :: plutusLogger | INFO | - income tax rate: 0.42
+2021-01-04 20:02:05,786 :: plutusLogger | INFO | Initializing Current Account: rado_current_account with: 
+2021-01-04 20:02:05,786 :: plutusLogger | INFO |  - CNIT: 0.0000
+2021-01-04 20:02:05,786 :: plutusLogger | INFO |  - effective rate: 0.0000
+2021-01-04 20:02:05,786 :: plutusLogger | INFO |  - current outstanding: 300000.00
+2021-01-04 20:02:05,786 :: plutusLogger | INFO |  - monthly cost: 100
+2021-01-04 20:02:05,787 :: plutusLogger | INFO | Initializing Current Account: rado_saving_account with: 
+2021-01-04 20:02:05,787 :: plutusLogger | INFO |  - CNIT: 0.0150
+2021-01-04 20:02:05,787 :: plutusLogger | INFO |  - effective rate: 0.0012
+2021-01-04 20:02:05,787 :: plutusLogger | INFO |  - current outstanding: 0.00
+2021-01-04 20:02:05,787 :: plutusLogger | INFO |  - monthly cost: 0.0
+2021-01-04 20:02:05,787 :: plutusLogger | INFO | Initializing Mortgage: rado_mortgage with: 
+2021-01-04 20:02:05,787 :: plutusLogger | INFO |  - CNIT: 0.0200
+2021-01-04 20:02:05,787 :: plutusLogger | INFO |  - monthly interest rate: 0.0017
+2021-01-04 20:02:05,787 :: plutusLogger | INFO |  - principal: 3000000.00
+2021-01-04 20:02:05,787 :: plutusLogger | INFO |  - maturity (in years): 30.00
+2021-01-04 20:02:05,787 :: plutusLogger | INFO | Initializing Real Estate Asset: rado_mortgage_flat with: 
+2021-01-04 20:02:05,787 :: plutusLogger | INFO |  - current market value: 5000000.0
+2021-01-04 20:02:05,787 :: plutusLogger | INFO |  - property tax: 2000
+2021-01-04 20:02:05,787 :: plutusLogger | INFO |  - house community costs: 6000
+2021-01-04 20:02:05,787 :: plutusLogger | INFO |  - real estate index: {0: 1.0, 1: 1.0058333333333334, 2: 1.0116666666666667, 3: 1.0175, 4: 1.0233333333333334, 5: 1.0291666666666668, 6: 1.0350000000000001, 7: 1.0408333333333335, 8: 1.0466666666666669, 9: 1.0525000000000002, 10: 1.0583333333333336, 11: 1.064166666666667, 12: 1.0700000000000003}
+2021-01-04 20:02:05,788 :: plutusLogger | INFO |  - events: {'cost': [{'step': 4, 'value': 10000}, {'step': 5, 'value': 270000}], 'income': {}}
+2021-01-04 20:02:05,794 :: plutusLogger | INFO | Initializing party: Rado
+2021-01-04 20:02:05,794 :: plutusLogger | INFO | with initial portfolio: ['rado_current_account', 'rado_saving_account', 'rado_mortgage', 'rado_mortgage_flat', 'rado_credo']
+2021-01-04 20:02:05,794 :: plutusLogger | INFO | with initial free cash: 10000
+2021-01-04 20:02:05,798 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,798 :: plutusLogger | INFO | ============================================
+2021-01-04 20:02:05,798 :: plutusLogger | INFO | ============== SIMULATION  =================
+2021-01-04 20:02:05,799 :: plutusLogger | INFO | ============================================
+2021-01-04 20:02:05,799 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,803 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,803 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 0 <<<<<<<
+2021-01-04 20:02:05,804 :: plutusLogger | DEBUG | [STEP 0] cash from PRIMARY current account "rado_current_account": 300000.00
+2021-01-04 20:02:05,804 :: plutusLogger | DEBUG | [STEP 0] Cash-flow from employee agreement: 78300.00
+2021-01-04 20:02:05,804 :: plutusLogger | DEBUG | [STEP 0] cash from the employee contract "rado_credo": 78300.00
+2021-01-04 20:02:05,804 :: plutusLogger | INFO | [STEP 0] Total cash: 388300.00
+2021-01-04 20:02:05,804 :: plutusLogger | DEBUG | [STEP 0] Expenditures from consumption: 20000.00
+2021-01-04 20:02:05,804 :: plutusLogger | DEBUG | [STEP 0] Account "rado_current_account" monthly cost: 100
+2021-01-04 20:02:05,804 :: plutusLogger | DEBUG | [STEP 0] Expenditures from the current account: 100.00
+2021-01-04 20:02:05,804 :: plutusLogger | DEBUG | [STEP 0] Account "rado_saving_account" monthly cost: 0.0
+2021-01-04 20:02:05,804 :: plutusLogger | DEBUG | [STEP 0] Expenditures from the current account: 0.00
+2021-01-04 20:02:05,804 :: plutusLogger | DEBUG | [STEP 0] Expenditures from mortgage: 0.00
+2021-01-04 20:02:05,804 :: plutusLogger | DEBUG | [STEP 0] Real-estate monthly costs: 666.6666666666666
+2021-01-04 20:02:05,804 :: plutusLogger | DEBUG | [STEP 0] Expenditures from the real estate 666.67
+2021-01-04 20:02:05,804 :: plutusLogger | INFO | [STEP 0] Total expenditures: 20766.67
+2021-01-04 20:02:05,804 :: plutusLogger | INFO | [STEP 0] Free cash: 367533.33
+2021-01-04 20:02:05,804 :: plutusLogger | DEBUG | [STEP 0] All funds withdrawn! from account rado_current_account
+2021-01-04 20:02:05,804 :: plutusLogger | DEBUG | [STEP 0] Amount deposited: 367533.3333333333 to account "rado_current_account"
+2021-01-04 20:02:05,804 :: plutusLogger | DEBUG | [STEP 0] Discount factor: 1.0000
+2021-01-04 20:02:05,804 :: plutusLogger | INFO | [STEP 0] Discounted free cash: 367533.33
+2021-01-04 20:02:05,804 :: plutusLogger | DEBUG | [STEP 0] Real-estate price: 5000000.0
+2021-01-04 20:02:05,805 :: plutusLogger | INFO | [STEP 0] Portfolio value: 5000000.00
+2021-01-04 20:02:05,805 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,805 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 1 <<<<<<<
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 1] Account "rado_current_account" value: 367533.3333333333
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 1] cash from PRIMARY current account "rado_current_account": 367533.33
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 1] Account "rado_saving_account" value: 0.0
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 1] Cash-flow from employee agreement: 78300.00
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 1] cash from the employee contract "rado_credo": 78300.00
+2021-01-04 20:02:05,805 :: plutusLogger | INFO | [STEP 1] Total cash: 445833.33
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 1] Expenditures from consumption: 20000.00
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 1] Account "rado_current_account" monthly cost: 100
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 1] Expenditures from the current account: 100.00
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 1] Account "rado_saving_account" monthly cost: 0.0
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 1] Expenditures from the current account: 0.00
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 1] Expenditures from mortgage: 0.00
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 1] Real-estate monthly costs: 666.6666666666666
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 1] Expenditures from the real estate 666.67
+2021-01-04 20:02:05,805 :: plutusLogger | INFO | [STEP 1] Total expenditures: 20766.67
+2021-01-04 20:02:05,805 :: plutusLogger | INFO | [STEP 1] Free cash: 425066.67
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 1] All funds withdrawn! from account rado_current_account
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 1] Amount deposited: 425066.6666666666 to account "rado_current_account"
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 1] Discount factor: 0.9988
+2021-01-04 20:02:05,805 :: plutusLogger | INFO | [STEP 1] Discounted free cash: 424539.61
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 1] Real-estate price: 5029166.666666667
+2021-01-04 20:02:05,805 :: plutusLogger | INFO | [STEP 1] Portfolio value: 5029166.67
+2021-01-04 20:02:05,805 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,805 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 2 <<<<<<<
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 2] Account "rado_current_account" value: 425066.6666666666
+2021-01-04 20:02:05,805 :: plutusLogger | DEBUG | [STEP 2] cash from PRIMARY current account "rado_current_account": 425066.67
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 2] Account "rado_saving_account" value: 0.0
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 2] Cash-flow from employee agreement: 81200.00
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 2] cash from the employee contract "rado_credo": 81200.00
+2021-01-04 20:02:05,806 :: plutusLogger | INFO | [STEP 2] Total cash: 506266.67
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 2] Expenditures from consumption: 20000.00
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 2] Account "rado_current_account" monthly cost: 100
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 2] Expenditures from the current account: 100.00
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 2] Account "rado_saving_account" monthly cost: 0.0
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 2] Expenditures from the current account: 0.00
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 2] Expenditures from mortgage: 0.00
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 2] Real-estate monthly costs: 666.6666666666666
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 2] Expenditures from the real estate 666.67
+2021-01-04 20:02:05,806 :: plutusLogger | INFO | [STEP 2] Total expenditures: 20766.67
+2021-01-04 20:02:05,806 :: plutusLogger | INFO | [STEP 2] Free cash: 485500.00
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 2] All funds withdrawn! from account rado_current_account
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 2] Amount deposited: 485499.99999999994 to account "rado_current_account"
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 2] Discount factor: 0.9975
+2021-01-04 20:02:05,806 :: plutusLogger | INFO | [STEP 2] Discounted free cash: 484296.76
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 2] Real-estate price: 5087840.277777778
+2021-01-04 20:02:05,806 :: plutusLogger | INFO | [STEP 2] Portfolio value: 5087840.28
+2021-01-04 20:02:05,806 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,806 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 3 <<<<<<<
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 3] Account "rado_current_account" value: 485499.99999999994
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 3] cash from PRIMARY current account "rado_current_account": 485500.00
+2021-01-04 20:02:05,806 :: plutusLogger | DEBUG | [STEP 3] Account "rado_saving_account" value: 0.0
+2021-01-04 20:02:05,807 :: plutusLogger | DEBUG | [STEP 3] Cash-flow from employee agreement: 81200.00
+2021-01-04 20:02:05,807 :: plutusLogger | DEBUG | [STEP 3] cash from the employee contract "rado_credo": 81200.00
+2021-01-04 20:02:05,807 :: plutusLogger | INFO | [STEP 3] Total cash: 566700.00
+2021-01-04 20:02:05,807 :: plutusLogger | DEBUG | [STEP 3] Expenditures from consumption: 20000.00
+2021-01-04 20:02:05,807 :: plutusLogger | DEBUG | [STEP 3] Account "rado_current_account" monthly cost: 100
+2021-01-04 20:02:05,807 :: plutusLogger | DEBUG | [STEP 3] Expenditures from the current account: 100.00
+2021-01-04 20:02:05,807 :: plutusLogger | DEBUG | [STEP 3] Account "rado_saving_account" monthly cost: 0.0
+2021-01-04 20:02:05,807 :: plutusLogger | DEBUG | [STEP 3] Expenditures from the current account: 0.00
+2021-01-04 20:02:05,807 :: plutusLogger | DEBUG | [STEP 3] Expenditures from mortgage: 0.00
+2021-01-04 20:02:05,807 :: plutusLogger | DEBUG | [STEP 3] Real-estate monthly costs: 666.6666666666666
+2021-01-04 20:02:05,807 :: plutusLogger | DEBUG | [STEP 3] Expenditures from the real estate 666.67
+2021-01-04 20:02:05,807 :: plutusLogger | INFO | [STEP 3] Total expenditures: 20766.67
+2021-01-04 20:02:05,807 :: plutusLogger | INFO | [STEP 3] Free cash: 545933.33
+2021-01-04 20:02:05,807 :: plutusLogger | DEBUG | [STEP 3] All funds withdrawn! from account rado_current_account
+2021-01-04 20:02:05,807 :: plutusLogger | DEBUG | [STEP 3] Amount deposited: 545933.3333333334 to account "rado_current_account"
+2021-01-04 20:02:05,807 :: plutusLogger | DEBUG | [STEP 3] Discount factor: 0.9963
+2021-01-04 20:02:05,807 :: plutusLogger | INFO | [STEP 3] Discounted free cash: 543905.06
+2021-01-04 20:02:05,807 :: plutusLogger | DEBUG | [STEP 3] Real-estate price: 5176877.48263889
+2021-01-04 20:02:05,807 :: plutusLogger | INFO | [STEP 3] Portfolio value: 5176877.48
+2021-01-04 20:02:05,807 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,807 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 4 <<<<<<<
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 4] Account "rado_current_account" value: 545933.3333333334
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 4] cash from PRIMARY current account "rado_current_account": 545933.33
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 4] Account "rado_saving_account" value: 0.0
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 4] Cash-flow from employee agreement: 79460.00
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 4] cash from the employee contract "rado_credo": 79460.00
+2021-01-04 20:02:05,808 :: plutusLogger | INFO | [STEP 4] Total cash: 625393.33
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 4] Expenditures from consumption: 20000.00
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 4] Account "rado_current_account" monthly cost: 100
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 4] Expenditures from the current account: 100.00
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 4] Account "rado_saving_account" monthly cost: 0.0
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 4] Expenditures from the current account: 0.00
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 4] Expenditures from mortgage: 0.00
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 4] Real-estate monthly costs: 10666.666666666666
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 4] Expenditures from the real estate 10666.67
+2021-01-04 20:02:05,808 :: plutusLogger | INFO | [STEP 4] Total expenditures: 30766.67
+2021-01-04 20:02:05,808 :: plutusLogger | INFO | [STEP 4] Free cash: 594626.67
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 4] All funds withdrawn! from account rado_current_account
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 4] Amount deposited: 594626.6666666667 to account "rado_current_account"
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 4] Discount factor: 0.9950
+2021-01-04 20:02:05,808 :: plutusLogger | INFO | [STEP 4] Discounted free cash: 591682.92
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 4] Real-estate price: 5297671.290567131
+2021-01-04 20:02:05,808 :: plutusLogger | INFO | [STEP 4] Portfolio value: 5297671.29
+2021-01-04 20:02:05,808 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,808 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 5 <<<<<<<
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 5] Account "rado_current_account" value: 594626.6666666667
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 5] cash from PRIMARY current account "rado_current_account": 594626.67
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 5] Account "rado_saving_account" value: 0.0
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 5] Cash-flow from employee agreement: 79460.00
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 5] cash from the employee contract "rado_credo": 79460.00
+2021-01-04 20:02:05,808 :: plutusLogger | INFO | [STEP 5] Total cash: 674086.67
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 5] Expenditures from consumption: 20000.00
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 5] Account "rado_current_account" monthly cost: 100
+2021-01-04 20:02:05,808 :: plutusLogger | DEBUG | [STEP 5] Expenditures from the current account: 100.00
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 5] Account "rado_saving_account" monthly cost: 0.0
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 5] Expenditures from the current account: 0.00
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 5] Expenditures from mortgage: 0.00
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 5] Real-estate monthly costs: 270666.6666666667
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 5] Expenditures from the real estate 270666.67
+2021-01-04 20:02:05,809 :: plutusLogger | INFO | [STEP 5] Total expenditures: 290766.67
+2021-01-04 20:02:05,809 :: plutusLogger | INFO | [STEP 5] Free cash: 383320.00
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 5] All funds withdrawn! from account rado_current_account
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 5] Amount deposited: 383320.00000000006 to account "rado_current_account"
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 5] Discount factor: 0.9938
+2021-01-04 20:02:05,809 :: plutusLogger | INFO | [STEP 5] Discounted free cash: 380949.40
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 5] Real-estate price: 5452186.703208673
+2021-01-04 20:02:05,809 :: plutusLogger | INFO | [STEP 5] Portfolio value: 5452186.70
+2021-01-04 20:02:05,809 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,809 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 6 <<<<<<<
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 6] New saldo of events after sold portfolio element: 5452186.70 
+2021-01-04 20:02:05,809 :: plutusLogger | INFO | [STEP 6] Asset rado_mortgage_flat sold for: 5452186.70
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 6] Account "rado_current_account" value: 383320.00000000006
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 6] cash from PRIMARY current account "rado_current_account": 383320.00
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 6] Account "rado_saving_account" value: 0.0
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 6] Cash-flow from employee agreement: 79460.00
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 6] cash from the employee contract "rado_credo": 79460.00
+2021-01-04 20:02:05,809 :: plutusLogger | INFO | [STEP 6] Total cash: 462780.00
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 6] Expenditures from consumption: 20000.00
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 6] Account "rado_current_account" monthly cost: 100
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 6] Expenditures from the current account: 100.00
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 6] Account "rado_saving_account" monthly cost: 0.0
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 6] Expenditures from the current account: 0.00
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 6] Expenditures from mortgage: 0.00
+2021-01-04 20:02:05,809 :: plutusLogger | INFO | [STEP 6] Total expenditures: 20100.00
+2021-01-04 20:02:05,809 :: plutusLogger | INFO | [STEP 6] Free cash: 5894866.70
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 6] All funds withdrawn! from account rado_current_account
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 6] Amount deposited: 5894866.703208673 to account "rado_current_account"
+2021-01-04 20:02:05,809 :: plutusLogger | DEBUG | [STEP 6] Discount factor: 0.9926
+2021-01-04 20:02:05,810 :: plutusLogger | INFO | [STEP 6] Discounted free cash: 5851146.45
+2021-01-04 20:02:05,810 :: plutusLogger | INFO | [STEP 6] Portfolio value: 0.00
+2021-01-04 20:02:05,810 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,810 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 7 <<<<<<<
+2021-01-04 20:02:05,810 :: plutusLogger | DEBUG | [STEP 7] Account "rado_current_account" value: 5894866.703208673
+2021-01-04 20:02:05,810 :: plutusLogger | DEBUG | [STEP 7] cash from PRIMARY current account "rado_current_account": 5894866.70
+2021-01-04 20:02:05,810 :: plutusLogger | DEBUG | [STEP 7] Account "rado_saving_account" value: 0.0
+2021-01-04 20:02:05,810 :: plutusLogger | DEBUG | [STEP 7] Cash-flow from employee agreement: 79460.00
+2021-01-04 20:02:05,810 :: plutusLogger | DEBUG | [STEP 7] cash from the employee contract "rado_credo": 79460.00
+2021-01-04 20:02:05,810 :: plutusLogger | INFO | [STEP 7] Total cash: 5974326.70
+2021-01-04 20:02:05,810 :: plutusLogger | DEBUG | [STEP 7] Expenditures from consumption: 20000.00
+2021-01-04 20:02:05,810 :: plutusLogger | DEBUG | [STEP 7] Account "rado_current_account" monthly cost: 100
+2021-01-04 20:02:05,810 :: plutusLogger | DEBUG | [STEP 7] Expenditures from the current account: 100.00
+2021-01-04 20:02:05,810 :: plutusLogger | DEBUG | [STEP 7] Account "rado_saving_account" monthly cost: 0.0
+2021-01-04 20:02:05,810 :: plutusLogger | DEBUG | [STEP 7] Expenditures from the current account: 0.00
+2021-01-04 20:02:05,810 :: plutusLogger | DEBUG | [STEP 7] Expenditures from mortgage: 0.00
+2021-01-04 20:02:05,810 :: plutusLogger | INFO | [STEP 7] Total expenditures: 20100.00
+2021-01-04 20:02:05,810 :: plutusLogger | INFO | [STEP 7] Free cash: 5954226.70
+2021-01-04 20:02:05,810 :: plutusLogger | DEBUG | [STEP 7] All funds withdrawn! from account rado_current_account
+2021-01-04 20:02:05,810 :: plutusLogger | DEBUG | [STEP 7] Amount deposited: 5954226.703208673 to account "rado_current_account"
+2021-01-04 20:02:05,810 :: plutusLogger | DEBUG | [STEP 7] Discount factor: 0.9914
+2021-01-04 20:02:05,810 :: plutusLogger | INFO | [STEP 7] Discounted free cash: 5902738.02
+2021-01-04 20:02:05,810 :: plutusLogger | INFO | [STEP 7] Portfolio value: 0.00
+2021-01-04 20:02:05,810 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,810 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 8 <<<<<<<
+2021-01-04 20:02:05,810 :: plutusLogger | DEBUG | [STEP 8] New saldo of events after bought portfolio element: -3000000.00 
+2021-01-04 20:02:05,810 :: plutusLogger | INFO | Initializing Real Estate Asset: rado_flat3 with: 
+2021-01-04 20:02:05,810 :: plutusLogger | INFO |  - current market value: 3000000.0
+2021-01-04 20:02:05,810 :: plutusLogger | INFO |  - property tax: 2000
+2021-01-04 20:02:05,810 :: plutusLogger | INFO |  - house community costs: 6000
+2021-01-04 20:02:05,810 :: plutusLogger | INFO |  - real estate index: {0: 1.0, 1: 1.0058333333333334, 2: 1.0116666666666667, 3: 1.0175, 4: 1.0233333333333334, 5: 1.0291666666666668, 6: 1.0350000000000001, 7: 1.0408333333333335, 8: 1.0466666666666669, 9: 1.0525000000000002, 10: 1.0583333333333336, 11: 1.064166666666667, 12: 1.0700000000000003}
+2021-01-04 20:02:05,810 :: plutusLogger | INFO |  - events: None
+2021-01-04 20:02:05,810 :: plutusLogger | INFO | [STEP 8] New portfolio element rado_flat3 added
+2021-01-04 20:02:05,810 :: plutusLogger | DEBUG | [STEP 8] Account "rado_current_account" value: 5954226.703208673
+2021-01-04 20:02:05,810 :: plutusLogger | DEBUG | [STEP 8] cash from PRIMARY current account "rado_current_account": 5954226.70
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 8] Account "rado_saving_account" value: 0.0
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 8] Cash-flow from employee agreement: 79460.00
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 8] cash from the employee contract "rado_credo": 79460.00
+2021-01-04 20:02:05,811 :: plutusLogger | INFO | [STEP 8] Total cash: 6033686.70
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 8] Expenditures from consumption: 20000.00
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 8] Account "rado_current_account" monthly cost: 100
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 8] Expenditures from the current account: 100.00
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 8] Account "rado_saving_account" monthly cost: 0.0
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 8] Expenditures from the current account: 0.00
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 8] Expenditures from mortgage: 0.00
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 8] Real-estate monthly costs: 666.6666666666666
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 8] Expenditures from the real estate 666.67
+2021-01-04 20:02:05,811 :: plutusLogger | INFO | [STEP 8] Total expenditures: 20766.67
+2021-01-04 20:02:05,811 :: plutusLogger | INFO | [STEP 8] Free cash: 3012920.04
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 8] All funds withdrawn! from account rado_current_account
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 8] Amount deposited: 3012920.0365420063 to account "rado_current_account"
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 8] Discount factor: 0.9901
+2021-01-04 20:02:05,811 :: plutusLogger | INFO | [STEP 8] Discounted free cash: 2983162.50
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 8] Real-estate price: 3000000.0
+2021-01-04 20:02:05,811 :: plutusLogger | INFO | [STEP 8] Portfolio value: 3000000.00
+2021-01-04 20:02:05,811 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,811 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 9 <<<<<<<
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 9] Account "rado_current_account" value: 3012920.0365420063
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 9] cash from PRIMARY current account "rado_current_account": 3012920.04
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 9] Account "rado_saving_account" value: 0.0
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 9] Bonus cash-flow from employee agreement: 100000.00
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 9] Cash-flow from employee agreement: 137460.00
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 9] cash from the employee contract "rado_credo": 137460.00
+2021-01-04 20:02:05,811 :: plutusLogger | INFO | [STEP 9] Total cash: 3150380.04
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 9] Expenditures from consumption: 20000.00
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 9] Account "rado_current_account" monthly cost: 100
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 9] Expenditures from the current account: 100.00
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 9] Account "rado_saving_account" monthly cost: 0.0
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 9] Expenditures from the current account: 0.00
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 9] Expenditures from mortgage: 0.00
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 9] Real-estate monthly costs: 666.6666666666666
+2021-01-04 20:02:05,811 :: plutusLogger | DEBUG | [STEP 9] Expenditures from the real estate 666.67
+2021-01-04 20:02:05,811 :: plutusLogger | INFO | [STEP 9] Total expenditures: 20766.67
+2021-01-04 20:02:05,812 :: plutusLogger | INFO | [STEP 9] Free cash: 3129613.37
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 9] All funds withdrawn! from account rado_current_account
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 9] Amount deposited: 3129613.36987534 to account "rado_current_account"
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 9] Discount factor: 0.9889
+2021-01-04 20:02:05,812 :: plutusLogger | INFO | [STEP 9] Discounted free cash: 3094861.06
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 9] Real-estate price: 3157500.0000000005
+2021-01-04 20:02:05,812 :: plutusLogger | INFO | [STEP 9] Portfolio value: 3157500.00
+2021-01-04 20:02:05,812 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,812 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 10 <<<<<<<
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] Account "rado_current_account" value: 3129613.36987534
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] cash from PRIMARY current account "rado_current_account": 3129613.37
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] Account "rado_saving_account" value: 0.0
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] Cash-flow from employee agreement: 79460.00
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] cash from the employee contract "rado_credo": 79460.00
+2021-01-04 20:02:05,812 :: plutusLogger | INFO | [STEP 10] Total cash: 3209073.37
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] Expenditures from consumption: 20000.00
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] Account "rado_current_account" monthly cost: 100
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] Expenditures from the current account: 100.00
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] Account "rado_saving_account" monthly cost: 0.0
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] Expenditures from the current account: 0.00
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] Expenditures from mortgage: 0.00
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] Real-estate monthly costs: 666.6666666666666
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] Expenditures from the real estate 666.67
+2021-01-04 20:02:05,812 :: plutusLogger | INFO | [STEP 10] Total expenditures: 20766.67
+2021-01-04 20:02:05,812 :: plutusLogger | INFO | [STEP 10] Free cash: 3188306.70
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] All funds withdrawn! from account rado_current_account
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] Amount deposited: 3188306.7032086733 to account "rado_current_account"
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] Discount factor: 0.9877
+2021-01-04 20:02:05,812 :: plutusLogger | INFO | [STEP 10] Discounted free cash: 3148993.21
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] Outstanding of account rado_current_account decreased by: 1000000.00 
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] Outstanding of account rado_saving_account increased by: 1000000.00 
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 10] Real-estate price: 3341687.5000000014
+2021-01-04 20:02:05,812 :: plutusLogger | INFO | [STEP 10] Portfolio value: 3341687.50
+2021-01-04 20:02:05,812 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,812 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 11 <<<<<<<
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 11] Account "rado_current_account" value: 2188306.7032086733
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 11] cash from PRIMARY current account "rado_current_account": 2188306.70
+2021-01-04 20:02:05,812 :: plutusLogger | DEBUG | [STEP 11] Account "rado_saving_account" value: 1001241.4877164493
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 11] Cash-flow from employee agreement: 79460.00
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 11] cash from the employee contract "rado_credo": 79460.00
+2021-01-04 20:02:05,813 :: plutusLogger | INFO | [STEP 11] Total cash: 2267766.70
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 11] Expenditures from consumption: 20000.00
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 11] Account "rado_current_account" monthly cost: 100
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 11] Expenditures from the current account: 100.00
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 11] Account "rado_saving_account" monthly cost: 0.0
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 11] Expenditures from the current account: 0.00
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 11] Expenditures from mortgage: 0.00
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 11] Real-estate monthly costs: 666.6666666666666
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 11] Expenditures from the real estate 666.67
+2021-01-04 20:02:05,813 :: plutusLogger | INFO | [STEP 11] Total expenditures: 20766.67
+2021-01-04 20:02:05,813 :: plutusLogger | INFO | [STEP 11] Free cash: 2247000.04
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 11] All funds withdrawn! from account rado_current_account
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 11] Amount deposited: 2247000.036542007 to account "rado_current_account"
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 11] Discount factor: 0.9864
+2021-01-04 20:02:05,813 :: plutusLogger | INFO | [STEP 11] Discounted free cash: 2216541.54
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 11] Real-estate price: 3556112.447916669
+2021-01-04 20:02:05,813 :: plutusLogger | INFO | [STEP 11] Portfolio value: 3556112.45
+2021-01-04 20:02:05,813 :: plutusLogger | INFO | 
+2021-01-04 20:02:05,813 :: plutusLogger | INFO | >>>>>> Party Rado is living the step: 12 <<<<<<<
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 12] Account "rado_current_account" value: 2247000.036542007
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 12] cash from PRIMARY current account "rado_current_account": 2247000.04
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 12] Account "rado_saving_account" value: 1002484.5167246487
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 12] Cash-flow from employee agreement: 79460.00
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 12] cash from the employee contract "rado_credo": 79460.00
+2021-01-04 20:02:05,813 :: plutusLogger | INFO | [STEP 12] Total cash: 2326460.04
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 12] Expenditures from consumption: 20000.00
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 12] Account "rado_current_account" monthly cost: 100
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 12] Expenditures from the current account: 100.00
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 12] Account "rado_saving_account" monthly cost: 0.0
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 12] Expenditures from the current account: 0.00
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 12] Expenditures from mortgage: 0.00
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 12] Real-estate monthly costs: 666.6666666666666
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 12] Expenditures from the real estate 666.67
+2021-01-04 20:02:05,813 :: plutusLogger | INFO | [STEP 12] Total expenditures: 20766.67
+2021-01-04 20:02:05,813 :: plutusLogger | INFO | [STEP 12] Free cash: 2305693.37
+2021-01-04 20:02:05,813 :: plutusLogger | DEBUG | [STEP 12] All funds withdrawn! from account rado_current_account
+2021-01-04 20:02:05,814 :: plutusLogger | DEBUG | [STEP 12] Amount deposited: 2305693.3698753403 to account "rado_current_account"
+2021-01-04 20:02:05,814 :: plutusLogger | DEBUG | [STEP 12] Discount factor: 0.9852
+2021-01-04 20:02:05,814 :: plutusLogger | INFO | [STEP 12] Discounted free cash: 2271619.08
+2021-01-04 20:02:05,814 :: plutusLogger | DEBUG | [STEP 12] Real-estate price: 3805040.3192708367
+2021-01-04 20:02:05,814 :: plutusLogger | INFO | [STEP 12] Portfolio value: 3805040.32

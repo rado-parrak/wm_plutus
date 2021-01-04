@@ -25,17 +25,17 @@ class Portfolio:
 
 class Party:
 
-    def __init__(self, id: str, logger:logging.Logger, initial_free_resources: float, initial_portfolio: Portfolio, monthly_expenditures: float, discount_rate: float, events: dict):
+    def __init__(self, id: str, logger:logging.Logger, initial_free_cash: float, initial_portfolio: Portfolio, monthly_expenditures: float, discount_rate: float, events: dict):
 
         self.id = id
-        self.initial_free_resources = initial_free_resources
-        self.resources = dict()
-        self.free_resources = dict()
+        self.initial_free_cash = initial_free_cash
+        self.cash = dict()
+        self.free_cash = dict()
         self.portfolio = initial_portfolio
         self.portfolio_types = dict()
         self.monthly_expenditures = monthly_expenditures
         self.expenditures = dict()
-        self.free_resources_pv = dict()
+        self.free_cash_pv = dict()
         self.discount_rate = discount_rate
         self.portfolio_values = dict()
         self.logger = logger
@@ -43,7 +43,7 @@ class Party:
 
         self.logger.info('Initializing party: {}'.format(self.id))
         self.logger.info('with initial portfolio: {}'.format(initial_portfolio.list_elements()))
-        self.logger.info('with initial free resources: {}'.format(self.initial_free_resources))
+        self.logger.info('with initial free cash: {}'.format(self.initial_free_cash))
 
     def calculate_expenditures(self, step):        
         # expenditures from consumption
@@ -71,50 +71,50 @@ class Party:
         self.expenditures[step] = expenditures
         self.logger.info('[STEP {}] Total expenditures: {:.2f}'.format(step, expenditures))
 
-    def calculate_resources(self, step, saldo_of_events):
-        resources = 0.0
+    def calculate_cash(self, step, saldo_of_events):
+        cash = 0.0
         if step == 0:
-            resources = self.initial_free_resources
+            cash = self.initial_free_cash
 
         for key,el in self.portfolio.elements.items():
             if isinstance(el, CurrentAccount):
                 el.calculate_value(step)
                 if el.primary:
-                    resources = resources + el.value[step]
-                    self.logger.debug('[STEP {}] Resources from PRIMARY current account "{}": {:.2f}'.format(step, el.id ,el.value[step]))
+                    cash = cash + el.value[step]
+                    self.logger.debug('[STEP {}] cash from PRIMARY current account "{}": {:.2f}'.format(step, el.id ,el.value[step]))
 
             if isinstance(el, EmployeeContract):
                 el.calculate_cashflow(step)
-                resources = resources + el.cash_flow[step]
-                self.logger.debug('[STEP {}] Resources from the employee contract "{}": {:.2f}'.format(step, el.id, el.cash_flow[step]))
+                cash = cash + el.cash_flow[step]
+                self.logger.debug('[STEP {}] cash from the employee contract "{}": {:.2f}'.format(step, el.id, el.cash_flow[step]))
 
-        self.resources[step] = resources + saldo_of_events
-        self.logger.info('[STEP {}] Total resources: {:.2f}'.format(step, resources))
+        self.cash[step] = cash + saldo_of_events
+        self.logger.info('[STEP {}] Total cash: {:.2f}'.format(step, cash))
 
-    def calculate_free_resources(self, step, saldo_of_events):
-        self.calculate_resources(step, saldo_of_events)
+    def calculate_free_cash(self, step, saldo_of_events):
+        self.calculate_cash(step, saldo_of_events)
         self.calculate_expenditures(step)
-        self.free_resources[step] = self.resources[step] - self.expenditures[step]
+        self.free_cash[step] = self.cash[step] - self.expenditures[step]
 
-        self.logger.info('[STEP {}] Free resources: {:.2f}'.format(step, self.free_resources[step]))
+        self.logger.info('[STEP {}] Free cash: {:.2f}'.format(step, self.free_cash[step]))
 
-    def allocate_free_resources(self, step):
+    def allocate_free_cash(self, step):
         # TODO: assumption: only single PRIMARY current account
         for key, el in self.portfolio.elements.items():
             if isinstance(el, CurrentAccount):
                 if el.primary:
                     el.withdraw_all(step)
-                    el.deposit(step, self.free_resources[step])
+                    el.deposit(step, self.free_cash[step])
 
-    def discount_free_resources(self, step: int, discount_rate: float):
+    def discount_free_cash(self, step: int, discount_rate: float):
         # TODO: discout rate / factor should be also a curve, not a point
         
         # discount factor calculation
         df = 1 / ((1+discount_rate)**(step/12.0))
         self.logger.debug('[STEP {}] Discount factor: {:.4f}'.format(step, df))
 
-        self.free_resources_pv[step] = self.free_resources[step] * df
-        self.logger.info('[STEP {}] Discounted free resources: {:.2f}'.format(step, self.free_resources_pv[step]))
+        self.free_cash_pv[step] = self.free_cash[step] * df
+        self.logger.info('[STEP {}] Discounted free cash: {:.2f}'.format(step, self.free_cash_pv[step]))
 
     def calculate_portfolio_value(self, step):
         portfolio_value = 0.0
@@ -195,10 +195,10 @@ class Party:
                 # pre-events
                 saldo_of_events = self.act_on_pre_events(step)
                 
-                # resources
-                self.calculate_free_resources(step, saldo_of_events)
-                self.allocate_free_resources(step)
-                self.discount_free_resources(step, self.discount_rate)
+                # cash
+                self.calculate_free_cash(step, saldo_of_events)
+                self.allocate_free_cash(step)
+                self.discount_free_cash(step, self.discount_rate)
 
                 # post-events
                 self.act_on_post_events(step)

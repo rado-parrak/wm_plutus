@@ -8,45 +8,51 @@ class PartyPlotter():
         self.party = party
 
 
-    def plot_overall_financial_status(self):
-        plt.plot(self.party.free_resources.values(), label='free resources')
-        plt.plot(self.party.resources.values(), label='resources')
-        plt.plot(self.party.expenditures.values(), label='expenditures')
+    def plot_position_evolution(self):
 
-        plt.xlabel('month')
-        plt.ylabel('value')
-        plt.title('Overall financial evolution | ' + self.party.id)
-        plt.legend()
+        fig, [[p1, p2], [p3, p4]] = plt.subplots(2, 2, figsize=(16, 8))
+        fig.text(0.5, 1.0, 'Financial overview', horizontalalignment='center', verticalalignment='top', fontsize=18)
 
-        return plt.show()
+        # Cash balance
+        p1.plot(self.party.free_cash.values(), label='free cash')
+        p1.plot(self.party.cash.values(), label='cash')
+        p1.plot(self.party.expenditures.values(), label='expenditures')
+        p1.grid(axis='y', which='major')
+        p1.ticklabel_format(style='plain')
+        p1.set_xlabel('month')
+        p1.set_ylabel('cash position')
+        p1.set_title('Cash | ' + self.party.id)
+        p1.legend()
 
-    def plot_overall_financial_status_pv(self):
-        plt.plot(self.party.free_resources_pv.values(), label='PV of free resources')
+        # Portofolio balance
+        p2.plot(self.party.portfolio_values.values(), label='Portfolio value')
+        p2.grid(axis='y', which='major')
+        p2.ticklabel_format(style='plain')
+        p2.set_xlabel('month')
+        p2.set_ylabel('value')
+        p2.set_title('Portfolio | ' + self.party.id)
+        p2.legend()
 
-        plt.xlabel('month')
-        plt.ylabel('PV of value')
-        plt.title('PV of overall financial evolution | ' + self.party.id)
-        plt.legend()
+        # PV of cash balance
+        p3.plot(self.party.free_cash_pv.values(), label='PV of free cash')
+        p3.grid(axis='y', which='major')
+        p3.ticklabel_format(style='plain')
+        p3.set_xlabel('month')
+        p3.set_ylabel('cash position')
+        p3.set_title('PV of cash | ' + self.party.id)
+        p3.legend()
 
-        return plt.show()
+        # Effect of inflation on free cash
+        p4.bar(x=range(len(list(self.party.free_cash.values())))
+                ,height=np.subtract(list(self.party.free_cash.values()), list(self.party.free_cash_pv.values())), label='Inflation cost')
+        p4.ticklabel_format(style='plain')
+        p4.set_xlabel('month')
+        p4.set_ylabel('cost of inflation')
+        p4.set_title('Inflation effect on free cash | ' + self.party.id)
+        p4.legend()
 
-    def plot_inflation_gap(self):
-        plt.plot(self.party.free_resources.values(), label='free resources')
-        plt.plot(self.party.free_resources_pv.values(), label='PV of free resources')
+        fig.subplots_adjust(wspace=0.4, hspace=0.3)
 
-        plt.xlabel('month')
-        plt.ylabel('value')
-        plt.title('Inflation gap | ' + self.party.id)
-        plt.legend()
+        #return fig.show()
 
-        return plt.show()
-
-    def plot_portfolio_value(self):
-        plt.plot(self.party.portfolio_values.values(), label='Portfolio value')
-
-        plt.xlabel('month')
-        plt.ylabel('value')
-        plt.title('Portfolio value | ' + self.party.id)
-        plt.legend()
-
-        return plt.show()
+ 
