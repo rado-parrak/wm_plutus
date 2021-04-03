@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from context.party import Party
-from context.instruments import CurrentAccount
+from context.instruments import CurrentAccount, Share
 from context.assets import RealEstate
 
 class PartyPlotter():
@@ -93,6 +93,19 @@ class PartyPlotter():
 
                 b = b+y_ticks
 
+            if isinstance(el, Share):
+                share_values = el.value
+                x_ticks = np.array(list(share_values.keys()))
+                y_ticks = np.array(list(share_values.values()))
+
+                p1.bar(x_ticks,
+                        y_ticks, 
+                        width,
+                        bottom=b,
+                        label=el.id)
+
+                b = b+y_ticks
+
         p1.set_ylabel('Value')
         p1.set_xlabel('Month')
         p1.set_title('Wealth evolution')
@@ -123,14 +136,18 @@ class PartyPlotter():
         y_ticks = np.array(list(self.party.monthly_income.values()))
         p2.bar(x_ticks, y_ticks, width, label='income from job')
 
-        # (2.iv) income from financial instruments
-
-        # (2.v) income from real estate assets
+        # (2.iv) income from real estate assets
         # TODO: extend for multiple RE assets
         b = b+y_ticks
         x_ticks = np.array(list(self.party.monthly_income_re.keys()))
         y_ticks = np.array(list(self.party.monthly_income_re.values()))
         p2.bar(x_ticks, y_ticks, width, label='income from real estate', bottom=b)
+
+        # (2.v) income from dividends
+        b = b+y_ticks
+        x_ticks = np.array(list(self.party.monhtly_income_dividends.keys()))
+        y_ticks = np.array(list(self.party.monhtly_income_dividends.values()))
+        p2.bar(x_ticks, y_ticks, width, label='income from dividends', bottom=b)
 
         p2.set_ylabel('Cashflow')
         p2.set_xlabel('Month')

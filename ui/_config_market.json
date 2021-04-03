@@ -7,6 +7,10 @@
         },
         {
             "name":"real_estate_index",
+            "yearly_rate":0.1
+        },
+        {
+            "name":"px_index",
             "yearly_rate":0.07
         }
     ]

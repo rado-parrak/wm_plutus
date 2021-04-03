@@ -42,8 +42,7 @@ class RealEstate(Asset):
 
         # event-based
         if self.events is not None:
-            # costs:
-            if self.events['cost'] is not None:
+            if 'costs' in self.events.keys():
                 for event in self.events['cost']:
                     if event['step'] == step:
                         self.monthly_costs[step] = self.monthly_costs[step] + event['value']

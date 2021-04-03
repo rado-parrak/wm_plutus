@@ -64,7 +64,7 @@ class EmployeeContract(Agreement):
     def calculate_cashflow(self, step):
         if self.events is not None:
             # modify
-            if self.events['modify'] is not None:
+            if 'modify' in self.events.keys():
                 for event in self.events['modify']:
                     if event['step'] == step:
                         self.salary = self.salary + event['value']
@@ -72,7 +72,7 @@ class EmployeeContract(Agreement):
         salary = self.salary
         if self.events is not None:
             # bonuses
-            if self.events['bonus'] is not None:
+            if 'bonus' in self.events.keys():
                 for event in self.events['bonus']:
                     if event['step'] == step:
                         salary += event['value']

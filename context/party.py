@@ -1,4 +1,4 @@
-from context.instruments import CurrentAccount, Mortgage
+from context.instruments import CurrentAccount, Mortgage, Share
 from context.assets import RealEstate
 from context.agreements import EmployeeContract, RentalAgreement
 from context.market import Market
@@ -38,6 +38,7 @@ class Party:
         self.expenditures_consumption_re = dict()
         self.monthly_income = dict()
         self.monthly_income_re = dict() # income from real-estate
+        self.monhtly_income_dividends = dict() # dividend income
         self.free_cash_pv = dict()
         self.discount_rate = discount_rate
         self.portfolio_values = dict()
@@ -100,6 +101,12 @@ class Party:
                     cash = cash + el.cash_flow[step]
                     self.monthly_income_re[step] = el.cash_flow[step]
                     self.logger.debug('[STEP {}] cash from the rental agreement "{}": {:.2f}'.format(step, el.id, el.cash_flow[step]))
+
+            if isinstance(el, Share):
+                el.calculate_value(step)
+                self.monhtly_income_dividends[step] = el.pay_dividend(step)
+                cash = cash + self.monhtly_income_dividends[step]
+                self.logger.debug('[STEP {}] cash from the dividends of share "{}": {:.2f}'.format(step, el.id, self.monhtly_income_dividends[step]))
 
         self.cash[step] = cash + saldo_of_events
         self.logger.info('[STEP {}] Total cash: {:.2f}'.format(step, cash))
@@ -256,7 +263,7 @@ def setup_portfolio(portfolio_config:dict, indices:dict, logger) -> dict:
                                             house_community_costs = re['house_community_costs'], 
                                             real_estate_index = indices[re['index']], 
                                             logger=logger, 
-                                            events=re['index'])
+                                            events=re['events'])
 
     # (3) rental agreement
     for ra in portfolio_config['rental_agreements']:
@@ -267,6 +274,18 @@ def setup_portfolio(portfolio_config:dict, indices:dict, logger) -> dict:
                                                 rent=ra['rent'],
                                                 yearly_costs=ra['yearly_costs'],
                                                 logger=logger)
+
+    # (4) shares
+    for s in portfolio_config['shares']:
+        logger.info('Adding Share: {} to the portfolio'.format(s['id']))
+        portfolio[s['id']] = Share(id=s['id'],
+                                    price=s['price'],
+                                    units=s['units'],
+                                    index=indices[s['index']],
+                                    dividend_yield=s['dividend_yield'],
+                                    dividend_step=s['dividend_step'],
+                                    current_step=0,
+                                    logger=logger)
 
     return(portfolio)
 

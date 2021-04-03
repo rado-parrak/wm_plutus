@@ -133,12 +133,13 @@ class Mortgage(Instrument):
 
 class Share(Instrument):
 
-    def __init__(self, id:str, logger:logging.Logger, price:float, units:int, index: dict, dividend_yield:float, current_step:int=0):
+    def __init__(self, id:str, logger:logging.Logger, price:float, units:int, index: dict, dividend_yield:float, dividend_step:int,current_step:int=0):
         super().__init__(id, logger)
         self.price = price
         self.units = units
         self.index = index
-        self.dividend_yield
+        self.dividend_yield = dividend_yield
+        self.dividend_step = dividend_step
         self.current_step = current_step
 
         self.logger.info('Initializing Share: {} with: '.format(self.id))
@@ -154,7 +155,14 @@ class Share(Instrument):
             if self.value[step - 1] is None:
                 raise Exception('Value at previous step to step ' + str(step) + ' not calculated!')
             else:
-                self.value[step] = self.value[step-1] * (index[step]/index[step-1])
+                self.value[step] = self.value[step-1] * (self.index[step]/self.index[step-1])
                 self.logger.debug('[STEP {}] Share "{}" value: {}'.format(step, self.id, self.value[step]))
 
-
+    def pay_dividend(self, step):
+        dividend=0.0
+        if step==(step//12)*12+self.dividend_step:
+            dividend = self.dividend_yield*self.value[step]
+            self.logger.info('[STEP {}] Dividend of {} paid out by share "{}"'.format(step, dividend,self.id))
+        else:
+            self.logger.info('[STEP {}] Not a dividend month for share "{}"'.format(step, self.id))
+        return(dividend)

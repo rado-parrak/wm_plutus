@@ -1,0 +1,65 @@
+{
+    "employee_contracts": [
+        {
+            "id": "rado_employee_contract",
+            "salary": 100000,
+            "income_tax_rate": 0.0,
+            "duration": 4,
+            "events": {
+                "modify": [
+                    {
+                        "step": 2,
+                        "value": 0
+                    },
+                    {
+                        "step": 4,
+                        "value": 0
+                    }
+                ],
+                "bonus": [
+                    {
+                        "step": 9,
+                        "value": 0
+                    }
+                ]
+            }
+        }
+    ],
+    "accounts": [
+        {
+            "type": "current",
+            "id": "rado_current_account",
+            "current_outstanding": 0.0,
+            "monthly_cost": 0.0,
+            "cnit": 0.0,
+            "primary": "True"
+        },
+        {
+            "type": "current",
+            "id": "rado_saving_account",
+            "current_outstanding": 0.0,
+            "monthly_cost": 0.0,
+            "cnit": 0.001,
+            "primary": "False"
+        }
+    ],
+    "real_estate": [
+        {
+            "id": "rado_inherited_flat",
+            "current_market_value": 1800000.0,
+            "property_tax": 2000,
+            "house_community_costs": 5000,
+            "index": "real_estate_index",
+            "events": {}
+        }
+    ],
+    "rental_agreements": [
+        {
+            "id": "rado_rent_from_inherited_flat",
+            "index": "inflation_index",
+            "my_position": "renter",
+            "rent": 10000.0,
+            "yearly_costs": 0.0
+        }
+    ]
+}
