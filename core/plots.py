@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from context.party import Party
+from context.instruments import CurrentAccount
+from context.assets import RealEstate
 
 class PartyPlotter():
 
@@ -55,4 +57,88 @@ class PartyPlotter():
 
         #return fig.show()
 
- 
+    def plot_wealth_evolution(self):
+
+        width = 0.5 # the width of the bars: can also be len(x) sequence
+
+        fig, [p1, p2] = plt.subplots(2, 1, figsize=(16, 16))
+        
+        # (1) Wealth
+        b = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
+        
+        for el in self.party.portfolio.elements.values():            
+            if isinstance(el, CurrentAccount):
+                instrument_values = el.value
+                x_ticks = np.array(list(instrument_values.keys()))
+                y_ticks = np.array(list(instrument_values.values()))
+
+                p1.bar(x_ticks,
+                        y_ticks, 
+                        width,
+                        bottom=b,
+                        label=el.id)
+
+                b = b+y_ticks
+
+            if isinstance(el, RealEstate):
+                asset_prices = el.price
+                x_ticks = np.array(list(asset_prices.keys()))
+                y_ticks = np.array(list(asset_prices.values()))
+
+                p1.bar(x_ticks,
+                        y_ticks, 
+                        width,
+                        bottom=b,
+                        label=el.id)
+
+                b = b+y_ticks
+
+        p1.set_ylabel('Value')
+        p1.set_xlabel('Month')
+        p1.set_title('Wealth evolution')
+        p1.ticklabel_format(style='plain')
+        p1.grid(axis='y', which='major')
+        p1.legend()
+
+        # (2) Cashflows
+        b = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
+
+        # (2.i) expendidures from consumption
+        x_ticks = np.array(list(self.party.expenditures_consumption.keys()))
+        y_ticks = np.array(list(self.party.expenditures_consumption.values()))
+        p2.bar(x_ticks, -y_ticks, width, label='expenditures from consumption')
+        
+        # (2.ii) expenditures from debt
+
+        # 2(.ii) expenditures from real-estate
+        b = b-y_ticks
+        x_ticks = np.array(list(self.party.expenditures_consumption_re.keys()))
+        y_ticks = np.array(list(self.party.expenditures_consumption_re.values()))
+        p2.bar(x_ticks, -y_ticks, width, label='expenditures from real estate', bottom=b)
+        
+        # (2.iii) income from work
+        b = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
+
+        x_ticks = np.array(list(self.party.monthly_income.keys()))
+        y_ticks = np.array(list(self.party.monthly_income.values()))
+        p2.bar(x_ticks, y_ticks, width, label='income from job')
+
+        # (2.iv) income from financial instruments
+
+        # (2.v) income from real estate assets
+        # TODO: extend for multiple RE assets
+        b = b+y_ticks
+        x_ticks = np.array(list(self.party.monthly_income_re.keys()))
+        y_ticks = np.array(list(self.party.monthly_income_re.values()))
+        p2.bar(x_ticks, y_ticks, width, label='income from real estate', bottom=b)
+
+        p2.set_ylabel('Cashflow')
+        p2.set_xlabel('Month')
+        p2.set_title('Cashflows')
+        p2.ticklabel_format(style='plain')
+        p2.grid(axis='y', which='major')
+        p2.legend()
+
+        plt.show()
+
+

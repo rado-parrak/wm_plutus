@@ -131,5 +131,30 @@ class Mortgage(Instrument):
         self.calculateMonthlyPayment
         self.monthly_costs[step] = self.monthly_payment
 
+class Share(Instrument):
+
+    def __init__(self, id:str, logger:logging.Logger, price:float, units:int, index: dict, dividend_yield:float, current_step:int=0):
+        super().__init__(id, logger)
+        self.price = price
+        self.units = units
+        self.index = index
+        self.dividend_yield
+        self.current_step = current_step
+
+        self.logger.info('Initializing Share: {} with: '.format(self.id))
+        self.logger.info(' - price: {:.2f}'.format(price))
+        self.logger.info(' - units: {:.2f}'.format(self.units))
+        self.logger.info(' - dividend_yield: {:.2f}'.format(dividend_yield))
+
+        self.value = dict()
+        self.value[0] = price*units
+
+    def calculate_value(self, step):
+        if step > self.current_step:
+            if self.value[step - 1] is None:
+                raise Exception('Value at previous step to step ' + str(step) + ' not calculated!')
+            else:
+                self.value[step] = self.value[step-1] * (index[step]/index[step-1])
+                self.logger.debug('[STEP {}] Share "{}" value: {}'.format(step, self.id, self.value[step]))
 
 

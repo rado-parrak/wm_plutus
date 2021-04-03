@@ -49,3 +49,23 @@ class Index:
 
         return(monthly_values)
 
+def extrapolate_index(yearly_rate:float, n_years:int, index_name:str, logger) -> dict:
+
+    index={}
+    index[0]=1.0
+    for step in range(1,n_years*12+1):
+        index[step]=index[step-1] + yearly_rate/12
+        logger.debug('The value of {} index at step {} is: {}'.format(index_name, step, index[step]))
+
+    return(index)
+
+def setup_market(market:dict, config:dict, logger) -> dict:
+    indices = dict()
+    for index in market['indices']:
+        logger.info('Adding index: {}'.format(index['name']))
+        indices[index['name']]=extrapolate_index(yearly_rate = index['yearly_rate'],
+                                                n_years=config['n_years'],
+                                                index_name=index['name'],
+                                                logger=logger)
+
+    return(indices)

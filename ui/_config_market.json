@@ -1,0 +1,13 @@
+{
+    "indices":
+    [
+        {
+            "name":"inflation_index",
+            "yearly_rate":0.025
+        },
+        {
+            "name":"real_estate_index",
+            "yearly_rate":0.07
+        }
+    ]
+}

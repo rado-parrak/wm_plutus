@@ -1,16 +1,15 @@
 from context.instruments import CurrentAccount, Mortgage
 from context.assets import RealEstate
-from context.agreements import EmployeeContract
+from context.agreements import EmployeeContract, RentalAgreement
 from context.market import Market
 import logging
 class Portfolio:
 
-    def __init__(self, logger: logging.Logger, *args):
+    def __init__(self, logger: logging.Logger, elements:dict):
 
         self.elements = dict()
         self.logger = logger
-        for el in args:
-            self.elements[el.id] = el
+        self.elements =  elements
 
         #self.logger.info('Initializing portfolio with elements: {}'.format(self.list_elements()))
 
@@ -35,6 +34,10 @@ class Party:
         self.portfolio_types = dict()
         self.monthly_expenditures = monthly_expenditures
         self.expenditures = dict()
+        self.expenditures_consumption = dict()
+        self.expenditures_consumption_re = dict()
+        self.monthly_income = dict()
+        self.monthly_income_re = dict() # income from real-estate
         self.free_cash_pv = dict()
         self.discount_rate = discount_rate
         self.portfolio_values = dict()
@@ -48,6 +51,7 @@ class Party:
     def calculate_expenditures(self, step):        
         # expenditures from consumption
         expenditures = self.monthly_expenditures
+        self.expenditures_consumption[step] = expenditures
         self.logger.debug('[STEP {}] Expenditures from consumption: {:.2f}'.format(step, self.monthly_expenditures))
 
         # expenditures from porfolio holding
@@ -65,6 +69,7 @@ class Party:
             if isinstance(el, RealEstate):
                 el.calculate_monthly_costs(step)
                 expenditures = expenditures + el.monthly_costs[step]
+                self.expenditures_consumption_re[step] = el.monthly_costs[step]
                 self.logger.debug('[STEP {}] Expenditures from the real estate {:.2f}'.format(step, el.monthly_costs[step]))
 
         # total expenditures
@@ -86,7 +91,15 @@ class Party:
             if isinstance(el, EmployeeContract):
                 el.calculate_cashflow(step)
                 cash = cash + el.cash_flow[step]
+                self.monthly_income[step] = el.cash_flow[step]
                 self.logger.debug('[STEP {}] cash from the employee contract "{}": {:.2f}'.format(step, el.id, el.cash_flow[step]))
+
+            if isinstance(el, RentalAgreement):
+                if el.my_position == 'renter':
+                    el.calculate_cashflow(step)
+                    cash = cash + el.cash_flow[step]
+                    self.monthly_income_re[step] = el.cash_flow[step]
+                    self.logger.debug('[STEP {}] cash from the rental agreement "{}": {:.2f}'.format(step, el.id, el.cash_flow[step]))
 
         self.cash[step] = cash + saldo_of_events
         self.logger.info('[STEP {}] Total cash: {:.2f}'.format(step, cash))
@@ -131,7 +144,7 @@ class Party:
         saldo_of_events = 0.0
 
         # sell events:
-        if self.events['sell'] is not None:
+        if 'sell' in self.events.keys():
             for event in self.events['sell']:
                 if event['step'] == step:
                     for key, el in self.portfolio.elements.copy().items():
@@ -145,7 +158,7 @@ class Party:
                             self.logger.info('[STEP {}] Asset {} sold for: {:.2f}'.format(step, el.id, el.price[step-1]))
 
         # buy events:
-        if self.events['buy'] is not None:
+        if 'buy' in self.events.keys():
             for event in self.events['buy']:
                 if event['step'] == step:
                     # decrease saldo_of_events by bought asset
@@ -161,7 +174,7 @@ class Party:
 
     def act_on_post_events(self, step):
         # transfer events:
-        if self.events['transfer'] is not None:
+        if 'transfer' in self.events.keys():
             for event in self.events['transfer']:
                 if event['step'] == step:
                     # decrease by amount 'from'
@@ -169,12 +182,14 @@ class Party:
                         if el.id == event['from']:
                             el.value[step] = el.value[step] - event['amount']
                             self.logger.debug('[STEP {}] Outstanding of account {} decreased by: {:.2f} '.format(step, el.id, event['amount']))
+                            self.logger.debug('[STEP {}] New outstanding value of account {} is: {:.2f} '.format(step, el.id, el.value[step]))
 
                     # increase by amount 'to'
                     for key, el in self.portfolio.elements.copy().items():
                         if el.id == event['to']:
                             el.value[step] = el.value[step] + event['amount']
                             self.logger.debug('[STEP {}] Outstanding of account {} increased by: {:.2f} '.format(step, el.id, event['amount']))
+                            self.logger.debug('[STEP {}] New outstanding value of account {} is: {:.2f} '.format(step, el.id, el.value[step]))
 
     def create_new_portfolio_element(self, event_description: dict):
         if event_description['type'] == 'RealEstate':
@@ -205,3 +220,55 @@ class Party:
 
                 # balance
                 self.calculate_portfolio_value(step)
+
+def setup_portfolio(portfolio_config:dict, indices:dict, logger) -> dict:
+
+    portfolio = dict()
+
+    # (1) employee contracts
+    for ec in portfolio_config['employee_contracts']:
+        logger.info('Adding Employee Contract: {} to the portfolio'.format(ec['id']))
+        portfolio[ec['id']] = EmployeeContract(id=ec['id'], 
+                                            salary = ec['salary'], 
+                                            income_tax_rate = ec['income_tax_rate'], 
+                                            n_years=ec['duration'],
+                                            events=ec['events'], 
+                                            logger=logger)
+
+    # (2) accounts
+    for acc in portfolio_config['accounts']:
+        logger.info('Adding Account: {} to the portfolio'.format(acc['id']))
+        if acc['type'] == 'current':
+            portfolio[acc['id']] = CurrentAccount(id=acc['id'],
+                                                    current_outstanding=acc['current_outstanding'],
+                                                    monthly_cost= acc['monthly_cost'],
+                                                    cnit=acc['cnit'], 
+                                                    logger=logger, 
+                                                    primary=bool(acc['primary']))
+
+
+    # (2) real estate assets
+    for re in portfolio_config['real_estate']:
+        logger.info('Adding Real Estate Asset: {} to the portfolio'.format(re['id']))
+        portfolio[re['id']] = RealEstate(id=re['id'], 
+                                            current_market_value=re['current_market_value'], 
+                                            property_tax = re['property_tax'], 
+                                            house_community_costs = re['house_community_costs'], 
+                                            real_estate_index = indices[re['index']], 
+                                            logger=logger, 
+                                            events=re['index'])
+
+    # (3) rental agreement
+    for ra in portfolio_config['rental_agreements']:
+        logger.info('Adding Rental Agreement: {} to the portfolio'.format(ra['id']))
+        portfolio[ra['id']] = RentalAgreement(id=ra['id'],
+                                                index = indices[ra['index']],
+                                                my_position=ra['my_position'],
+                                                rent=ra['rent'],
+                                                yearly_costs=ra['yearly_costs'],
+                                                logger=logger)
+
+    return(portfolio)
+
+
+    
