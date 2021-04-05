@@ -238,68 +238,73 @@ def setup_portfolio(portfolio_config:dict, indices:dict, logger) -> dict:
     portfolio = dict()
 
     # (1) employee contracts
-    for ec in portfolio_config['employee_contracts']:
-        logger.info('Adding Employee Contract: {} to the portfolio'.format(ec['id']))
-        portfolio[ec['id']] = EmployeeContract(id=ec['id'], 
-                                            salary = ec['salary'], 
-                                            income_tax_rate = ec['income_tax_rate'], 
-                                            n_years=ec['duration'],
-                                            events=ec['events'], 
-                                            logger=logger)
-
-    # (2) accounts
-    for acc in portfolio_config['accounts']:
-        logger.info('Adding Account: {} to the portfolio'.format(acc['id']))
-        if acc['type'] == 'current':
-            portfolio[acc['id']] = CurrentAccount(id=acc['id'],
-                                                    current_outstanding=acc['current_outstanding'],
-                                                    monthly_cost= acc['monthly_cost'],
-                                                    cnit=acc['cnit'], 
-                                                    logger=logger, 
-                                                    primary=bool(acc['primary']))
-
-
-    # (2) real estate assets
-    for re in portfolio_config['real_estate']:
-        logger.info('Adding Real Estate Asset: {} to the portfolio'.format(re['id']))
-        portfolio[re['id']] = RealEstate(id=re['id'], 
-                                            current_market_value=re['current_market_value'], 
-                                            property_tax = re['property_tax'], 
-                                            house_community_costs = re['house_community_costs'], 
-                                            real_estate_index = indices[re['index']], 
-                                            logger=logger, 
-                                            events=re['events'])
-
-    # (3) rental agreement
-    for ra in portfolio_config['rental_agreements']:
-        logger.info('Adding Rental Agreement: {} to the portfolio'.format(ra['id']))
-        portfolio[ra['id']] = RentalAgreement(id=ra['id'],
-                                                index = indices[ra['index']],
-                                                my_position=ra['my_position'],
-                                                rent=ra['rent'],
-                                                yearly_costs=ra['yearly_costs'],
+    if 'employee_contracts' in portfolio_config.keys():
+        for ec in portfolio_config['employee_contracts']:
+            logger.info('Adding Employee Contract: {} to the portfolio'.format(ec['id']))
+            portfolio[ec['id']] = EmployeeContract(id=ec['id'], 
+                                                salary = ec['salary'], 
+                                                income_tax_rate = ec['income_tax_rate'], 
+                                                n_years=ec['duration'],
+                                                events=ec['events'], 
                                                 logger=logger)
 
+    # (2) accounts
+    if 'accounts' in portfolio_config.keys():
+        for acc in portfolio_config['accounts']:
+            logger.info('Adding Account: {} to the portfolio'.format(acc['id']))
+            if acc['type'] == 'current':
+                portfolio[acc['id']] = CurrentAccount(id=acc['id'],
+                                                        current_outstanding=acc['current_outstanding'],
+                                                        monthly_cost= acc['monthly_cost'],
+                                                        cnit=acc['cnit'], 
+                                                        logger=logger, 
+                                                        primary=bool(acc['primary']))
+
+    # (2) real estate assets
+    if 'real_estate' in portfolio_config.keys():
+        for re in portfolio_config['real_estate']:
+            logger.info('Adding Real Estate Asset: {} to the portfolio'.format(re['id']))
+            portfolio[re['id']] = RealEstate(id=re['id'], 
+                                                current_market_value=re['current_market_value'], 
+                                                property_tax = re['property_tax'], 
+                                                house_community_costs = re['house_community_costs'], 
+                                                real_estate_index = indices[re['index']], 
+                                                logger=logger, 
+                                                events=re['events'])
+
+    # (3) rental agreement
+    if 'rental_agreements' in portfolio_config.keys():
+        for ra in portfolio_config['rental_agreements']:
+            logger.info('Adding Rental Agreement: {} to the portfolio'.format(ra['id']))
+            portfolio[ra['id']] = RentalAgreement(id=ra['id'],
+                                                    index = indices[ra['index']],
+                                                    my_position=ra['my_position'],
+                                                    rent=ra['rent'],
+                                                    yearly_costs=ra['yearly_costs'],
+                                                    logger=logger)
+
     # (4) shares
-    for s in portfolio_config['shares']:
-        logger.info('Adding Share: {} to the portfolio'.format(s['id']))
-        portfolio[s['id']] = Share(id=s['id'],
-                                    price=s['price'],
-                                    units=s['units'],
-                                    index=indices[s['index']],
-                                    dividend_yield=s['dividend_yield'],
-                                    dividend_step=s['dividend_step'],
-                                    current_step=0,
-                                    logger=logger)
+    if 'shares' in portfolio_config.keys():
+        for s in portfolio_config['shares']:
+            logger.info('Adding Share: {} to the portfolio'.format(s['id']))
+            portfolio[s['id']] = Share(id=s['id'],
+                                        price=s['price'],
+                                        units=s['units'],
+                                        index=indices[s['index']],
+                                        dividend_yield=s['dividend_yield'],
+                                        dividend_step=s['dividend_step'],
+                                        current_step=0,
+                                        logger=logger)
 
     # (5) mortgage agreements
-    for m in portfolio_config['mortgage_agreements']:
-        logger.info('Adding Mortgage agreement: {} to the portfolio'.format(m['id']))
-        portfolio[m['id']] = Mortgage(id=m['id'], 
-                                        principal=m['principal'], 
-                                        cnit=m['cnit'], 
-                                        maturity_in_years=m['maturity_in_years'], 
-                                        logger=logger)
+    if 'mortgage_agreements' in portfolio_config.keys():
+        for m in portfolio_config['mortgage_agreements']:
+            logger.info('Adding Mortgage agreement: {} to the portfolio'.format(m['id']))
+            portfolio[m['id']] = Mortgage(id=m['id'], 
+                                            principal=m['principal'], 
+                                            cnit=m['cnit'], 
+                                            maturity_in_years=m['maturity_in_years'], 
+                                            logger=logger)
 
     return(portfolio)
 

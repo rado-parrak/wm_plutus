@@ -1,6 +1,6 @@
 {
     "run_config":"_config_run.json",
     "market_config":"_config_market.json",
-    "portfolio_config":"_config_portfolio.json",
+    "portfolio_config":"_config_portfolio-wo-mortgage.json",
     "event_config":"_config_events.json"
 }

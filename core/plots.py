@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from context.party import Party
 from context.instruments import CurrentAccount, Share, Mortgage
+from context.agreements import RentalAgreement
 from context.assets import RealEstate
 
 class PartyPlotter():
@@ -135,44 +136,51 @@ class PartyPlotter():
         p1.legend()
 
         # (2) Cashflows
-        b = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
+        portfolio_element_types = [type(x) for x in self.party.portfolio.elements.values()]
+        BOTTOM = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
 
         # (2.i) expendidures from consumption
         x_ticks = np.array(list(self.party.expenditures_consumption.keys()))
         y_ticks = np.array(list(self.party.expenditures_consumption.values()))
         p2.bar(x_ticks, -y_ticks, width, label='expenditures from consumption')
+        BOTTOM = BOTTOM-y_ticks
         
         # (2.ii) expenditures from mortgage
-        b = b-y_ticks
-        x_ticks = np.array(list(self.party.expenditures_mortgage.keys()))
-        y_ticks = np.array(list(self.party.expenditures_mortgage.values()))
-        p2.bar(x_ticks, -y_ticks, width, label='expenditures from mortgage', bottom=b)
+        if Mortgage in portfolio_element_types:        
+            x_ticks = np.array(list(self.party.expenditures_mortgage.keys()))
+            y_ticks = np.array(list(self.party.expenditures_mortgage.values()))
+            p2.bar(x_ticks, -y_ticks, width, label='expenditures from mortgage', bottom=BOTTOM)
+            BOTTOM = BOTTOM-y_ticks
 
         # 2(.ii) expenditures from real-estate
-        b = b-y_ticks
-        x_ticks = np.array(list(self.party.expenditures_consumption_re.keys()))
-        y_ticks = np.array(list(self.party.expenditures_consumption_re.values()))
-        p2.bar(x_ticks, -y_ticks, width, label='expenditures from real estate', bottom=b)
+        if RealEstate in portfolio_element_types:
+            x_ticks = np.array(list(self.party.expenditures_consumption_re.keys()))
+            y_ticks = np.array(list(self.party.expenditures_consumption_re.values()))
+            p2.bar(x_ticks, -y_ticks, width, label='expenditures from real estate', bottom=BOTTOM)
+            BOTTOM = BOTTOM-y_ticks
         
         # (2.iii) income from work
-        b = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
-
+        BOTTOM = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
+        
         x_ticks = np.array(list(self.party.monthly_income.keys()))
         y_ticks = np.array(list(self.party.monthly_income.values()))
-        p2.bar(x_ticks, y_ticks, width, label='income from job')
+        p2.bar(x_ticks, y_ticks, width, label='income from job', bottom=BOTTOM)
+        BOTTOM = BOTTOM+y_ticks
 
         # (2.iv) income from real estate assets
         # TODO: extend for multiple RE assets
-        b = b+y_ticks
-        x_ticks = np.array(list(self.party.monthly_income_re.keys()))
-        y_ticks = np.array(list(self.party.monthly_income_re.values()))
-        p2.bar(x_ticks, y_ticks, width, label='income from real estate', bottom=b)
+        if RentalAgreement in portfolio_element_types:    
+            x_ticks = np.array(list(self.party.monthly_income_re.keys()))
+            y_ticks = np.array(list(self.party.monthly_income_re.values()))
+            p2.bar(x_ticks, y_ticks, width, label='income from real estate', bottom=BOTTOM)
+            BOTTOM = BOTTOM+y_ticks
 
         # (2.v) income from dividends
-        b = b+y_ticks
-        x_ticks = np.array(list(self.party.monhtly_income_dividends.keys()))
-        y_ticks = np.array(list(self.party.monhtly_income_dividends.values()))
-        p2.bar(x_ticks, y_ticks, width, label='income from dividends', bottom=b)
+        if Share in portfolio_element_types:
+            x_ticks = np.array(list(self.party.monhtly_income_dividends.keys()))
+            y_ticks = np.array(list(self.party.monhtly_income_dividends.values()))
+            p2.bar(x_ticks, y_ticks, width, label='income from dividends', bottom=BOTTOM)
+            BOTTOM = BOTTOM+y_ticks
 
         p2.set_ylabel('Cashflow')
         p2.set_xlabel('Month')
