@@ -36,6 +36,7 @@ class Party:
         self.expenditures = dict()
         self.expenditures_consumption = dict()
         self.expenditures_consumption_re = dict()
+        self.expenditures_mortgage = dict()
         self.monthly_income = dict()
         self.monthly_income_re = dict() # income from real-estate
         self.monhtly_income_dividends = dict() # dividend income
@@ -59,7 +60,11 @@ class Party:
         for key, el in self.portfolio.elements.items():
             if isinstance(el, Mortgage):
                 el.calculate_monthly_costs(step)
+                el.calculateInterestPayment(step)
+                el.calculatePrincipalPayment(step)
+                el.calculateOutstandingAmount(step)
                 expenditures = expenditures + el.monthly_costs[step]
+                self.expenditures_mortgage[step] = el.monthly_costs[step]
                 self.logger.debug('[STEP {}] Expenditures from mortgage: {:.2f}'.format(step, el.monthly_costs[step]))
 
             if isinstance(el, CurrentAccount):
@@ -286,6 +291,15 @@ def setup_portfolio(portfolio_config:dict, indices:dict, logger) -> dict:
                                     dividend_step=s['dividend_step'],
                                     current_step=0,
                                     logger=logger)
+
+    # (5) mortgage agreements
+    for m in portfolio_config['mortgage_agreements']:
+        logger.info('Adding Mortgage agreement: {} to the portfolio'.format(m['id']))
+        portfolio[m['id']] = Mortgage(id=m['id'], 
+                                        principal=m['principal'], 
+                                        cnit=m['cnit'], 
+                                        maturity_in_years=m['maturity_in_years'], 
+                                        logger=logger)
 
     return(portfolio)
 

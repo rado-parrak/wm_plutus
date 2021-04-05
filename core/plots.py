@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from context.party import Party
-from context.instruments import CurrentAccount, Share
+from context.instruments import CurrentAccount, Share, Mortgage
 from context.assets import RealEstate
 
 class PartyPlotter():
@@ -106,6 +106,20 @@ class PartyPlotter():
 
                 b = b+y_ticks
 
+            if isinstance(el, Mortgage):
+                b = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
+                outstanding_amount = el.outstanding_amount
+                x_ticks = np.array(list(outstanding_amount.keys()))
+                y_ticks = np.array(list(outstanding_amount.values()))
+
+                p1.bar(x_ticks,
+                        -y_ticks, 
+                        width,
+                        bottom=b,
+                        label=el.id)
+
+                b = b-y_ticks
+
         p1.set_ylabel('Value')
         p1.set_xlabel('Month')
         p1.set_title('Wealth evolution')
@@ -121,7 +135,11 @@ class PartyPlotter():
         y_ticks = np.array(list(self.party.expenditures_consumption.values()))
         p2.bar(x_ticks, -y_ticks, width, label='expenditures from consumption')
         
-        # (2.ii) expenditures from debt
+        # (2.ii) expenditures from mortgage
+        b = b-y_ticks
+        x_ticks = np.array(list(self.party.expenditures_mortgage.keys()))
+        y_ticks = np.array(list(self.party.expenditures_mortgage.values()))
+        p2.bar(x_ticks, -y_ticks, width, label='expenditures from mortgage', bottom=b)
 
         # 2(.ii) expenditures from real-estate
         b = b-y_ticks

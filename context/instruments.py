@@ -96,8 +96,7 @@ class Mortgage(Instrument):
 
     def calculateMonthlyPayment(self):
         self.calculateNumberOfPeriods()
-        self.monthly_payment = (self.monthly_interest_rate * self.principal) / (
-                    1 - (1 + self.monthly_interest_rate) ** -self.number_of_periods)
+        self.monthly_payment = (self.monthly_interest_rate * self.principal) / (1 - (1 + self.monthly_interest_rate) ** -self.number_of_periods)
 
         self.logger.debug(' Derived monthly mortgage payment: {:.2f}'.format(self.monthly_payment))
 
@@ -128,7 +127,7 @@ class Mortgage(Instrument):
                 self.logger.debug('[STEP {}] Principal payment: {}'.format(step, self.principal_payment[step]))
 
     def calculate_monthly_costs(self, step):
-        self.calculateMonthlyPayment
+        self.calculateMonthlyPayment()
         self.monthly_costs[step] = self.monthly_payment
 
 class Share(Instrument):
