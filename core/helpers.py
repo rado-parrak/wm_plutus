@@ -25,4 +25,7 @@ def configure_run(configmap:dict):
     with open(configmap['portfolio_config']) as f: portfolio_config = json.load(f)
     portfolio = setup_portfolio(portfolio_config, market, logger)
 
-    return run_config, market, portfolio, logger
+    # (4) Events
+    with open(configmap['event_config']) as f: event_config = json.load(f)
+
+    return run_config, market, portfolio, event_config, logger

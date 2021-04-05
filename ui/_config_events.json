@@ -1,0 +1,372 @@
+{
+    "buy": [],
+    "sell": [],
+    "transfer": [
+        {
+            "step": 0,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 1,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 2,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 3,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 4,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 5,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 6,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 7,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 8,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 9,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 10,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 11,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 12,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 13,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 14,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 15,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 16,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 17,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 18,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 19,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 20,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 21,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 22,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 23,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 24,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 25,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 26,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 27,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 28,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 29,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 30,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 31,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 32,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 33,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 34,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 35,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 36,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 37,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 38,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 39,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 40,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 41,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 42,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 43,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 44,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 45,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 46,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 47,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 48,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 49,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 50,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 51,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 52,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 53,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 54,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 55,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 56,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 57,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 58,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 59,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        },
+        {
+            "step": 60,
+            "from": "rado_current_account",
+            "to": "rado_saving_account",
+            "amount": 25000
+        }
+    ]
+}
