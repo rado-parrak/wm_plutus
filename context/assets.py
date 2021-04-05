@@ -32,7 +32,7 @@ class RealEstate(Asset):
             if self.price[step - 1] is None:
                 raise Exception('Value at previous step to step ' + str(step) + ' not calculated!')
             else:
-                self.price[step] = self.price[0] * self.real_estate_index[step]
+                self.price[step] = self.price[step-1] * (self.real_estate_index[step]/self.real_estate_index[step-1])
 
         self.logger.debug('[STEP {}] Real-estate price: {}'.format(step, self.price[step]))
 

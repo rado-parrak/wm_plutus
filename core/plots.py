@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from context.party import Party
 from context.instruments import CurrentAccount, Share, Mortgage
-from context.agreements import RentalAgreement
+from context.agreements import RentalAgreement, EmployeeContract
 from context.assets import RealEstate
 
 class PartyPlotter():
@@ -58,9 +58,26 @@ class PartyPlotter():
 
         #return fig.show()
 
-    def plot_wealth_evolution(self):
+    def plot_bar(self, plot, dictionary, width, bottom, label, sign):
+        x_ticks = np.array(list(dictionary.keys()))
+        y_ticks = np.array(list(dictionary.values()))
 
-        width = 0.5 # the width of the bars: can also be len(x) sequence
+        plot.bar(x_ticks, sign*y_ticks, width, bottom=bottom, label=label)
+        bottom = bottom + sign*y_ticks 
+        return(bottom)
+
+    def fill_empty_with_zeros(self, dictionary):
+        mini = np.amin(np.array(list(dictionary.keys())))
+        if mini>0:
+            for i in range(0,mini):
+                dictionary[i]=0.0
+
+        return(dictionary)
+
+    def plot_wealth_evolution(self):
+        # TODO: This could probably done in a more elegant way...
+
+        WIDTH = 0.5 # the width of the bars: can also be len(x) sequence
 
         fig, [p1, p2] = plt.subplots(2, 1, figsize=(16, 16))
         
@@ -70,63 +87,26 @@ class PartyPlotter():
 
         for el in self.party.portfolio.elements.values():
             if isinstance(el, CurrentAccount):
-                instrument_values = el.value
-                x_ticks = np.array(list(instrument_values.keys()))
-                y_ticks = np.array(list(instrument_values.values()))
-
-                p1.bar(x_ticks,
-                        y_ticks, 
-                        width,
-                        bottom=BOTTOM,
-                        label=el.id)
-
-                BOTTOM = BOTTOM+y_ticks
-
-
-            if isinstance(el, RealEstate):
-                asset_prices = el.price
-                x_ticks = np.array(list(asset_prices.keys()))
-                y_ticks = np.array(list(asset_prices.values()))
-
-                p1.bar(x_ticks,
-                        y_ticks, 
-                        width,
-                        bottom=BOTTOM,
-                        label=el.id)
-
-                BOTTOM = BOTTOM+y_ticks
-                
-
+                dict_of_values = el.value
+                dict_of_values = self.fill_empty_with_zeros(dict_of_values)
+                BOTTOM = self.plot_bar(p1, dict_of_values, WIDTH, BOTTOM, el.id,1)
+            if isinstance(el, RealEstate): 
+                dict_of_values = el.price
+                dict_of_values = self.fill_empty_with_zeros(dict_of_values)
+                BOTTOM = self.plot_bar(p1, dict_of_values, WIDTH, BOTTOM, el.id,1)
             if isinstance(el, Share):
-                share_values = el.value
-                x_ticks = np.array(list(share_values.keys()))
-                y_ticks = np.array(list(share_values.values()))
-
-                p1.bar(x_ticks,
-                        y_ticks, 
-                        width,
-                        bottom=BOTTOM,
-                        label=el.id)
-
-                BOTTOM = BOTTOM+y_ticks
-                
+                dict_of_values = el.value
+                dict_of_values = self.fill_empty_with_zeros(dict_of_values)
+                BOTTOM = self.plot_bar(p1, dict_of_values, WIDTH, BOTTOM, el.id,1)
                 
         # (B) Plot NEGATIVE wealth second:
         BOTTOM = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
 
         for el in self.party.portfolio.elements.values():
             if isinstance(el, Mortgage):
-                outstanding_amount = el.outstanding_amount
-                x_ticks = np.array(list(outstanding_amount.keys()))
-                y_ticks = np.array(list(outstanding_amount.values()))
-
-                p1.bar(x_ticks,
-                        -y_ticks, 
-                        width,
-                        bottom=BOTTOM,
-                        label=el.id)
-                
-                BOTTOM = BOTTOM-y_ticks
+                dict_of_values = el.outstanding_amount
+                dict_of_values = self.fill_empty_with_zeros(dict_of_values)
+                BOTTOM = self.plot_bar(p1, dict_of_values, WIDTH, BOTTOM, el.id,-1)
 
         p1.set_ylabel('Value')
         p1.set_xlabel('Month')
@@ -136,6 +116,7 @@ class PartyPlotter():
         p1.legend()
 
         # (2) Cashflows
+        width = WIDTH
         portfolio_element_types = [type(x) for x in self.party.portfolio.elements.values()]
         BOTTOM = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
 

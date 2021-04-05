@@ -24,7 +24,7 @@ class Portfolio:
 
 class Party:
 
-    def __init__(self, id: str, logger:logging.Logger, initial_free_cash: float, initial_portfolio: Portfolio, monthly_expenditures: float, discount_rate: float, events: dict):
+    def __init__(self, id: str, logger:logging.Logger, initial_free_cash: float, initial_portfolio: Portfolio, monthly_expenditures: float, discount_rate: float, events: dict, market:dict):
 
         self.id = id
         self.initial_free_cash = initial_free_cash
@@ -45,6 +45,7 @@ class Party:
         self.portfolio_values = dict()
         self.logger = logger
         self.events = events
+        self.market = market
 
         self.logger.info('Initializing party: {}'.format(self.id))
         self.logger.info('with initial portfolio: {}'.format(initial_portfolio.list_elements()))
@@ -182,6 +183,16 @@ class Party:
                     self.portfolio.add_element(el)
                     self.logger.info('[STEP {}] New portfolio element {} added'.format(step, el.id))
 
+        # create events:
+        if 'create' in self.events.keys():
+            for event in self.events['create']:
+                if event['step'] == step:
+                    # create new portfolio element and add to portfolio
+                    el = self.create_new_portfolio_element(event)
+                    self.portfolio.add_element(el)
+                    self.logger.info('[STEP {}] New portfolio element {} added'.format(step, el.id))
+
+
         return(saldo_of_events)
 
     def act_on_post_events(self, step):
@@ -209,10 +220,18 @@ class Party:
                             , current_market_value=event_description['current_market_value']
                             , property_tax = event_description['property_tax']
                             , house_community_costs = event_description['house_community_costs']
-                            , real_estate_index = event_description['real_estate_index']
+                            , real_estate_index = self.market[event_description['real_estate_index']]
                             , logger=self.logger
                             , events=None # TODO: make also new production to be linked to events
-                            , current_step= event_description['step'])) 
+                            , current_step=event_description['current_step']))
+
+        if event_description['type'] == 'Mortgage':
+            return(Mortgage(id=event_description['id'], 
+                            logger=self.logger, 
+                            principal=event_description['principal'], 
+                            cnit=event_description['cnit'], 
+                            maturity_in_years=event_description['maturity_in_years'],
+                            current_step=event_description['current_step']))
 
     def live(self, steps: int):
             for step in range(0, steps):
