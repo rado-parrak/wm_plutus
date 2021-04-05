@@ -64,9 +64,10 @@ class PartyPlotter():
         fig, [p1, p2] = plt.subplots(2, 1, figsize=(16, 16))
         
         # (1) Wealth
-        b = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
-        
-        for el in self.party.portfolio.elements.values():            
+        # (A) Plot POSITIVE wealth first:
+        BOTTOM = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
+
+        for el in self.party.portfolio.elements.values():
             if isinstance(el, CurrentAccount):
                 instrument_values = el.value
                 x_ticks = np.array(list(instrument_values.keys()))
@@ -75,10 +76,11 @@ class PartyPlotter():
                 p1.bar(x_ticks,
                         y_ticks, 
                         width,
-                        bottom=b,
+                        bottom=BOTTOM,
                         label=el.id)
 
-                b = b+y_ticks
+                BOTTOM = BOTTOM+y_ticks
+
 
             if isinstance(el, RealEstate):
                 asset_prices = el.price
@@ -88,10 +90,11 @@ class PartyPlotter():
                 p1.bar(x_ticks,
                         y_ticks, 
                         width,
-                        bottom=b,
+                        bottom=BOTTOM,
                         label=el.id)
 
-                b = b+y_ticks
+                BOTTOM = BOTTOM+y_ticks
+                
 
             if isinstance(el, Share):
                 share_values = el.value
@@ -101,13 +104,17 @@ class PartyPlotter():
                 p1.bar(x_ticks,
                         y_ticks, 
                         width,
-                        bottom=b,
+                        bottom=BOTTOM,
                         label=el.id)
 
-                b = b+y_ticks
+                BOTTOM = BOTTOM+y_ticks
+                
+                
+        # (B) Plot NEGATIVE wealth second:
+        BOTTOM = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
 
+        for el in self.party.portfolio.elements.values():
             if isinstance(el, Mortgage):
-                b = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
                 outstanding_amount = el.outstanding_amount
                 x_ticks = np.array(list(outstanding_amount.keys()))
                 y_ticks = np.array(list(outstanding_amount.values()))
@@ -115,10 +122,10 @@ class PartyPlotter():
                 p1.bar(x_ticks,
                         -y_ticks, 
                         width,
-                        bottom=b,
+                        bottom=BOTTOM,
                         label=el.id)
-
-                b = b-y_ticks
+                
+                BOTTOM = BOTTOM-y_ticks
 
         p1.set_ylabel('Value')
         p1.set_xlabel('Month')
