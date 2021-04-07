@@ -2,7 +2,7 @@ from context.instruments import CurrentAccount, Mortgage, Share
 from context.assets import RealEstate
 from context.agreements import EmployeeContract, RentalAgreement
 from context.market import Market
-import logging
+import logging, datetime
 class Portfolio:
 
     def __init__(self, logger: logging.Logger, elements:dict):
@@ -24,7 +24,7 @@ class Portfolio:
 
 class Party:
 
-    def __init__(self, id: str, logger:logging.Logger, initial_free_cash: float, initial_portfolio: Portfolio, monthly_expenditures: float, discount_rate: float, events: dict, market:dict):
+    def __init__(self, id: str, logger:logging.Logger, initial_free_cash: float, initial_portfolio: Portfolio, monthly_expenditures: float, discount_rate: float, events: dict, market:dict, birthdate:datetime.date, today:datetime.date, retirement_age:int):
 
         self.id = id
         self.initial_free_cash = initial_free_cash
@@ -46,6 +46,11 @@ class Party:
         self.logger = logger
         self.events = events
         self.market = market
+        self.birthdate = birthdate
+        self.retirement_age = retirement_age
+        self.event_domain = []
+        self.current_age = ((today - birthdate).days)//365.25
+        self.today = today
 
         self.logger.info('Initializing party: {}'.format(self.id))
         self.logger.info('with initial portfolio: {}'.format(initial_portfolio.list_elements()))
@@ -207,7 +212,7 @@ class Party:
                             self.logger.debug('[STEP {}] Outstanding of account {} decreased by: {:.2f} '.format(step, el.id, event['amount']))
                             self.logger.debug('[STEP {}] New outstanding value of account {} is: {:.2f} '.format(step, el.id, el.value[step]))
 
-                    # increase by amount 'to'
+                    # increase by amount 'to'   
                     for key, el in self.portfolio.elements.copy().items():
                         if el.id == event['to']:
                             el.value[step] = el.value[step] + event['amount']
@@ -252,6 +257,9 @@ class Party:
                 # balance
                 self.calculate_portfolio_value(step)
 
+                # enrich event domain
+                self.event_domain.append(step)
+
 def setup_portfolio(portfolio_config:dict, indices:dict, logger) -> dict:
 
     portfolio = dict()
@@ -263,7 +271,7 @@ def setup_portfolio(portfolio_config:dict, indices:dict, logger) -> dict:
             portfolio[ec['id']] = EmployeeContract(id=ec['id'], 
                                                 salary = ec['salary'], 
                                                 income_tax_rate = ec['income_tax_rate'], 
-                                                n_years=ec['duration'],
+                                                duration=ec['duration'],
                                                 events=ec['events'], 
                                                 logger=logger)
 

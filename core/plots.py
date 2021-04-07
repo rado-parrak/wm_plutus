@@ -4,15 +4,18 @@ from context.party import Party
 from context.instruments import CurrentAccount, Share, Mortgage
 from context.agreements import RentalAgreement, EmployeeContract
 from context.assets import RealEstate
+from dateutil.relativedelta import relativedelta
+import matplotlib.dates as mdates
 
 class PartyPlotter():
 
     def __init__(self, party: Party):
         self.party = party
-
+        self.step_domain = self.party.event_domain
+        self.date_domain = [self.party.today+relativedelta(months=x) for x in self.step_domain]
+        self.age_domain = [((x - self.party.birthdate).days)/365.25 for x in self.date_domain]
 
     def plot_position_evolution(self):
-
         fig, [[p1, p2], [p3, p4]] = plt.subplots(2, 2, figsize=(16, 8))
         fig.text(0.5, 1.0, 'Financial overview', horizontalalignment='center', verticalalignment='top', fontsize=18)
 
@@ -72,6 +75,8 @@ class PartyPlotter():
             for i in range(0,mini):
                 dictionary[i]=0.0
 
+        dictionary = dict(sorted(dictionary.items()))
+
         return(dictionary)
 
     def plot_wealth_evolution(self):
@@ -83,85 +88,81 @@ class PartyPlotter():
         
         # (1) Wealth
         # (A) Plot POSITIVE wealth first:
-        BOTTOM = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
-
+        BOTTOM = np.array([0 for x in self.step_domain])
         for el in self.party.portfolio.elements.values():
-            if isinstance(el, CurrentAccount):
-                dict_of_values = el.value
-                dict_of_values = self.fill_empty_with_zeros(dict_of_values)
-                BOTTOM = self.plot_bar(p1, dict_of_values, WIDTH, BOTTOM, el.id,1)
+            if isinstance(el, CurrentAccount) or isinstance(el, Share):
+                d = self.fill_empty_with_zeros(el.value)
+                y_ticks = np.array(list(d.values()))
+                p1.bar(np.array(self.age_domain), y_ticks, WIDTH, bottom=BOTTOM, label=el.id)
+                BOTTOM = BOTTOM + y_ticks 
+
             if isinstance(el, RealEstate): 
-                dict_of_values = el.price
-                dict_of_values = self.fill_empty_with_zeros(dict_of_values)
-                BOTTOM = self.plot_bar(p1, dict_of_values, WIDTH, BOTTOM, el.id,1)
-            if isinstance(el, Share):
-                dict_of_values = el.value
-                dict_of_values = self.fill_empty_with_zeros(dict_of_values)
-                BOTTOM = self.plot_bar(p1, dict_of_values, WIDTH, BOTTOM, el.id,1)
+                d = self.fill_empty_with_zeros(el.price)
+                y_ticks = np.array(list(d.values()))
+                p1.bar(np.array(self.age_domain), y_ticks, WIDTH, bottom=BOTTOM, label=el.id)
+                BOTTOM = BOTTOM + y_ticks 
                 
         # (B) Plot NEGATIVE wealth second:
-        BOTTOM = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
-
+        BOTTOM = np.array([0 for x in self.step_domain])
         for el in self.party.portfolio.elements.values():
             if isinstance(el, Mortgage):
-                dict_of_values = el.outstanding_amount
-                dict_of_values = self.fill_empty_with_zeros(dict_of_values)
-                BOTTOM = self.plot_bar(p1, dict_of_values, WIDTH, BOTTOM, el.id,-1)
+                d = self.fill_empty_with_zeros(el.outstanding_amount)
+                y_ticks = np.array(list(d.values()))           
+                p1.bar(np.array(self.age_domain), -y_ticks, WIDTH, bottom=BOTTOM, label=el.id)
+                BOTTOM = BOTTOM - y_ticks
 
+        # Minor ticks every month.
+        fmt_month = mdates.MonthLocator()
+        p1.xaxis.set_minor_locator(fmt_month)
         p1.set_ylabel('Value')
-        p1.set_xlabel('Month')
+        p1.set_xlabel('Age')
         p1.set_title('Wealth evolution')
-        p1.ticklabel_format(style='plain')
+        #p1.ticklabel_format(axis="y", style='plain')
+        p1.axvline(x=self.party.retirement_age, color='r')
         p1.grid(axis='y', which='major')
         p1.legend()
 
         # (2) Cashflows
         width = WIDTH
         portfolio_element_types = [type(x) for x in self.party.portfolio.elements.values()]
-        BOTTOM = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
+        BOTTOM = np.array([0 for x in self.step_domain])
 
         # (2.i) expendidures from consumption
-        x_ticks = np.array(list(self.party.expenditures_consumption.keys()))
-        y_ticks = np.array(list(self.party.expenditures_consumption.values()))
-        p2.bar(x_ticks, -y_ticks, width, label='expenditures from consumption')
-        BOTTOM = BOTTOM-y_ticks
+        dict_of_values = self.party.expenditures_consumption
+        dict_of_values = self.fill_empty_with_zeros(dict_of_values)
+        BOTTOM = self.plot_bar(p2, dict_of_values, WIDTH, BOTTOM,'expenditures from consumption',-1)
         
         # (2.ii) expenditures from mortgage
-        if Mortgage in portfolio_element_types:        
-            x_ticks = np.array(list(self.party.expenditures_mortgage.keys()))
-            y_ticks = np.array(list(self.party.expenditures_mortgage.values()))
-            p2.bar(x_ticks, -y_ticks, width, label='expenditures from mortgage', bottom=BOTTOM)
-            BOTTOM = BOTTOM-y_ticks
+        if Mortgage in portfolio_element_types:
+            dict_of_values = self.party.expenditures_mortgage
+            dict_of_values = self.fill_empty_with_zeros(dict_of_values)
+            BOTTOM = self.plot_bar(p2, dict_of_values, WIDTH, BOTTOM,'expenditures from mortgage',-1)
 
         # 2(.ii) expenditures from real-estate
         if RealEstate in portfolio_element_types:
-            x_ticks = np.array(list(self.party.expenditures_consumption_re.keys()))
-            y_ticks = np.array(list(self.party.expenditures_consumption_re.values()))
-            p2.bar(x_ticks, -y_ticks, width, label='expenditures from real estate', bottom=BOTTOM)
-            BOTTOM = BOTTOM-y_ticks
+            dict_of_values = self.party.expenditures_consumption_re
+            dict_of_values = self.fill_empty_with_zeros(dict_of_values)
+            BOTTOM = self.plot_bar(p2, dict_of_values, WIDTH, BOTTOM,'expenditures from real estate',-1)
         
         # (2.iii) income from work
-        BOTTOM = np.array([0 for x in range(0, len(self.party.free_cash.values()))])
-        
-        x_ticks = np.array(list(self.party.monthly_income.keys()))
-        y_ticks = np.array(list(self.party.monthly_income.values()))
-        p2.bar(x_ticks, y_ticks, width, label='income from job', bottom=BOTTOM)
-        BOTTOM = BOTTOM+y_ticks
+        BOTTOM = np.array([0 for x in self.step_domain])
+
+        dict_of_values = self.party.monthly_income
+        dict_of_values = self.fill_empty_with_zeros(dict_of_values)
+        BOTTOM = self.plot_bar(p2, dict_of_values, WIDTH, BOTTOM,'income from job',1)
 
         # (2.iv) income from real estate assets
         # TODO: extend for multiple RE assets
-        if RentalAgreement in portfolio_element_types:    
-            x_ticks = np.array(list(self.party.monthly_income_re.keys()))
-            y_ticks = np.array(list(self.party.monthly_income_re.values()))
-            p2.bar(x_ticks, y_ticks, width, label='income from real estate', bottom=BOTTOM)
-            BOTTOM = BOTTOM+y_ticks
+        if RentalAgreement in portfolio_element_types:  
+            dict_of_values = self.party.monthly_income_re
+            dict_of_values = self.fill_empty_with_zeros(dict_of_values)
+            BOTTOM = self.plot_bar(p2, dict_of_values, WIDTH, BOTTOM,'income from real estate',1)
 
         # (2.v) income from dividends
         if Share in portfolio_element_types:
-            x_ticks = np.array(list(self.party.monhtly_income_dividends.keys()))
-            y_ticks = np.array(list(self.party.monhtly_income_dividends.values()))
-            p2.bar(x_ticks, y_ticks, width, label='income from dividends', bottom=BOTTOM)
-            BOTTOM = BOTTOM+y_ticks
+            dict_of_values = self.party.monhtly_income_dividends
+            dict_of_values = self.fill_empty_with_zeros(dict_of_values)
+            BOTTOM = self.plot_bar(p2, dict_of_values, WIDTH, BOTTOM,'income from dividends',1)
 
         p2.set_ylabel('Cashflow')
         p2.set_xlabel('Month')

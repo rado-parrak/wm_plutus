@@ -70,6 +70,7 @@ class Mortgage(Instrument):
         self.value = dict()
         self.principal = principal
         self.maturity_in_years = maturity_in_years
+        self.maturity = maturity_in_years*12
 
         self.outstanding_amount = dict()
         self.outstanding_amount[current_step] = principal
@@ -101,14 +102,18 @@ class Mortgage(Instrument):
         self.logger.debug(' Derived monthly mortgage payment: {:.2f}'.format(self.monthly_payment))
 
     def calculateOutstandingAmount(self, step):
-        if step > self.current_step:
-            if self.outstanding_amount[step-1] is None:
-                raise Exception('Outstanding amount at previous step to step ' + str(step) + ' not calculated!')
-            elif self.principal_payment[step-1] is None:
-                raise Exception('Principal payment at previous step to step ' + str(step) + ' not calculated!')
-            else:
-                self.outstanding_amount[step] = self.outstanding_amount[step-1] - self.principal_payment[step]
-                self.logger.debug('[STEP {}] Outstanding amount: {}'.format(step, self.outstanding_amount[step]))
+        if step <= self.maturity:
+            if step > self.current_step:
+                if self.outstanding_amount[step-1] is None:
+                    raise Exception('Outstanding amount at previous step to step ' + str(step) + ' not calculated!')
+                elif self.principal_payment[step-1] is None:
+                    raise Exception('Principal payment at previous step to step ' + str(step) + ' not calculated!')
+                else:
+                    self.outstanding_amount[step] = self.outstanding_amount[step-1] - self.principal_payment[step]
+                    self.logger.debug('[STEP {}] Outstanding amount: {}'.format(step, self.outstanding_amount[step]))
+        else:
+            self.outstanding_amount[step] = 0.0
+            self.logger.debug('[STEP {}] Outstanding amount: {}'.format(step, self.outstanding_amount[step]))
 
     def calculateInterestPayment(self, step):
         if step > self.current_step:

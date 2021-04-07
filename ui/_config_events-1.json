@@ -1,17 +1,5 @@
 {
-    "buy": [
-        {
-            "step": 7,
-            "type": "RealEstate",
-            "id": "real_estate_bought_with_mortgage_from_step_6",
-            "current_market_value": 150000.0,
-            "property_tax": 2000,
-            "house_community_costs": 3000,
-            "real_estate_index": "real_estate_index",
-            "events": {},
-            "current_step": 7
-        }
-    ],
+    "buy": [],
     "sell": [],
     "transfer": [
         {
@@ -381,15 +369,5 @@
             "amount": 25000
         }
     ],
-    "create": [
-        {
-            "step": 6,
-            "type": "Mortgage",
-            "id": "mortgage_taken_in_step_6",
-            "principal": 150000.0,
-            "cnit": 0.02,
-            "maturity_in_years": 3,
-            "current_step": 6
-        }
-    ]
+    "create": []
 }

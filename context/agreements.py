@@ -50,16 +50,18 @@ class UtilitiesAgreement(Agreement):
         self.logger.debug('[STEP {}] Cash-flow from utilities agreement: {:.2f}'.format(step, self.cash_flow[step] ))
 
 class EmployeeContract(Agreement):
-    def __init__(self, id, logger:logging.Logger, salary:float, income_tax_rate:float, events:dict, n_years:int):
+    def __init__(self, id, logger:logging.Logger, salary:float, income_tax_rate:float, events:dict, duration:int):
         super().__init__(id, logger)
         self.salary = salary
         self.income_tax_rate = income_tax_rate
         self.events = events
-        self.n_years = n_years 
+        self.duration = duration 
 
         self.logger.info('Initializing: Employee Agreement: {} with: '.format(self.id))
         self.logger.info('- salary: {}'.format(salary))
         self.logger.info('- income tax rate: {}'.format(income_tax_rate))
+        self.logger.info('- duration: {}'.format(duration))
+        
 
     def calculate_cashflow(self, step):
         if self.events is not None:
@@ -81,6 +83,6 @@ class EmployeeContract(Agreement):
         self.cash_flow[step] = salary * (1-self.income_tax_rate)
 
         # after contract termination it is 0
-        if step > self.n_years*12:
+        if step > self.duration*12:
             self.cash_flow[step] = 0.0
         self.logger.debug('[STEP {}] Cash-flow from employee agreement: {:.2f}'.format(step, self.cash_flow[step] ))

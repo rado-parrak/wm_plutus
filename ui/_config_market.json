@@ -3,11 +3,11 @@
     [
         {
             "name":"inflation_index",
-            "yearly_rate":0.025
+            "yearly_rate":0.03
         },
         {
             "name":"real_estate_index",
-            "yearly_rate":0.1
+            "yearly_rate":0.05
         },
         {
             "name":"px_index",
